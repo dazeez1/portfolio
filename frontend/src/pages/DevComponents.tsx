@@ -1,7 +1,24 @@
+import { BrowserFrame } from "../components/BrowserFrame";
 import { Button } from "../components/Button";
 import { Card } from "../components/Card";
+import { SectionHeading } from "../components/SectionHeading";
+import { TagPill } from "../components/TagPill";
 
 const buttonVariants = ["primary", "accent", "secondary"] as const;
+
+// Not a real screenshot — a plain labeled block standing in for the image
+// slot in this dev-only gallery. CLAUDE.md Section 3 requires real product
+// screenshots everywhere on the actual site; this demo intentionally avoids
+// anything that could be mistaken for one.
+function DemoImageSlot() {
+  return (
+    <div className="flex h-40 items-center justify-center bg-tint text-center font-sans text-xs text-accent-text">
+      Example image slot
+      <br />
+      (placeholder for demo only — not a real screenshot)
+    </div>
+  );
+}
 
 function ThemePanel({ theme }: { theme: "light" | "dark" }) {
   return (
@@ -12,10 +29,8 @@ function ThemePanel({ theme }: { theme: "light" | "dark" }) {
       <h2 className="mb-6 font-serif text-2xl capitalize">{theme} mode</h2>
 
       <section className="mb-10">
-        <h3 className="mb-3 text-xs uppercase tracking-wide text-text-muted">
-          Button
-        </h3>
-        <div className="flex flex-wrap items-center gap-4">
+        <SectionHeading title="Button" variant="label" as="h3" />
+        <div className="mt-3 flex flex-wrap items-center gap-4">
           {buttonVariants.map((variant) => (
             <Button key={variant} variant={variant}>
               {variant}
@@ -33,11 +48,9 @@ function ThemePanel({ theme }: { theme: "light" | "dark" }) {
         </p>
       </section>
 
-      <section>
-        <h3 className="mb-3 text-xs uppercase tracking-wide text-text-muted">
-          Card
-        </h3>
-        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+      <section className="mb-10">
+        <SectionHeading title="Card" variant="label" as="h3" />
+        <div className="mt-3 grid grid-cols-1 gap-4 sm:grid-cols-2">
           <Card>
             <p className="font-serif text-lg">Base card</p>
             <p className="mt-2 text-sm text-text-secondary">
@@ -50,6 +63,62 @@ function ThemePanel({ theme }: { theme: "light" | "dark" }) {
               Hover to see the lift and shadow.
             </p>
           </Card>
+        </div>
+      </section>
+
+      <section className="mb-10">
+        <SectionHeading title="SectionHeading" variant="label" as="h3" />
+        <div className="mt-3 flex flex-col gap-6">
+          <SectionHeading
+            title="Selected work"
+            action={
+              <a href="#" className="text-sm text-accent-text underline">
+                View all →
+              </a>
+            }
+          />
+          <SectionHeading title="Tools I work with" variant="label" />
+        </div>
+      </section>
+
+      <section className="mb-10">
+        <SectionHeading title="TagPill" variant="label" as="h3" />
+        <div className="mt-3 flex flex-wrap items-center gap-2">
+          <TagPill>React</TagPill>
+          <TagPill>TypeScript</TagPill>
+          <TagPill>Node.js</TagPill>
+          <TagPill variant="tinted">● Available for work</TagPill>
+          <TagPill variant="tinted">Selected</TagPill>
+        </div>
+      </section>
+
+      <section>
+        <SectionHeading title="BrowserFrame" variant="label" as="h3" />
+        <div className="mt-3 grid grid-cols-1 gap-4 sm:grid-cols-2">
+          <div>
+            <p className="mb-2 text-xs text-text-muted">URL + image</p>
+            <BrowserFrame url="sangira.vercel.app">
+              <DemoImageSlot />
+            </BrowserFrame>
+          </div>
+          <div>
+            <p className="mb-2 text-xs text-text-muted">
+              URL, no image (placeholder)
+            </p>
+            <BrowserFrame url="qure.app" />
+          </div>
+          <div>
+            <p className="mb-2 text-xs text-text-muted">Image, no URL</p>
+            <BrowserFrame>
+              <DemoImageSlot />
+            </BrowserFrame>
+          </div>
+          <div>
+            <p className="mb-2 text-xs text-text-muted">
+              No URL, no image (placeholder)
+            </p>
+            <BrowserFrame />
+          </div>
         </div>
       </section>
     </div>
