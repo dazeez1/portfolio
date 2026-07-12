@@ -8,10 +8,10 @@ Build order is sequential — a phase starts only when the previous one is appro
 
 - [x] Vite + React 19 + TypeScript + Tailwind + React Router scaffold inside `frontend/`
 - [x] Repo structure: `frontend/`, `backend/` (`.gitkeep` only), docs at root
-- [ ] Branches: `main` (production) + `stage` (staging) created locally; not yet pushed to `origin` or connected to Vercel
+- [ ] Branches: `main` (production) + `stage` (staging) pushed to `origin`; not yet connected to Vercel (blocked on Vercel auth — see owner to-dos)
 - [x] Design tokens as CSS variables + Tailwind theme (light + dark) — Terracotta editorial, per CLAUDE.md Section 1
 - [x] Self-hosted fonts: serif display (Fraunces) + sans (Inter), preloaded
-- [ ] Plausible analytics script wired
+- [x] Plausible analytics script wired (data-domain="azeezdamilare.com" — won't record real data until that domain is live and a matching Plausible site/account exists)
 
 ## Phase 1 — Component library (approve each before pages begin)
 
@@ -54,6 +54,7 @@ Build order is sequential — a phase starts only when the previous one is appro
 - [ ] Favicon + site-wide OG image
 - [ ] Custom domain purchased (on Vercel) and connected — target: end of month
 - [ ] Announce on LinkedIn / X / WhatsApp
+- [ ] Remove `/dev/components` route and the `/` → `/dev/components` redirect once Home exists
 
 ## Content gaps (owner tasks — not launch-blocking to start, blocking to finish)
 
