@@ -17,11 +17,11 @@ Build order is sequential — a phase starts only when the previous one is appro
 
 - [x] Button (primary ink / accent terracotta / secondary outline)
 - [x] Card
-- [ ] SectionHeading (serif)
+- [x] SectionHeading (serif)
 - [ ] Nav (with Resources dropdown, mobile hamburger)
 - [ ] Footer
-- [ ] BrowserFrame (screenshot frame: dots + optional URL bar)
-- [ ] TagPill
+- [x] BrowserFrame (screenshot frame: dots + optional URL bar)
+- [x] TagPill
 - [ ] Accordion (FAQ)
 - [ ] MetricCard
 - [ ] TimelineItem
