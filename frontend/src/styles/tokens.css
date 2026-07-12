@@ -1,0 +1,78 @@
+/*
+ * Design tokens — README.md Section 1 ("Terracotta editorial").
+ * Every hex value here must exist in that table. Light mode is the default
+ * theme; dark mode activates via [data-theme="dark"] on the root element,
+ * set by a future theme toggle — never by prefers-color-scheme.
+ *
+ * Raw tokens are plain CSS custom properties so a theme switch is a
+ * variable swap, not a rewrite. `@theme inline` re-exposes them under
+ * Tailwind's `--color-*` namespace so utilities like `bg-accent` resolve
+ * to the current theme's value at runtime.
+ */
+
+:root {
+  --bg: #faf7f2;
+  --surface: #ffffff;
+  --surface-alt: #f3eee5;
+  --ink: #211d18;
+  --text-secondary: #5c554a;
+  --text-muted: #8a8377;
+  --accent: #d95d39;
+  --accent-hover: #c24e2c;
+  --accent-text: #b04525;
+  --tint: #f7e7df;
+  --tint-border: #edd5c8;
+  --border: #eae4da;
+  --border-strong: #d8d0c2;
+  --focus: var(--accent);
+  --success: #4f7942;
+  --warning: #c2790f;
+  --error: #a63b2a;
+
+  /* Primary button: dark ink fill, light text. Inverts in dark mode. */
+  --button-primary-bg: var(--ink);
+  --button-primary-text: var(--bg);
+}
+
+/*
+ * README Section 1 dark table only redefines bg, surface, text (→ ink),
+ * text-secondary, border, and accent. Every other token below (surface-alt,
+ * text-muted, accent-hover, accent-text, tint, tint-border, border-strong,
+ * success, warning, error) has no dark-specific hex in that table, and
+ * Section 1 rule 7 forbids introducing hex values that aren't in the file —
+ * so those tokens intentionally carry their light-mode value into dark mode
+ * unchanged until the doc is updated with real dark values for them.
+ */
+:root[data-theme="dark"] {
+  --bg: #191613;
+  --surface: #232019;
+  --ink: #f0ebe3;
+  --text-secondary: #a89f91;
+  --border: #33302b;
+  --accent: #e8825f;
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-surface-alt: var(--surface-alt);
+  --color-ink: var(--ink);
+  --color-text-secondary: var(--text-secondary);
+  --color-text-muted: var(--text-muted);
+  --color-accent: var(--accent);
+  --color-accent-hover: var(--accent-hover);
+  --color-accent-text: var(--accent-text);
+  --color-tint: var(--tint);
+  --color-tint-border: var(--tint-border);
+  --color-border: var(--border);
+  --color-border-strong: var(--border-strong);
+  --color-focus: var(--focus);
+  --color-success: var(--success);
+  --color-warning: var(--warning);
+  --color-error: var(--error);
+  --color-button-primary-bg: var(--button-primary-bg);
+  --color-button-primary-text: var(--button-primary-text);
+
+  --font-serif: "Fraunces Variable", ui-serif, Georgia, serif;
+  --font-sans: "Inter Variable", ui-sans-serif, system-ui, sans-serif;
+}

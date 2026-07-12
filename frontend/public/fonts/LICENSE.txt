@@ -1,0 +1,6 @@
+Fonts in this directory are self-hosted, latin-subset, variable-weight builds:
+
+- Fraunces (Undercase Type) — SIL Open Font License 1.1
+- Inter (Rasmus Andersson) — SIL Open Font License 1.1
+
+Full license text: https://openfontlicense.org
