@@ -36,21 +36,50 @@
 }
 
 /*
- * README Section 1 dark table only redefines bg, surface, text (→ ink),
- * text-secondary, border, and accent. Every other token below (surface-alt,
- * text-muted, accent-hover, accent-text, tint, tint-border, border-strong,
- * success, warning, error) has no dark-specific hex in that table, and
- * Section 1 rule 7 forbids introducing hex values that aren't in the file —
- * so those tokens intentionally carry their light-mode value into dark mode
- * unchanged until the doc is updated with real dark values for them.
+ * CLAUDE.md Section 1 dark table redefines bg, surface, surface-alt,
+ * text (→ ink), text-secondary, border, and accent. Every other token
+ * below (text-muted, accent-hover, accent-text, tint, tint-border,
+ * border-strong, success, warning, error) has no dark-specific hex in
+ * that table, and Section 1 rule 7 forbids introducing hex values that
+ * aren't in the file — so those tokens intentionally carry their
+ * light-mode value into dark mode unchanged until the doc is updated
+ * with real dark values for them.
  */
 [data-theme="dark"] {
   --bg: #191613;
   --surface: #232019;
+  --surface-alt: #2b2720;
   --ink: #f0ebe3;
   --text-secondary: #a89f91;
   --border: #33302b;
   --accent: #e8825f;
+}
+
+/*
+ * Explicit light re-assertion. :root already holds these as the default,
+ * but a scoped [data-theme="light"] container needs this block to reset
+ * back to light if it sits inside an ancestor that set data-theme="dark"
+ * (e.g. two Nav instances rendered side by side for theme comparison,
+ * where one live instance's toggle shouldn't leak into the other).
+ */
+[data-theme="light"] {
+  --bg: #faf7f2;
+  --surface: #ffffff;
+  --surface-alt: #f3eee5;
+  --ink: #211d18;
+  --text-secondary: #5c554a;
+  --text-muted: #8a8377;
+  --accent: #d95d39;
+  --accent-hover: #c24e2c;
+  --accent-text: #b04525;
+  --tint: #f7e7df;
+  --tint-border: #edd5c8;
+  --border: #eae4da;
+  --border-strong: #d8d0c2;
+  --focus: var(--accent);
+  --success: #4f7942;
+  --warning: #c2790f;
+  --error: #a63b2a;
 }
 
 @theme inline {
