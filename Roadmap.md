@@ -6,17 +6,17 @@ Build order is sequential — a phase starts only when the previous one is appro
 
 ## Phase 0 — Scaffold & foundations
 
-- [ ] Vite + React 19 + TypeScript + Tailwind + React Router scaffold inside `frontend/`
-- [ ] Repo structure: `frontend/`, `backend/` (`.gitkeep` only), docs at root
-- [ ] Branches: `main` (production) + `stage` (staging), Vercel connected to both
-- [ ] Design tokens as CSS variables + Tailwind theme (light + dark) — Terracotta editorial, per CLAUDE.md Section 1
-- [ ] Self-hosted fonts: serif display (Fraunces) + sans (Inter), preloaded
+- [x] Vite + React 19 + TypeScript + Tailwind + React Router scaffold inside `frontend/`
+- [x] Repo structure: `frontend/`, `backend/` (`.gitkeep` only), docs at root
+- [ ] Branches: `main` (production) + `stage` (staging) created locally; not yet pushed to `origin` or connected to Vercel
+- [x] Design tokens as CSS variables + Tailwind theme (light + dark) — Terracotta editorial, per CLAUDE.md Section 1
+- [x] Self-hosted fonts: serif display (Fraunces) + sans (Inter), preloaded
 - [ ] Plausible analytics script wired
 
 ## Phase 1 — Component library (approve each before pages begin)
 
-- [ ] Button (primary ink / accent terracotta / secondary outline)
-- [ ] Card
+- [x] Button (primary ink / accent terracotta / secondary outline)
+- [x] Card
 - [ ] SectionHeading (serif)
 - [ ] Nav (with Resources dropdown, mobile hamburger)
 - [ ] Footer
