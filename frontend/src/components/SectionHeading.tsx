@@ -12,6 +12,7 @@ export interface SectionHeadingProps {
   variant?: "heading" | "label";
   /** Heading level for semantic hierarchy (CLAUDE.md 5.4). Default h2. */
   as?: ElementType;
+  className?: string;
 }
 
 export function SectionHeading({
@@ -19,9 +20,10 @@ export function SectionHeading({
   action,
   variant = "heading",
   as: Component = "h2",
+  className = "",
 }: SectionHeadingProps) {
   return (
-    <div className="flex items-baseline justify-between gap-4">
+    <div className={`flex items-baseline justify-between gap-4 ${className}`}>
       <Component
         className={
           variant === "label"

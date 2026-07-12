@@ -18,8 +18,8 @@ Build order is sequential — a phase starts only when the previous one is appro
 - [x] Button (primary ink / accent terracotta / secondary outline)
 - [x] Card
 - [x] SectionHeading (serif)
-- [ ] Nav (with Resources dropdown, mobile hamburger)
-- [ ] Footer
+- [x] Nav (with Resources dropdown, mobile hamburger)
+- [x] Footer
 - [x] BrowserFrame (screenshot frame: dots + optional URL bar)
 - [x] TagPill
 - [ ] Accordion (FAQ)
@@ -65,6 +65,7 @@ Build order is sequential — a phase starts only when the previous one is appro
 - [ ] SEO proof screenshots from past project (Search Console + analytics)
 - [ ] Vephla training year for the About timeline
 - [ ] Referral fixed-reward amount ($) for Starter tier
+- [ ] Real LinkedIn and Instagram profile URLs (Footer currently links to `#` for both)
 - [ ] Privacy Policy + Terms text (template-based is fine)
 
 ## Post-launch (v2 candidates — not now)

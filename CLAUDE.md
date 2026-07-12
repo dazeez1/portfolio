@@ -17,6 +17,7 @@ This file is the source of truth for how this project is built. Read fully befor
 4. **Figma/Stitch exports are layout references only. NEVER copy colors, hex values, or color styles from Figma or any design export.** The tokens in Section 1 of this file are the only source of color truth. If a Figma value conflicts with this file, this file wins — silently correct it.
 5. **Units: rem, not px.** All spacing, font sizes, radii, and layout dimensions use rem (Tailwind's default rem-based scale). The only px exceptions: 1px hairline borders and the 2px focus ring. Root font size stays at the browser default (16px = 1rem); never set a custom root px size.
 6. Work happens on the `stage` branch. Small conventional commits per meaningful change. Merge to `main` only when the owner approves a page as done (Section 13).
+7. **Never amend, rebase, reset, or otherwise rewrite git history without explicit owner approval in that session.** If a commit needs fixing, propose the fix and wait.
 
 ---
 
@@ -52,6 +53,7 @@ Light mode is the **default** theme. Dark mode is a user toggle, never the defau
 | ---------------- | --------------------------------------------------------------------- |
 | `bg`             | `#191613`                                                             |
 | `surface`        | `#232019`                                                             |
+| `surface-alt`    | `#2B2720` (one step lighter than dark `surface`, same warm undertone) |
 | `text`           | `#F0EBE3`                                                             |
 | `text-secondary` | `#A89F91`                                                             |
 | `border`         | `#33302B`                                                             |
@@ -155,6 +157,7 @@ This site never claims what isn't true:
 **SPA caveat:** because this is a Vite + React SPA (not server-rendered), SEO requires deliberate mitigation — this is mandatory, not optional:
 
 - **Pre-render every route to static HTML at build time** (e.g. `vite-plugin-ssr`/Vike prerender, or an equivalent SSG step) so crawlers and link previews receive real content, not an empty shell. If prerendering ever becomes a blocker, flag it — the fallback decision is migrating to Next.js, not shipping an unrendered SPA.
+- `frontend/vercel.json` rewrites all paths to `/index.html` — the SPA fallback that makes direct loads and hard reloads of deep routes (e.g. `/dev/components`) work instead of hitting Vercel's 404. The future prerendering step must not break this: every deep-linked route still needs to resolve on a direct load/reload, whether via this rewrite serving the SPA shell or via real prerendered static HTML per route.
 - Per-route `<title>`, meta description, OG + Twitter tags managed via `react-helmet-async` (and baked into the prerendered HTML).
 - Unique OG image per page (minimum: site-wide default + one per case study).
 - `sitemap.xml` (generated at build from the routes table) and `robots.txt`; submit to Search Console at launch.

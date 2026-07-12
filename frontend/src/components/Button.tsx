@@ -1,12 +1,12 @@
 import type { ButtonHTMLAttributes } from "react";
+import { Link, type LinkProps } from "react-router";
 
 // "accent" is the single highest-value CTA per page (CLAUDE.md 1.1) — a
 // page-composition rule, not something this component enforces.
 export type ButtonVariant = "primary" | "accent" | "secondary";
 
-export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-  variant?: ButtonVariant;
-}
+const baseButtonClasses =
+  "inline-flex shrink-0 items-center justify-center whitespace-nowrap rounded-md px-4 py-2 font-sans text-sm font-medium transition-colors disabled:pointer-events-none disabled:opacity-50";
 
 const variantClasses: Record<ButtonVariant, string> = {
   primary: "bg-button-primary-bg text-button-primary-text hover:opacity-90",
@@ -14,6 +14,10 @@ const variantClasses: Record<ButtonVariant, string> = {
   secondary:
     "border border-border-strong bg-transparent text-ink hover:bg-surface-alt",
 };
+
+export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+  variant?: ButtonVariant;
+}
 
 export function Button({
   variant = "primary",
@@ -24,7 +28,25 @@ export function Button({
   return (
     <button
       type={type}
-      className={`inline-flex items-center justify-center rounded-md px-4 py-2 font-sans text-sm font-medium transition-colors disabled:pointer-events-none disabled:opacity-50 ${variantClasses[variant]} ${className}`}
+      className={`${baseButtonClasses} ${variantClasses[variant]} ${className}`}
+      {...props}
+    />
+  );
+}
+
+/** Same visual treatment as Button, but a real <a> via react-router Link — for CTAs that navigate (e.g. Nav's "Book a call"). */
+export interface ButtonLinkProps extends LinkProps {
+  variant?: ButtonVariant;
+}
+
+export function ButtonLink({
+  variant = "primary",
+  className = "",
+  ...props
+}: ButtonLinkProps) {
+  return (
+    <Link
+      className={`${baseButtonClasses} ${variantClasses[variant]} ${className}`}
       {...props}
     />
   );
