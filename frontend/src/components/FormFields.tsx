@@ -2,6 +2,7 @@ import { useId } from "react";
 import type {
   InputHTMLAttributes,
   ReactNode,
+  Ref,
   SelectHTMLAttributes,
   TextareaHTMLAttributes,
 } from "react";
@@ -58,6 +59,7 @@ export interface TextInputProps
   label: string;
   optional?: boolean;
   error?: string;
+  ref?: Ref<HTMLInputElement>;
 }
 
 export function TextInput({
@@ -66,6 +68,7 @@ export function TextInput({
   error,
   id: idProp,
   className = "",
+  ref,
   ...props
 }: TextInputProps) {
   const generatedId = useId();
@@ -81,6 +84,7 @@ export function TextInput({
       errorId={errorId}
     >
       <input
+        ref={ref}
         id={id}
         aria-invalid={!!error}
         aria-describedby={error ? errorId : undefined}
@@ -97,6 +101,7 @@ export interface SelectProps
   label: string;
   optional?: boolean;
   error?: string;
+  ref?: Ref<HTMLSelectElement>;
 }
 
 export function Select({
@@ -106,6 +111,7 @@ export function Select({
   id: idProp,
   className = "",
   children,
+  ref,
   ...props
 }: SelectProps) {
   const generatedId = useId();
@@ -122,6 +128,7 @@ export function Select({
     >
       <div className="relative">
         <select
+          ref={ref}
           id={id}
           aria-invalid={!!error}
           aria-describedby={error ? errorId : undefined}
@@ -145,6 +152,7 @@ export interface TextareaProps
   label: string;
   optional?: boolean;
   error?: string;
+  ref?: Ref<HTMLTextAreaElement>;
 }
 
 export function Textarea({
@@ -154,6 +162,7 @@ export function Textarea({
   id: idProp,
   className = "",
   rows = 4,
+  ref,
   ...props
 }: TextareaProps) {
   const generatedId = useId();
@@ -169,6 +178,7 @@ export function Textarea({
       errorId={errorId}
     >
       <textarea
+        ref={ref}
         id={id}
         rows={rows}
         aria-invalid={!!error}
