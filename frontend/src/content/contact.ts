@@ -116,6 +116,8 @@ export const referralMessagePlaceholder =
 export const submitLabel = "Send message";
 export const submitMicrocopy =
   "By clicking send, you agree to my basic processing of your contact info. No spam, ever.";
+export const submitFailureMessage =
+  "Something went wrong sending your message. Email me directly at azeezdamilare31@gmail.com";
 
 export const booking = {
   title: "Prefer to talk it through?",
