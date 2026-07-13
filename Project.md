@@ -3,7 +3,7 @@ PROJECT CONTEXT — Portfolio, Azeez Damilare Gbenga
 WHO
 Azeez Damilare Gbenga — full-stack software engineer (MERN), Kigali, Rwanda.
 B.Sc. Software Engineering, African Leadership University, 2023–2026, First Class Honours, CGPA 4.22.
-GitHub: dazeez1 · Email: azeezdamilare31@gmail.com · WhatsApp: +250 798 203 134.
+GitHub: dazeez1 · Email: azeezdamilare31@gmail.com · Phone: +250 798 203 134 · WhatsApp: +234 701 505 9880.
 Certifications: Full-Stack Dev (Vephla), DB Design (DataCamp, Jun 2025), Flutter & Dart (IBM, Mar 2025), Deep Learning Indaba 2025 (Univ. of Rwanda, Aug 2025), Academic Writing (Coursera/OPJGU, Jun 2024). Past: graphics design internship (SideHustle, 2021), customer relations (Datahub), virtual assistant (Healthertainer).
 
 WHAT
@@ -25,7 +25,7 @@ DESIGN (phase complete — all pages wireframed, approved, and Stitch-prompted)
 - Nav: Home · Portfolio · About · Services · Resources ▾ (SEO, Referrals) · Contact + "Book a call". Footer socials: GitHub, LinkedIn, WhatsApp, Instagram.
 
 CONVERSION LOGIC
-Every CTA funnels to /contact with URL params (?package=…, ?type=referral) → pre-filled dismissible chip + pre-set select. Form options: New project / Existing product help / Hiring or recruiting / I want to refer someone / Something else; budget optional. Submit → serverless fn → Brevo email to owner's Gmail (subject: [Portfolio] type — package — name) → redirect to /thank-you. Inline validation only (no toasts/modals).
+Every CTA funnels to /contact with URL params (?package=…, ?type=referral) → pre-filled dismissible chip + pre-set select. Form options: New project / Existing product help / Hiring or recruiting / I want to refer someone / Something else; budget optional. Submit → serverless fn → Resend email to owner's Gmail (subject: [Portfolio] type — package — name) → redirect to /thank-you. Inline validation only (no toasts/modals).
 
 BUILD (current phase — starting now)
 

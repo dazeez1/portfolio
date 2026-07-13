@@ -29,7 +29,7 @@ const socialLinks = [
   },
   {
     label: "WhatsApp",
-    href: "https://wa.me/250798203134",
+    href: "https://wa.me/2347015059880",
     Icon: WhatsAppIcon,
     hoverClass: "hover:text-brand-whatsapp",
   },

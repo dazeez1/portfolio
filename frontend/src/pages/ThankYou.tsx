@@ -78,17 +78,19 @@ export default function ThankYou() {
               </dl>
             </div>
 
-            <div className="mt-6 rounded-lg border border-dashed border-border-strong p-6 text-left">
-              <p className="font-sans text-sm font-semibold text-ink">
-                {thankYou.referral.title}
-              </p>
-              <p className="mt-1 font-sans text-sm text-text-secondary">
-                {thankYou.referral.subline}
-              </p>
+            <div className="mt-6 flex flex-col items-start gap-4 rounded-lg border border-dashed border-border-strong p-6 text-left sm:flex-row sm:items-center sm:justify-between">
+              <div>
+                <p className="font-sans text-sm font-semibold text-ink">
+                  {thankYou.referral.title}
+                </p>
+                <p className="mt-1 font-sans text-sm text-text-secondary">
+                  {thankYou.referral.subline}
+                </p>
+              </div>
               <ButtonLink
                 to={thankYou.referral.href}
                 variant="secondary"
-                className="mt-4"
+                className="shrink-0"
               >
                 {thankYou.referral.buttonLabel}
               </ButtonLink>

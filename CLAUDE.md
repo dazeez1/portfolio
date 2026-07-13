@@ -1,9 +1,9 @@
 # Portfolio — Azeez Damilare Gbenga
 
 Personal brand & portfolio website. Owner: Azeez Damilare Gbenga — full-stack software engineer, Kigali, Rwanda.
-GitHub: **dazeez1** · Email: azeezdamilare31@gmail.com · Phone/WhatsApp: +250 798 203 134
+GitHub: **dazeez1** · Email: azeezdamilare31@gmail.com · Phone: +250 798 203 134 · WhatsApp: +234 701 505 9880
 
-**Stack:** React 19 + Vite + TypeScript · Tailwind CSS · React Router · Vercel · Brevo (form email) · Calendly (booking popup) · Plausible (analytics)
+**Stack:** React 19 + Vite + TypeScript · Tailwind CSS · React Router · Vercel · Resend (form email) · Calendly (booking popup) · Plausible (analytics)
 
 This file is the source of truth for how this project is built. Read fully before writing any code. These rules were settled during the design phase and are not open for reinterpretation during the build. When a decision isn't covered here, choose the boring, maintainable option and flag it.
 
@@ -158,7 +158,7 @@ This site never claims what isn't true:
    - Referrals "Start referring now" / "Contact me to refer" → `/contact?type=referral`
 2. On arrival with a parameter: show a dismissible tinted chip ("Selected: … ✕"), pre-set the "What do you need?" select, and for referrals swap the message placeholder to: _"Who are you referring, and what do they need? Include their name and how I can reach them — or just your own details and I'll follow up."_
 3. "What do you need?" options: New project · Existing product help · Hiring or recruiting · I want to refer someone · Something else. Budget range is **optional**.
-4. **Submission pipeline:** API route → Brevo transactional email to azeezdamilare31@gmail.com. Subject format: `[Portfolio] <type> — <package if any> — <name>`. Include a honeypot field for spam. Validate inline (error red, message under field, focus first error — no toasts, no modals).
+4. **Submission pipeline:** API route → Resend transactional email to azeezdamilare31@gmail.com. Subject format: `[Portfolio] <type> — <package if any> — <name>`. Include a honeypot field for spam. Validate inline (error red, message under field, focus first error — no toasts, no modals).
 5. On success: redirect to `/thank-you` with a summary of what was sent. No toast, no modal.
 6. **Booking:** "Pick a time" opens the Calendly popup widget. No embedded calendar anywhere.
 

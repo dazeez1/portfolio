@@ -30,6 +30,7 @@ import {
   referralMessagePlaceholder,
   socialLabel,
   socialLinks,
+  submitFailureMessage,
   submitLabel,
   submitMicrocopy,
 } from "../content/contact";
@@ -199,7 +200,7 @@ export default function Contact() {
       const data = await res.json();
 
       if (!res.ok) {
-        setSubmitError(data.error ?? "Something went wrong. Please try again.");
+        setSubmitError(submitFailureMessage);
         setSubmitting(false);
         return;
       }
@@ -212,7 +213,7 @@ export default function Contact() {
         },
       });
     } catch {
-      setSubmitError("Network error. Please try again.");
+      setSubmitError(submitFailureMessage);
       setSubmitting(false);
     }
   }

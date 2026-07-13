@@ -32,7 +32,7 @@ Build order is sequential — a phase starts only when the previous one is appro
 - [ ] Revisit Resources dropdown visual design when building SEO/Referrals pages
 - [x] Home
 - [x] Contact (incl. pre-filled chip state, validation state, Calendly popup)
-- [x] Thank You + form pipeline (serverless → Brevo → redirect)
+- [x] Thank You + form pipeline (serverless → Resend → redirect)
 - [ ] About
 - [ ] Portfolio index (pagination-ready grid)
 - [ ] Case study: Sangira
@@ -54,6 +54,7 @@ Build order is sequential — a phase starts only when the previous one is appro
 - [ ] Forms and booking tested end-to-end **in production**
 - [ ] Favicon + site-wide OG image
 - [ ] Custom domain purchased (on Vercel) and connected — target: end of month
+- [ ] Verify azeezdamilare.com in Resend, then switch frontend/api/contact.ts's FROM_ADDRESS from the onboarding@resend.dev sandbox sender to the custom-domain sender
 - [ ] Announce on LinkedIn / X / WhatsApp
 - [ ] Remove `/dev/components` route and the `/` → `/dev/components` redirect once Home exists
 
