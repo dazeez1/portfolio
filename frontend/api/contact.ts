@@ -34,6 +34,11 @@ const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 // simple on both ends.
 const GENERIC_FAILURE = { error: "message_failed" };
 
+// Resend's shared sandbox sender — works with zero domain setup. Switch to
+// a custom-domain sender (e.g. "Portfolio Contact <contact@azeezdamilare.com>")
+// once azeezdamilare.com is verified in Resend — see ROADMAP.md launch phase.
+const FROM_ADDRESS = "Portfolio Contact <onboarding@resend.dev>";
+
 function escapeHtml(value: string): string {
   return value
     .replace(/&/g, "&amp;")
@@ -58,7 +63,7 @@ export default async function handler(
   res: VercelResponse,
 ) {
   // Whole handler is wrapped — any unexpected exception (a bad req.body
-  // shape, a Brevo response that doesn't parse, anything) is caught
+  // shape, a Resend response that doesn't parse, anything) is caught
   // here and turned into a controlled 500 instead of an uncaught crash,
   // which is what Vercel reports upstream as a 502.
   try {
@@ -81,11 +86,11 @@ export default async function handler(
       return;
     }
 
-    const apiKey = process.env.BREVO_API_KEY;
+    const apiKey = process.env.RESEND_API_KEY;
     const toEmail = process.env.CONTACT_TO_EMAIL;
 
     if (!apiKey) {
-      console.error("contact api: missing env var BREVO_API_KEY");
+      console.error("contact api: missing env var RESEND_API_KEY");
       res.status(500).json(GENERIC_FAILURE);
       return;
     }
@@ -105,19 +110,18 @@ export default async function handler(
     const reference = `INQ-${Date.now().toString(36).toUpperCase()}`;
     const subject = `[Portfolio] ${type} — ${pkg ?? "none"} — ${name}`;
 
-    const brevoRes = await fetch("https://api.brevo.com/v3/smtp/email", {
+    const resendRes = await fetch("https://api.resend.com/emails", {
       method: "POST",
       headers: {
-        "api-key": apiKey,
+        Authorization: `Bearer ${apiKey}`,
         "Content-Type": "application/json",
-        Accept: "application/json",
       },
       body: JSON.stringify({
-        sender: { name: "Portfolio contact form", email: toEmail },
-        to: [{ email: toEmail }],
-        replyTo: { email, name },
+        from: FROM_ADDRESS,
+        to: [toEmail],
+        reply_to: email,
         subject,
-        htmlContent: `
+        html: `
           <p><strong>Reference:</strong> ${escapeHtml(reference)}</p>
           <p><strong>Name:</strong> ${escapeHtml(name)}</p>
           <p><strong>Email:</strong> ${escapeHtml(email)}</p>
@@ -128,11 +132,11 @@ export default async function handler(
       }),
     });
 
-    if (!brevoRes.ok) {
+    if (!resendRes.ok) {
       console.error(
-        "contact api: Brevo error",
-        brevoRes.status,
-        await brevoRes.text(),
+        "contact api: Resend error",
+        resendRes.status,
+        await resendRes.text(),
       );
       res.status(500).json(GENERIC_FAILURE);
       return;

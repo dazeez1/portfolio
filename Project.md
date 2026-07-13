@@ -25,7 +25,7 @@ DESIGN (phase complete — all pages wireframed, approved, and Stitch-prompted)
 - Nav: Home · Portfolio · About · Services · Resources ▾ (SEO, Referrals) · Contact + "Book a call". Footer socials: GitHub, LinkedIn, WhatsApp, Instagram.
 
 CONVERSION LOGIC
-Every CTA funnels to /contact with URL params (?package=…, ?type=referral) → pre-filled dismissible chip + pre-set select. Form options: New project / Existing product help / Hiring or recruiting / I want to refer someone / Something else; budget optional. Submit → serverless fn → Brevo email to owner's Gmail (subject: [Portfolio] type — package — name) → redirect to /thank-you. Inline validation only (no toasts/modals).
+Every CTA funnels to /contact with URL params (?package=…, ?type=referral) → pre-filled dismissible chip + pre-set select. Form options: New project / Existing product help / Hiring or recruiting / I want to refer someone / Something else; budget optional. Submit → serverless fn → Resend email to owner's Gmail (subject: [Portfolio] type — package — name) → redirect to /thank-you. Inline validation only (no toasts/modals).
 
 BUILD (current phase — starting now)
 

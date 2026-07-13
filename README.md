@@ -3,7 +3,7 @@
 Personal brand & portfolio website. Owner: Azeez Damilare Gbenga — full-stack software engineer, Kigali, Rwanda.
 GitHub: **dazeez1** · Email: azeezdamilare31@gmail.com · Phone/WhatsApp: +250 798 203 134
 
-**Stack:** React 19 + Vite + TypeScript · Tailwind CSS · React Router · Vercel · Brevo (form email) · Calendly (booking popup) · Plausible (analytics)
+**Stack:** React 19 + Vite + TypeScript · Tailwind CSS · React Router · Vercel · Resend (form email) · Calendly (booking popup) · Plausible (analytics)
 
 ## Structure
 
