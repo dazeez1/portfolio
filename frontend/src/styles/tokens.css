@@ -33,6 +33,16 @@
   /* Primary button: dark ink fill, light text. Inverts in dark mode. */
   --button-primary-bg: var(--ink);
   --button-primary-text: var(--bg);
+
+  /*
+   * Brand icon colors (Footer social icons, hover only). Not part of the
+   * theme system — official external brand colors, constant regardless
+   * of theme, not counted in the accent-usage rules. See CLAUDE.md
+   * Section 1 "Brand icon colors".
+   */
+  --brand-linkedin: #0a66c2;
+  --brand-whatsapp: #25d366;
+  --brand-instagram: #e4405f;
 }
 
 /*
@@ -102,6 +112,9 @@
   --color-error: var(--error);
   --color-button-primary-bg: var(--button-primary-bg);
   --color-button-primary-text: var(--button-primary-text);
+  --color-brand-linkedin: var(--brand-linkedin);
+  --color-brand-whatsapp: var(--brand-whatsapp);
+  --color-brand-instagram: var(--brand-instagram);
 
   --font-serif: "Fraunces Variable", ui-serif, Georgia, serif;
   --font-sans: "Inter Variable", ui-sans-serif, system-ui, sans-serif;

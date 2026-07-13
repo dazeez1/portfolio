@@ -1,10 +1,26 @@
+import { Accordion } from "../components/Accordion";
 import { BrowserFrame } from "../components/BrowserFrame";
 import { Button } from "../components/Button";
 import { Card } from "../components/Card";
 import { Footer } from "../components/Footer";
+import { Select, Textarea, TextInput } from "../components/FormFields";
+import { MetricCard } from "../components/MetricCard";
 import { Nav } from "../components/Nav";
 import { SectionHeading } from "../components/SectionHeading";
 import { TagPill } from "../components/TagPill";
+import { TimelineItem } from "../components/TimelineItem";
+
+const faqItems = [
+  {
+    question: "How long does a typical project take?",
+    answer: "Depends on scope — timelines are agreed up front per project.",
+  },
+  {
+    question: "Do you work with a fixed price or hourly?",
+    answer:
+      "Fixed price by default, scoped up front. Hourly only for ongoing/retainer work.",
+  },
+];
 
 const buttonVariants = ["primary", "accent", "secondary"] as const;
 
@@ -134,6 +150,68 @@ function ThemePanel({ theme }: { theme: "light" | "dark" }) {
               </p>
               <BrowserFrame />
             </div>
+          </div>
+        </section>
+
+        <section className="mb-10">
+          <SectionHeading title="Accordion" variant="label" as="h3" />
+          <div className="mt-3">
+            <Accordion items={faqItems} defaultOpenIndex={0} />
+          </div>
+        </section>
+
+        <section className="mb-10">
+          <SectionHeading title="MetricCard" variant="label" as="h3" />
+          <div className="mt-3 grid grid-cols-1 gap-4 sm:grid-cols-3">
+            <MetricCard value="3" label="Portals" />
+            <MetricCard value="95/100/96" label="Lighthouse" />
+            <MetricCard value="−82%" label="Bundle size" />
+          </div>
+        </section>
+
+        <section className="mb-10">
+          <SectionHeading title="TimelineItem" variant="label" as="h3" />
+          <div className="mt-3">
+            <TimelineItem
+              isFirst
+              title="Graduation — 2026"
+              context="B.Sc. Software Engineering, African Leadership University"
+            />
+            <TimelineItem
+              title="Vephla"
+              context="Full-stack development training"
+            />
+            <TimelineItem
+              isLast
+              title="SideHustle — 2021"
+              context="Graphics design internship"
+            />
+          </div>
+        </section>
+
+        <section className="mb-10">
+          <SectionHeading title="Form fields" variant="label" as="h3" />
+          <div className="mt-3 grid grid-cols-1 gap-4 sm:grid-cols-2">
+            <TextInput label="Name" placeholder="Ada Lovelace" />
+            <TextInput
+              label="Email"
+              type="email"
+              defaultValue="not-an-email"
+              error="Enter a valid email address."
+            />
+            <Select label="What do you need?" defaultValue="">
+              <option value="" disabled>
+                Select one
+              </option>
+              <option value="new-project">New project</option>
+              <option value="existing-product">Existing product help</option>
+            </Select>
+            <TextInput label="Budget range" optional placeholder="$2,000–$4,000" />
+            <Textarea
+              label="Message"
+              placeholder="Tell me about what you're building."
+              className="sm:col-span-2"
+            />
           </div>
         </section>
       </div>

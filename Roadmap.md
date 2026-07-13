@@ -22,14 +22,15 @@ Build order is sequential — a phase starts only when the previous one is appro
 - [x] Footer
 - [x] BrowserFrame (screenshot frame: dots + optional URL bar)
 - [x] TagPill
-- [ ] Accordion (FAQ)
-- [ ] MetricCard
-- [ ] TimelineItem
-- [ ] Form fields (input, select, textarea, inline error state)
+- [x] Accordion (FAQ)
+- [x] MetricCard
+- [x] TimelineItem
+- [x] Form fields (input, select, textarea, inline error state)
 
 ## Phase 2 — Pages (one at a time, in this order)
 
-- [ ] Home
+- [ ] Revisit Resources dropdown visual design when building SEO/Referrals pages
+- [x] Home
 - [ ] Contact (incl. pre-filled chip state, validation state, Calendly popup)
 - [ ] Thank You + form pipeline (serverless → Brevo → redirect)
 - [ ] About

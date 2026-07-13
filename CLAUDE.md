@@ -61,6 +61,17 @@ Light mode is the **default** theme. Dark mode is a user toggle, never the defau
 
 Primary buttons invert in dark mode: `#F0EBE3` fill, `#191613` text.
 
+### Brand icon colors (Footer social icons, hover only)
+
+Not part of the theme system — these don't swap between light/dark, and don't count toward the accent-usage rules below. Icons are monochrome (`ink`) at rest; on hover, each icon shows its own official brand color.
+
+| Icon      | Hex       |
+| --------- | --------- |
+| GitHub    | `#211D18` (the existing `ink` token — no new color needed) |
+| LinkedIn  | `#0A66C2` |
+| WhatsApp  | `#25D366` |
+| Instagram | `#E4405F` |
+
 ### Color rules — non-negotiable
 
 1. **The dark ink button is the default primary.** The terracotta accent button appears **at most once per page** — the single highest-value CTA (usually "Book a call" / "Book a discovery call").
