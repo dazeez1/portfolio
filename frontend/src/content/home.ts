@@ -39,12 +39,12 @@ export const hero: HeroContent = {
     after: " as well as it looks.",
   },
   subhead:
-    "Full-stack engineer in Kigali. I care about the same things on every project — does it hold up under real conditions, and do people actually want to use it.",
+    "Full-stack engineer. I care about the same things on every project, does it hold up under real conditions, and do people actually want to use it.",
   primaryCta: { label: "View my work", to: "/portfolio" },
   secondaryCta: { label: "Book a discovery call", to: "/contact" },
   credentialLine:
-    "B.Sc. Software Engineering, First Class Honours · ALU — certified by IBM & DataCamp",
-  screenshotUrl: "sangira.vercel.app",
+    "B.Sc. Software Engineering, First Class Honours · ALU certified by IBM & DataCamp",
+  screenshotUrl: "gusangira.com",
   screenshot: {
     src: "/images/sangira-hero.png",
     alt: "Sangira dashboard showing active food donation listings",
@@ -53,7 +53,7 @@ export const hero: HeroContent = {
     loading: "eager",
   },
   liveBadgeLabel: "Live in production",
-  liveCaption: "Sangira — food redistribution platform",
+  liveCaption: "Sangira food redistribution platform",
 };
 
 export interface TechBadge {
@@ -80,7 +80,7 @@ export const featuredProjects: FeaturedProject[] = [
       { Icon: ReactIcon, label: "React" },
       { Icon: SocketIOIcon, label: "Socket.io" },
     ],
-    liveUrl: "sangira.vercel.app",
+    liveUrl: "gusangira.com",
     screenshot: {
       src: "/images/sangira-card.png",
       alt: "Sangira listing flow screenshot",
@@ -97,8 +97,7 @@ export const featuredProjects: FeaturedProject[] = [
       { Icon: PrismaIcon, label: "Prisma" },
       { Icon: MongoDBIcon, label: "MongoDB" },
     ],
-    // No confirmed live URL yet (Roadmap.md content gaps) — omitted rather
-    // than guessed, per CLAUDE.md Section 4 honesty rules.
+    liveUrl: "qurequeue.com",
     screenshot: {
       src: "/images/qure-card.png",
       alt: "Qure staff dashboard screenshot",
@@ -147,6 +146,7 @@ export const tools: string[] = [
   "Prisma",
   "Socket.io",
   "Tailwind CSS",
+  "Figma",
 ];
 
 export interface FinalCtaContent {
@@ -165,7 +165,7 @@ export const finalCta: FinalCtaContent = {
     after: " a real problem.",
   },
   subline:
-    "Free discovery call — no commitment, written scope before any code.",
+    "Looking to transform your vision into a real-world product? I thrive at crafting intuitive and attractive interfaces that tackle complex challenges.",
   button: { label: "Book a discovery call", to: "/contact" },
   referralLead: "Know someone who needs a developer?",
   referralLinkLabel: "Refer them and earn →",
