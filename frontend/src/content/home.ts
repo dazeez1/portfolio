@@ -119,7 +119,7 @@ export const services: ServiceItem[] = [
     Icon: CodeIcon,
     title: "Full-stack development",
     description:
-      "End-to-end web applications built with modern frameworks like React, Next.js, and robust backends.",
+      "End-to-end web applications built with modern frameworks like React, Node.js, and robust backends.",
   },
   {
     Icon: ApiIcon,
