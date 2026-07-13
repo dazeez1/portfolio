@@ -252,7 +252,7 @@ export default function Contact() {
       {/* Connect + Form */}
       <section className="bg-bg pb-16 md:pb-24">
         <Container>
-          <div className="grid grid-cols-1 gap-8 md:grid-cols-[42fr_58fr] md:gap-10">
+          <div className="grid grid-cols-1 gap-8 md:grid-cols-[42fr_58fr] md:items-start md:gap-10">
             {/* Left column */}
             <div>
               <h2 className="font-serif text-2xl text-ink">{connectTitle}</h2>

@@ -55,7 +55,7 @@ export const connectMethods: ConnectMethod[] = [
   {
     Icon: WhatsAppIcon,
     label: "WhatsApp · fastest reply",
-    value: "+234 7O1 505 9880",
+    value: "+234 701 505 9880",
     action: { type: "copy" },
   },
   {

@@ -6,7 +6,7 @@ import { Link, type LinkProps } from "react-router";
 export type ButtonVariant = "primary" | "accent" | "secondary";
 
 const baseButtonClasses =
-  "inline-flex shrink-0 items-center justify-center whitespace-nowrap rounded-md px-4 py-2 font-sans text-sm font-medium transition-colors disabled:pointer-events-none disabled:opacity-50";
+  "inline-flex shrink-0 items-center justify-center gap-2 whitespace-nowrap rounded-md px-4 py-2 font-sans text-sm font-medium transition-colors disabled:pointer-events-none disabled:opacity-50";
 
 const variantClasses: Record<ButtonVariant, string> = {
   primary: "bg-button-primary-bg text-button-primary-text hover:opacity-90",
