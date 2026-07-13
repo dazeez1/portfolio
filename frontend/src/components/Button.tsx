@@ -1,4 +1,4 @@
-import type { ButtonHTMLAttributes } from "react";
+import type { AnchorHTMLAttributes, ButtonHTMLAttributes, Ref } from "react";
 import { Link, type LinkProps } from "react-router";
 
 // "accent" is the single highest-value CTA per page (CLAUDE.md 1.1) — a
@@ -17,16 +17,19 @@ const variantClasses: Record<ButtonVariant, string> = {
 
 export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: ButtonVariant;
+  ref?: Ref<HTMLButtonElement>;
 }
 
 export function Button({
   variant = "primary",
   className = "",
   type = "button",
+  ref,
   ...props
 }: ButtonProps) {
   return (
     <button
+      ref={ref}
       type={type}
       className={`${baseButtonClasses} ${variantClasses[variant]} ${className}`}
       {...props}
@@ -46,6 +49,28 @@ export function ButtonLink({
 }: ButtonLinkProps) {
   return (
     <Link
+      className={`${baseButtonClasses} ${variantClasses[variant]} ${className}`}
+      {...props}
+    />
+  );
+}
+
+/** Same visual treatment as Button, but a real external <a> — for links that leave the site (e.g. Google Maps, WhatsApp, social profiles). */
+export interface ButtonAnchorProps
+  extends AnchorHTMLAttributes<HTMLAnchorElement> {
+  variant?: ButtonVariant;
+  ref?: Ref<HTMLAnchorElement>;
+}
+
+export function ButtonAnchor({
+  variant = "primary",
+  className = "",
+  ref,
+  ...props
+}: ButtonAnchorProps) {
+  return (
+    <a
+      ref={ref}
       className={`${baseButtonClasses} ${variantClasses[variant]} ${className}`}
       {...props}
     />

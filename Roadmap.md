@@ -31,8 +31,8 @@ Build order is sequential — a phase starts only when the previous one is appro
 
 - [ ] Revisit Resources dropdown visual design when building SEO/Referrals pages
 - [x] Home
-- [ ] Contact (incl. pre-filled chip state, validation state, Calendly popup)
-- [ ] Thank You + form pipeline (serverless → Brevo → redirect)
+- [x] Contact (incl. pre-filled chip state, validation state, Calendly popup)
+- [x] Thank You + form pipeline (serverless → Brevo → redirect)
 - [ ] About
 - [ ] Portfolio index (pagination-ready grid)
 - [ ] Case study: Sangira
@@ -60,14 +60,17 @@ Build order is sequential — a phase starts only when the previous one is appro
 ## Content gaps (owner tasks — not launch-blocking to start, blocking to finish)
 
 - [ ] Real light-mode screenshots: Sangira (dashboard, listing flow, PIN confirmation) and Qure (staff dashboard, queue mgmt, waiting areas, analytics)
-- [ ] Qure live demo URL
+- [x] Qure live demo URL (confirmed: qurequeue.com)
 - [ ] Professional photo for About
 - [ ] Resume PDF matching site content
 - [ ] SEO proof screenshots from past project (Search Console + analytics)
 - [ ] Vephla training year for the About timeline
 - [ ] Referral fixed-reward amount ($) for Starter tier
-- [ ] Real LinkedIn and Instagram profile URLs (Footer currently links to `#` for both)
+- [ ] Real LinkedIn and Instagram profile URLs (Footer + Contact page currently link to `#` for both)
 - [ ] Privacy Policy + Terms text (template-based is fine)
+- [ ] Confirm Contact page budget-range select options — currently derived from the approved package prices (Section 4), not owner-specified; see content/contact.ts
+- [ ] Contact FAQ answer copy (5 questions currently show a placeholder string — see content/contact.ts)
+- [ ] Confirm Calendly URL is correct: https://calendly.com/azeezdamilare31/30mins (owner-supplied, not independently verified)
 
 ## Post-launch (v2 candidates — not now)
 
