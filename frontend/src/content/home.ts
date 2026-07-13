@@ -44,8 +44,8 @@ export const hero: HeroContent = {
   secondaryCta: { label: "Book a discovery call", to: "/contact" },
   credentialLine:
     "B.Sc. Software Engineering, First Class Honours · ALU certified by IBM & DataCamp",
-  // Placeholder until the owner confirms the exact URL string.
-  screenshotUrl: "…",
+  
+  screenshotUrl: "gusangira.com",
   screenshot: {
     src: "/images/sangira-hero.png",
     alt: "Sangira dashboard showing active food donation listings",
