@@ -124,36 +124,58 @@ export default function Contact() {
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [submitting, setSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
+  const [calendlyLoading, setCalendlyLoading] = useState(false);
 
   const nameRef = useRef<HTMLInputElement>(null);
   const emailRef = useRef<HTMLInputElement>(null);
   const needRef = useRef<HTMLSelectElement>(null);
   const messageRef = useRef<HTMLTextAreaElement>(null);
+  const calendlyLoadPromiseRef = useRef<Promise<void> | null>(null);
 
   function handleDismissChip() {
     setChipDismissed(true);
     setNeed("");
   }
 
-  function openCalendly() {
-    if (window.Calendly) {
-      window.Calendly.initPopupWidget({ url: booking.calendlyUrl });
+  // Kicks off loading the Calendly assets without opening anything — safe
+  // to call repeatedly (pointerenter fires a lot); returns the same
+  // in-flight promise once loading has started.
+  function loadCalendly(): Promise<void> {
+    if (window.Calendly) return Promise.resolve();
+    if (calendlyLoadPromiseRef.current) return calendlyLoadPromiseRef.current;
+
+    calendlyLoadPromiseRef.current = new Promise((resolve) => {
+      if (!document.querySelector("link[data-calendly]")) {
+        const link = document.createElement("link");
+        link.rel = "stylesheet";
+        link.href = "https://assets.calendly.com/assets/external/widget.css";
+        link.setAttribute("data-calendly", "true");
+        document.head.appendChild(link);
+      }
+      const script = document.createElement("script");
+      script.src = "https://assets.calendly.com/assets/external/widget.js";
+      script.async = true;
+      script.onload = () => resolve();
+      document.body.appendChild(script);
+    });
+
+    return calendlyLoadPromiseRef.current;
+  }
+
+  function warmUpCalendly() {
+    loadCalendly();
+  }
+
+  async function openCalendly() {
+    const existing = window.Calendly;
+    if (existing) {
+      existing.initPopupWidget({ url: booking.calendlyUrl });
       return;
     }
-    if (!document.querySelector('link[data-calendly]')) {
-      const link = document.createElement("link");
-      link.rel = "stylesheet";
-      link.href = "https://assets.calendly.com/assets/external/widget.css";
-      link.setAttribute("data-calendly", "true");
-      document.head.appendChild(link);
-    }
-    const script = document.createElement("script");
-    script.src = "https://assets.calendly.com/assets/external/widget.js";
-    script.async = true;
-    script.onload = () => {
-      window.Calendly?.initPopupWidget({ url: booking.calendlyUrl });
-    };
-    document.body.appendChild(script);
+    setCalendlyLoading(true);
+    await loadCalendly();
+    setCalendlyLoading(false);
+    window.Calendly?.initPopupWidget({ url: booking.calendlyUrl });
   }
 
   async function handleSubmit(e: SyntheticEvent<HTMLFormElement>) {
@@ -451,10 +473,13 @@ export default function Contact() {
             <Button
               variant="secondary"
               onClick={openCalendly}
+              onPointerEnter={warmUpCalendly}
+              onTouchStart={warmUpCalendly}
+              disabled={calendlyLoading}
               className="shrink-0"
             >
               <CalendarIcon className="h-4 w-4" aria-hidden="true" />
-              {booking.buttonLabel}
+              {calendlyLoading ? "Opening calendar…" : booking.buttonLabel}
             </Button>
           </div>
         </Container>
