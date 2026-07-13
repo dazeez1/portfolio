@@ -29,7 +29,8 @@ Build order is sequential — a phase starts only when the previous one is appro
 
 ## Phase 2 — Pages (one at a time, in this order)
 
-- [ ] Home
+- [ ] Revisit Resources dropdown visual design when building SEO/Referrals pages
+- [x] Home
 - [ ] Contact (incl. pre-filled chip state, validation state, Calendly popup)
 - [ ] Thank You + form pipeline (serverless → Brevo → redirect)
 - [ ] About

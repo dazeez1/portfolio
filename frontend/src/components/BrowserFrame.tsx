@@ -1,14 +1,29 @@
+import { useState } from "react";
 import type { ReactNode } from "react";
+
+export interface BrowserFrameImage {
+  src: string;
+  alt: string;
+  width?: number;
+  height?: number;
+  /** Default "lazy". Set "eager" for above-the-fold usage (e.g. the hero). */
+  loading?: "lazy" | "eager";
+}
 
 export interface BrowserFrameProps {
   /** Shown in the top bar, e.g. "sangira.vercel.app". Omit for no URL bar. */
   url?: string;
   /**
-   * The screenshot. Pass a single real <img> with explicit width/height
-   * and meaningful alt text (CLAUDE.md Section 3) — this component fills
-   * it edge-to-edge without cropping. Omit to show the neutral placeholder.
+   * The screenshot as a raw children slot — pass a single real <img> with
+   * explicit width/height and meaningful alt text (CLAUDE.md Section 3).
+   * Prefer the `image` prop instead when the path may not exist yet: it
+   * falls back to the placeholder automatically on load failure, so a
+   * real capture can be dropped into /public later with no code change.
    */
   children?: ReactNode;
+  image?: BrowserFrameImage;
+  /** False to omit this component's own border/radius — for nesting inside another bordered container. Default true. */
+  bordered?: boolean;
   className?: string;
 }
 
@@ -27,10 +42,20 @@ function Dots({ invisible = false }: { invisible?: boolean }) {
   );
 }
 
-export function BrowserFrame({ url, children, className = "" }: BrowserFrameProps) {
+export function BrowserFrame({
+  url,
+  children,
+  image,
+  bordered = true,
+  className = "",
+}: BrowserFrameProps) {
+  const [imageFailed, setImageFailed] = useState(false);
+  const showImage = !children && image && !imageFailed;
+  const showPlaceholder = !children && !showImage;
+
   return (
     <div
-      className={`overflow-hidden rounded-lg border border-border bg-surface ${className}`}
+      className={`${bordered ? "overflow-hidden rounded-lg border border-border bg-surface" : ""} ${className}`}
     >
       <div className="grid grid-cols-[auto_1fr_auto] items-center gap-2 border-b border-border bg-surface-alt px-4 py-3">
         <Dots />
@@ -50,7 +75,20 @@ export function BrowserFrame({ url, children, className = "" }: BrowserFrameProp
         <div className="bg-surface-alt [&>img]:block [&>img]:h-auto [&>img]:w-full">
           {children}
         </div>
-      ) : (
+      ) : showImage ? (
+        <div className="bg-surface-alt">
+          <img
+            src={image.src}
+            alt={image.alt}
+            width={image.width}
+            height={image.height}
+            loading={image.loading ?? "lazy"}
+            className="block h-auto w-full"
+            onError={() => setImageFailed(true)}
+          />
+        </div>
+      ) : null}
+      {showPlaceholder && (
         <div className="flex aspect-[16/10] items-center justify-center bg-surface-alt">
           <span className="font-sans text-xs text-text-muted">
             No screenshot yet

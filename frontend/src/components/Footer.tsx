@@ -10,16 +10,34 @@ import {
   WhatsAppIcon,
 } from "./icons";
 
+// Brand colors are CLAUDE.md Section 1 "Brand icon colors" — hover only,
+// not part of the theme system. GitHub's is just the existing ink token.
 const socialLinks = [
-  { label: "GitHub", href: "https://github.com/dazeez1", Icon: GithubIcon },
+  {
+    label: "GitHub",
+    href: "https://github.com/dazeez1",
+    Icon: GithubIcon,
+    hoverClass: "hover:text-ink",
+  },
   // TODO: real LinkedIn/Instagram profile URLs — see Roadmap.md content gaps.
-  { label: "LinkedIn", href: "#", Icon: LinkedInIcon },
+  {
+    label: "LinkedIn",
+    href: "#",
+    Icon: LinkedInIcon,
+    hoverClass: "hover:text-brand-linkedin",
+  },
   {
     label: "WhatsApp",
     href: "https://wa.me/250798203134",
     Icon: WhatsAppIcon,
+    hoverClass: "hover:text-brand-whatsapp",
   },
-  { label: "Instagram", href: "#", Icon: InstagramIcon },
+  {
+    label: "Instagram",
+    href: "#",
+    Icon: InstagramIcon,
+    hoverClass: "hover:text-brand-instagram",
+  },
 ];
 
 export function Footer() {
@@ -85,14 +103,14 @@ export function Footer() {
             Follow me
           </p>
           <div className="mt-3 flex items-center gap-3">
-            {socialLinks.map(({ label, href, Icon }) => (
+            {socialLinks.map(({ label, href, Icon, hoverClass }) => (
               <a
                 key={label}
                 href={href}
                 target="_blank"
                 rel="noreferrer"
                 aria-label={label}
-                className="flex h-9 w-9 items-center justify-center rounded-full bg-button-primary-bg text-button-primary-text transition-opacity hover:opacity-90"
+                className={`flex h-9 w-9 items-center justify-center rounded-full border border-border text-ink motion-safe:transition-colors ${hoverClass}`}
               >
                 <Icon className="h-4 w-4" aria-hidden="true" />
               </a>
