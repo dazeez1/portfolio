@@ -154,7 +154,7 @@ function ResourcesDropdown() {
           id={menuId}
           role="menu"
           aria-label="Resources"
-          className="absolute left-0 top-full mt-2 min-w-[10rem] rounded-md border border-border bg-surface py-1 shadow-md"
+          className="absolute left-0 top-full z-50 mt-2 w-48 rounded-lg border border-border bg-surface py-1 shadow-lg"
         >
           {resourceLinks.map((link) => (
             <NavLink
@@ -163,7 +163,7 @@ function ResourcesDropdown() {
               role="menuitem"
               onClick={() => setOpen(false)}
               className={({ isActive }) =>
-                `block px-4 py-2 font-sans text-sm transition-colors hover:bg-surface-alt hover:text-accent-text ${
+                `block px-4 py-2.5 font-sans text-sm transition-colors hover:bg-surface-alt hover:text-accent-text ${
                   isActive ? "text-accent-text" : "text-ink"
                 }`
               }

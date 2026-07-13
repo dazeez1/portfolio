@@ -2,6 +2,24 @@ import type { SVGProps } from "react";
 
 export type IconProps = SVGProps<SVGSVGElement>;
 
+export function AlertIcon(props: IconProps) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      {...props}
+    >
+      <circle cx="12" cy="12" r="9" />
+      <line x1="12" y1="8" x2="12" y2="13" />
+      <line x1="12" y1="16.5" x2="12" y2="16.51" />
+    </svg>
+  );
+}
+
 export function HamburgerIcon(props: IconProps) {
   return (
     <svg
