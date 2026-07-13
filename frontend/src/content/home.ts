@@ -47,7 +47,7 @@ export const hero: HeroContent = {
   
   screenshotUrl: "gusangira.com",
   screenshot: {
-    src: "/images/sangira-hero.png",
+    src: "/images/sangira-card.png",
     alt: "Sangira dashboard showing active food donation listings",
     width: 1200,
     height: 750,
