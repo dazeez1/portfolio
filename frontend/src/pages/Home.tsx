@@ -3,6 +3,7 @@ import { Link } from "react-router";
 import { BrowserFrame } from "../components/BrowserFrame";
 import { ButtonLink } from "../components/Button";
 import { Card } from "../components/Card";
+import { Container } from "../components/Container";
 import { Footer } from "../components/Footer";
 import { Nav } from "../components/Nav";
 import { SectionHeading } from "../components/SectionHeading";
@@ -36,8 +37,8 @@ export default function Home() {
       <Nav />
 
       {/* Hero */}
-      <section className="bg-bg px-6 py-16 md:py-24">
-        <div className="mx-auto grid max-w-6xl grid-cols-1 items-center gap-12 md:grid-cols-[11fr_9fr] md:gap-10">
+      <section className="bg-bg py-16 md:py-24">
+        <Container className="grid grid-cols-1 items-center gap-12 md:grid-cols-[11fr_9fr] md:gap-10">
           <div>
             <TagPill variant="tinted">
               <AccentDot />
@@ -80,12 +81,12 @@ export default function Home() {
               </p>
             </div>
           </div>
-        </div>
+        </Container>
       </section>
 
       {/* Featured work */}
-      <section className="bg-bg px-6 py-16 md:py-24">
-        <div className="mx-auto max-w-6xl">
+      <section className="bg-bg py-16 md:py-24">
+        <Container>
           <SectionHeading
             title="Featured work"
             action={
@@ -135,12 +136,12 @@ export default function Home() {
               </div>
             ))}
           </div>
-        </div>
+        </Container>
       </section>
 
       {/* Services */}
-      <section className="bg-surface px-6 py-16 md:py-24">
-        <div className="mx-auto max-w-6xl">
+      <section className="bg-surface py-16 md:py-24">
+        <Container>
           <SectionHeading title="What I can do for you" />
 
           <div className="mt-8 grid grid-cols-1 gap-6 md:grid-cols-3">
@@ -168,49 +169,51 @@ export default function Home() {
               See services and pricing →
             </Link>
           </p>
-        </div>
+        </Container>
       </section>
 
       {/* Tools */}
-      <section className="bg-surface-alt px-6 py-12 md:py-16">
-        <div className="mx-auto max-w-6xl">
+      <section className="bg-surface-alt py-12 md:py-16">
+        <Container>
           <SectionHeading title="Tools I work with" variant="label" />
           <div className="mt-4 flex flex-wrap gap-2">
             {tools.map((tool) => (
               <TagPill key={tool}>{tool}</TagPill>
             ))}
           </div>
-        </div>
+        </Container>
       </section>
 
       {/* Final CTA */}
-      <section className="bg-surface-alt px-6 py-16 md:py-24">
-        <div className="mx-auto max-w-2xl text-center">
-          <h2 className="font-serif text-3xl text-ink md:text-4xl">
-            {finalCta.headline.before}
-            <span className="italic text-accent">
-              {finalCta.headline.accent}
-            </span>
-            {finalCta.headline.after}
-          </h2>
-          <p className="mt-4 font-sans text-base text-text-secondary">
-            {finalCta.subline}
-          </p>
-          <div className="mt-8">
-            <ButtonLink to={finalCta.button.to} variant="primary">
-              {finalCta.button.label}
-            </ButtonLink>
+      <section className="bg-surface-alt py-16 md:py-24">
+        <Container>
+          <div className="mx-auto max-w-2xl text-center">
+            <h2 className="font-serif text-3xl text-ink md:text-4xl">
+              {finalCta.headline.before}
+              <span className="italic text-accent">
+                {finalCta.headline.accent}
+              </span>
+              {finalCta.headline.after}
+            </h2>
+            <p className="mt-4 font-sans text-base text-text-secondary">
+              {finalCta.subline}
+            </p>
+            <div className="mt-8">
+              <ButtonLink to={finalCta.button.to} variant="primary">
+                {finalCta.button.label}
+              </ButtonLink>
+            </div>
+            <p className="mt-6 font-sans text-sm text-text-muted">
+              {finalCta.referralLead}{" "}
+              <Link
+                to={finalCta.referralHref}
+                className="text-accent-text underline"
+              >
+                {finalCta.referralLinkLabel}
+              </Link>
+            </p>
           </div>
-          <p className="mt-6 font-sans text-sm text-text-muted">
-            {finalCta.referralLead}{" "}
-            <Link
-              to={finalCta.referralHref}
-              className="text-accent-text underline"
-            >
-              {finalCta.referralLinkLabel}
-            </Link>
-          </p>
-        </div>
+        </Container>
       </section>
 
       <Footer />

@@ -1,6 +1,7 @@
 import { useEffect, useId, useRef, useState } from "react";
 import { Link, NavLink } from "react-router";
 import { ButtonLink } from "./Button";
+import { Container } from "./Container";
 import {
   ChevronDownIcon,
   CloseIcon,
@@ -203,7 +204,7 @@ export function Nav({ sticky = true }: NavProps) {
     <header
       className={`${sticky ? "sticky top-0 z-40" : "relative"} border-b border-border bg-bg`}
     >
-      <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-6 py-4">
+      <Container className="flex items-center justify-between gap-4 py-4">
         <Link
           to="/"
           className="shrink-0 font-sans text-lg font-bold tracking-tight text-ink"
@@ -251,11 +252,11 @@ export function Nav({ sticky = true }: NavProps) {
             <HamburgerIcon className="h-5 w-5" aria-hidden="true" />
           )}
         </button>
-      </div>
+      </Container>
 
       {mobileOpen && (
         <div id={mobileMenuId} className="border-t border-border md:hidden">
-          <ul className="flex flex-col gap-1 px-6 py-4">
+          <Container as="ul" className="flex flex-col gap-1 py-4">
             {navLinks.map((link) => (
               <li key={link.to}>
                 <NavLink
@@ -294,8 +295,8 @@ export function Nav({ sticky = true }: NavProps) {
                 Contact
               </NavLink>
             </li>
-          </ul>
-          <div className="flex items-center gap-3 border-t border-border px-6 py-4">
+          </Container>
+          <Container className="flex items-center gap-3 border-t border-border py-4">
             <ButtonLink
               to="/contact"
               variant="primary"
@@ -305,7 +306,7 @@ export function Nav({ sticky = true }: NavProps) {
               Book a call
             </ButtonLink>
             <ThemeToggle />
-          </div>
+          </Container>
         </div>
       )}
     </header>

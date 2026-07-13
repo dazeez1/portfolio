@@ -1,4 +1,5 @@
 import { Link } from "react-router";
+import { Container } from "./Container";
 import {
   DownloadIcon,
   GithubIcon,
@@ -45,7 +46,7 @@ export function Footer() {
 
   return (
     <footer className="border-t border-border bg-surface-alt">
-      <div className="mx-auto grid max-w-6xl grid-cols-1 gap-10 px-6 py-12 sm:grid-cols-3">
+      <Container className="grid grid-cols-1 gap-10 py-12 sm:grid-cols-3">
         <div>
           <p className="font-serif text-lg text-ink">
             Azeez Damilare Gbenga
@@ -117,10 +118,10 @@ export function Footer() {
             ))}
           </div>
         </div>
-      </div>
+      </Container>
 
       <div className="border-t border-border">
-        <div className="mx-auto flex max-w-6xl flex-col gap-2 px-6 py-4 font-sans text-xs text-text-muted sm:flex-row sm:items-center sm:justify-between">
+        <Container className="flex flex-col gap-2 py-4 font-sans text-xs text-text-muted sm:flex-row sm:items-center sm:justify-between">
           <p>© {year} Azeez Damilare Gbenga. All rights reserved.</p>
           <div className="flex items-center gap-4">
             <Link to="/privacy" className="hover:text-accent-text">
@@ -130,7 +131,7 @@ export function Footer() {
               Terms of Service
             </Link>
           </div>
-        </div>
+        </Container>
       </div>
     </footer>
   );

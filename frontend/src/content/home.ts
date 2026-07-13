@@ -44,9 +44,10 @@ export const hero: HeroContent = {
   secondaryCta: { label: "Book a discovery call", to: "/contact" },
   credentialLine:
     "B.Sc. Software Engineering, First Class Honours · ALU certified by IBM & DataCamp",
+  
   screenshotUrl: "gusangira.com",
   screenshot: {
-    src: "/images/sangira-hero.png",
+    src: "/images/sangira-card.png",
     alt: "Sangira dashboard showing active food donation listings",
     width: 1200,
     height: 750,
@@ -80,6 +81,7 @@ export const featuredProjects: FeaturedProject[] = [
       { Icon: ReactIcon, label: "React" },
       { Icon: SocketIOIcon, label: "Socket.io" },
     ],
+    // Placeholder until the owner confirms the exact URL string.
     liveUrl: "gusangira.com",
     screenshot: {
       src: "/images/sangira-card.png",
@@ -97,6 +99,7 @@ export const featuredProjects: FeaturedProject[] = [
       { Icon: PrismaIcon, label: "Prisma" },
       { Icon: MongoDBIcon, label: "MongoDB" },
     ],
+    // Placeholder until the owner confirms the exact URL string.
     liveUrl: "qurequeue.com",
     screenshot: {
       src: "/images/qure-card.png",
@@ -119,13 +122,13 @@ export const services: ServiceItem[] = [
     Icon: CodeIcon,
     title: "Full-stack development",
     description:
-      "End-to-end web applications built with modern frameworks like React, Next.js, and robust backends.",
+      "End-to-end web applications built with modern frameworks like React, Node.js, and robust backends.",
   },
   {
     Icon: ApiIcon,
     title: "API & Backend systems",
     description:
-      "Scalable, secure, and well-documented REST or GraphQL APIs that power complex digital ecosystems.",
+      "Scalable, secure, and well-documented REST APIs that power complex digital ecosystems.",
   },
   {
     Icon: LightbulbIcon,
