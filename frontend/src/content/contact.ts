@@ -53,6 +53,12 @@ export const connectMethods: ConnectMethod[] = [
     action: { type: "copy" },
   },
   {
+    Icon: PhoneIcon,
+    label: "Phone",
+    value: "+250 798 203 134",
+    action: { type: "link", label: "Call", href: "tel:+250798203134" },
+  },
+  {
     Icon: WhatsAppIcon,
     label: "WhatsApp · fastest reply",
     value: "+234 701 505 9880",
