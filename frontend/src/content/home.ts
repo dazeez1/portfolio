@@ -44,7 +44,8 @@ export const hero: HeroContent = {
   secondaryCta: { label: "Book a discovery call", to: "/contact" },
   credentialLine:
     "B.Sc. Software Engineering, First Class Honours · ALU certified by IBM & DataCamp",
-  screenshotUrl: "gusangira.com",
+  // Placeholder until the owner confirms the exact URL string.
+  screenshotUrl: "…",
   screenshot: {
     src: "/images/sangira-hero.png",
     alt: "Sangira dashboard showing active food donation listings",
@@ -80,6 +81,7 @@ export const featuredProjects: FeaturedProject[] = [
       { Icon: ReactIcon, label: "React" },
       { Icon: SocketIOIcon, label: "Socket.io" },
     ],
+    // Placeholder until the owner confirms the exact URL string.
     liveUrl: "gusangira.com",
     screenshot: {
       src: "/images/sangira-card.png",
@@ -97,6 +99,7 @@ export const featuredProjects: FeaturedProject[] = [
       { Icon: PrismaIcon, label: "Prisma" },
       { Icon: MongoDBIcon, label: "MongoDB" },
     ],
+    // Placeholder until the owner confirms the exact URL string.
     liveUrl: "qurequeue.com",
     screenshot: {
       src: "/images/qure-card.png",
@@ -125,7 +128,7 @@ export const services: ServiceItem[] = [
     Icon: ApiIcon,
     title: "API & Backend systems",
     description:
-      "Scalable, secure, and well-documented REST or GraphQL APIs that power complex digital ecosystems.",
+      "Scalable, secure, and well-documented REST APIs that power complex digital ecosystems.",
   },
   {
     Icon: LightbulbIcon,

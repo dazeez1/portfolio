@@ -114,6 +114,7 @@ This site never claims what isn't true:
 - The SEO page shows proof from real projects only.
 - "Starting from" prices are real commitments: Starter website $600 · Business web app $2,000 · Full platform/SaaS $4,500.
 - Education: B.Sc. Software Engineering, African Leadership University, 2023–2026, First Class Honours, CGPA 4.22.
+- **Never write, improve, or paraphrase site copy.** All copy comes from the owner-approved data files; if copy is missing, ask.
 
 ---
 
