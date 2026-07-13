@@ -19,7 +19,6 @@ interface ContactPayload {
   name?: string;
   email?: string;
   need?: string;
-  budget?: string;
   message?: string;
   package?: string;
   type?: string;
@@ -110,7 +109,6 @@ export default async function handler(
           <p><strong>Email:</strong> ${escapeHtml(email)}</p>
           <p><strong>Need:</strong> ${escapeHtml(need)}</p>
           <p><strong>Package:</strong> ${escapeHtml(pkg ?? "—")}</p>
-          <p><strong>Budget:</strong> ${escapeHtml(body.budget?.trim() || "—")}</p>
           <p><strong>Message:</strong><br>${escapeHtml(message).replace(/\n/g, "<br>")}</p>
         `,
       }),

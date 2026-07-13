@@ -14,16 +14,17 @@ import { TagPill } from "../components/TagPill";
 import {
   afterYouWrite,
   booking,
-  budgetOptions,
   connectMethods,
   connectSubline,
   connectTitle,
   defaultMessagePlaceholder,
+  emailPlaceholder,
   faqItems,
   faqSectionLabel,
   formHeader,
   header,
   messageLabel,
+  namePlaceholder,
   needOptions,
   packageLabels,
   referralMessagePlaceholder,
@@ -117,7 +118,6 @@ export default function Contact() {
   const [need, setNeed] = useState(() =>
     packageParam ? "new-project" : isReferral ? "referral" : "",
   );
-  const [budget, setBudget] = useState("");
   const [message, setMessage] = useState("");
   const [honeypot, setHoneypot] = useState("");
   const [errors, setErrors] = useState<Record<string, string>>({});
@@ -180,7 +180,6 @@ export default function Contact() {
 
     const needLabel =
       needOptions.find((o) => o.value === need)?.label ?? need;
-    const budgetLabel = budgetOptions.find((o) => o.value === budget)?.label;
     const packageLabel = packageParam ? packageLabels[packageParam] : undefined;
 
     try {
@@ -191,7 +190,6 @@ export default function Contact() {
           name,
           email,
           need: needLabel,
-          budget: budgetLabel,
           message,
           package: packageLabel,
           type: isReferral ? "referral" : needLabel,
@@ -357,6 +355,7 @@ export default function Contact() {
                     ref={nameRef}
                     label="Your name"
                     name="name"
+                    placeholder={namePlaceholder}
                     autoComplete="name"
                     value={name}
                     onChange={(e) => setName(e.target.value)}
@@ -367,6 +366,7 @@ export default function Contact() {
                     label="Your email"
                     name="email"
                     type="email"
+                    placeholder={emailPlaceholder}
                     autoComplete="email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
@@ -374,7 +374,7 @@ export default function Contact() {
                   />
                 </div>
 
-                <div className="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-2">
+                <div className="mt-4">
                   <Select
                     ref={needRef}
                     label="What do you need?"
@@ -387,20 +387,6 @@ export default function Contact() {
                       Select one
                     </option>
                     {needOptions.map((opt) => (
-                      <option key={opt.value} value={opt.value}>
-                        {opt.label}
-                      </option>
-                    ))}
-                  </Select>
-                  <Select
-                    label="Budget range"
-                    optional
-                    name="budget"
-                    value={budget}
-                    onChange={(e) => setBudget(e.target.value)}
-                  >
-                    <option value="">Select one</option>
-                    {budgetOptions.map((opt) => (
                       <option key={opt.value} value={opt.value}>
                         {opt.label}
                       </option>
