@@ -5,6 +5,7 @@ import DevComponents from "./pages/DevComponents";
 import Home from "./pages/Home";
 import NotFound from "./pages/NotFound";
 import Portfolio from "./pages/Portfolio";
+import Sangira from "./pages/Sangira";
 import ThankYou from "./pages/ThankYou";
 
 function App() {
@@ -13,6 +14,7 @@ function App() {
       <Route path="/" element={<Home />} />
       <Route path="/about" element={<About />} />
       <Route path="/portfolio" element={<Portfolio />} />
+      <Route path="/portfolio/sangira" element={<Sangira />} />
       <Route path="/contact" element={<Contact />} />
       <Route path="/thank-you" element={<ThankYou />} />
       <Route path="/dev/components" element={<DevComponents />} />

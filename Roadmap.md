@@ -35,7 +35,7 @@ Build order is sequential — a phase starts only when the previous one is appro
 - [x] Thank You + form pipeline (serverless → Resend → redirect)
 - [x] About
 - [x] Portfolio index (pagination-ready grid)
-- [ ] Case study: Sangira
+- [x] Case study: Sangira
 - [ ] Case study: Qure
 - [ ] Services + Pricing
 - [ ] SEO page (Resources)
@@ -75,6 +75,7 @@ Build order is sequential — a phase starts only when the previous one is appro
 - [ ] Confirm Calendly URL is correct: https://calendly.com/azeezdamilare31/30mins (owner-supplied, not independently verified)
 - [ ] Confirm Sangira live URL (gusangira.com is a placeholder pending confirmation — see content/projects.ts)
 - [ ] 6 placeholder projects in content/projects.ts ("PLACEHOLDER — Project 1" through 6) need real repos, screenshots, and case study links
+- [ ] Sangira architecture diagram image (placeholder slot in content/caseStudies/sangira.ts, section 03)
 
 ## Post-launch (v2 candidates — not now)
 
