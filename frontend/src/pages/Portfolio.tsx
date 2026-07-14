@@ -371,8 +371,8 @@ export default function Portfolio() {
 
         {/* GitHub note */}
         <section className="bg-bg py-12 md:py-16">
-          <Container className="flex justify-center">
-            <div className="flex w-full max-w-[26rem] flex-col items-center rounded-lg border border-border bg-surface p-6 text-center">
+          <Container>
+            <div className="flex w-full flex-col items-center rounded-lg border border-border bg-surface p-6 text-center md:p-8">
               <p className="font-sans text-base text-text-secondary">
                 {githubNote.lead}
               </p>
