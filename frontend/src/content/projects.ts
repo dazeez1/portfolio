@@ -95,7 +95,7 @@ export const projects: Project[] = [
     tags: ["Healthcare", "SaaS"],
     stack: ["Node.js", "Express", "Prisma", "MongoDB"],
     screenshot: {
-      src: "/images/qure-card.png",
+      src: "/images/qure-mockup.png",
       alt: "Qure staff dashboard screenshot",
       width: 1200,
       height: 750,
