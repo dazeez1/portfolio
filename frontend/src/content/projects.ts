@@ -62,6 +62,8 @@ export interface Project {
   links: ProjectLinks;
   featured: boolean;
   clientWork: boolean;
+  /** True for the seed placeholder entries — styles the one-liner as a quiet annotation instead of body copy. */
+  placeholder?: boolean;
 }
 
 export const projects: Project[] = [
@@ -69,7 +71,7 @@ export const projects: Project[] = [
     slug: "sangira",
     title: "Sangira",
     oneLiner: "Verified surplus-food handoffs between donors and NGOs in Kigali.",
-    tags: ["Social impact"],
+    tags: ["Social impact", "Real-time"],
     stack: ["Node.js", "React", "Socket.io", "MongoDB"],
     screenshot: {
       src: "/images/sangira-card.png",
@@ -119,6 +121,7 @@ export const projects: Project[] = [
     links: { caseStudy: "/portfolio/placeholder-project-1", github: "#" },
     featured: false,
     clientWork: false,
+    placeholder: true,
   },
   {
     slug: "placeholder-project-2",
@@ -133,6 +136,7 @@ export const projects: Project[] = [
     links: { caseStudy: "/portfolio/placeholder-project-2", live: "#" },
     featured: false,
     clientWork: true,
+    placeholder: true,
   },
   {
     slug: "placeholder-project-3",
@@ -147,6 +151,7 @@ export const projects: Project[] = [
     links: { caseStudy: "/portfolio/placeholder-project-3", github: "#" },
     featured: false,
     clientWork: false,
+    placeholder: true,
   },
   {
     slug: "placeholder-project-4",
@@ -161,6 +166,7 @@ export const projects: Project[] = [
     links: { caseStudy: "/portfolio/placeholder-project-4", live: "#" },
     featured: false,
     clientWork: true,
+    placeholder: true,
   },
   {
     slug: "placeholder-project-5",
@@ -175,6 +181,7 @@ export const projects: Project[] = [
     links: { caseStudy: "/portfolio/placeholder-project-5", github: "#" },
     featured: false,
     clientWork: false,
+    placeholder: true,
   },
   {
     slug: "placeholder-project-6",
@@ -189,5 +196,6 @@ export const projects: Project[] = [
     links: { caseStudy: "/portfolio/placeholder-project-6", live: "#" },
     featured: false,
     clientWork: true,
+    placeholder: true,
   },
 ];

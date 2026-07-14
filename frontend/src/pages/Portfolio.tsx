@@ -8,6 +8,7 @@ import { Footer } from "../components/Footer";
 import {
   ChevronLeftIcon,
   ChevronRightIcon,
+  ExternalLinkIcon,
   GithubIcon,
   GlobeIcon,
 } from "../components/icons";
@@ -100,19 +101,18 @@ function GridImage({ src, alt }: { src: string; alt: string }) {
 function FeaturedCard({ project, reverse }: { project: Project; reverse: boolean }) {
   return (
     <div
-      className={`flex flex-col overflow-hidden rounded-lg border border-border bg-surface md:flex-row ${
+      className={`flex flex-col overflow-hidden rounded-lg border border-border bg-surface md:flex-row md:items-start ${
         reverse ? "md:flex-row-reverse" : ""
       }`}
     >
-      <div className="md:w-1/2">
+      <div className="overflow-hidden md:h-72 md:w-1/2">
         <BrowserFrame
           bordered={false}
           url={project.links.live?.replace(/^https?:\/\//, "")}
           image={project.screenshot}
-          className="h-full"
         />
       </div>
-      <div className="flex flex-col justify-center p-6 md:w-1/2 md:p-10">
+      <div className="flex flex-col p-6 md:w-1/2 md:p-8">
         <div className="flex flex-wrap gap-2">
           {project.tags.map((tag) => (
             <TagPill key={tag} variant="tinted">
@@ -121,30 +121,30 @@ function FeaturedCard({ project, reverse }: { project: Project; reverse: boolean
           ))}
         </div>
         <h3 className="mt-4 font-serif text-2xl text-ink">{project.title}</h3>
-        <p className="mt-3 font-sans text-sm text-text-secondary">
+        <p className="mt-2 font-sans text-base text-text-secondary">
           {project.oneLiner}
         </p>
         {project.stack.length > 0 && (
-          <p className="mt-4 font-sans text-xs text-text-muted">
+          <p className="mt-3 font-sans text-xs text-text-muted">
             {project.stack.join(" · ")}
           </p>
         )}
-        <div className="mt-6 flex flex-wrap items-center gap-4">
+        <div className="mt-5 flex flex-wrap items-center gap-3">
           {project.links.caseStudy && (
             <ButtonLink to={project.links.caseStudy} variant="primary">
               Read case study
             </ButtonLink>
           )}
           {project.links.github && (
-            <a
+            <ButtonAnchor
               href={project.links.github}
               target="_blank"
               rel="noreferrer"
-              className="inline-flex items-center gap-1.5 font-sans text-sm text-text-secondary hover:text-ink"
+              variant="secondary"
             >
               <GithubIcon className="h-4 w-4" aria-hidden="true" />
               Code
-            </a>
+            </ButtonAnchor>
           )}
         </div>
       </div>
@@ -158,12 +158,16 @@ function GridCard({ project }: { project: Project }) {
       <GridImage src={project.screenshot.src} alt={project.screenshot.alt} />
       <div className="flex flex-1 flex-col p-5">
         <div className="flex items-center gap-2">
-          <h3 className="font-sans text-base font-semibold text-ink">
-            {project.title}
-          </h3>
+          <h3 className="font-serif text-xl text-ink">{project.title}</h3>
           {project.clientWork && <TagPill>Client work</TagPill>}
         </div>
-        <p className="mt-2 flex-1 font-sans text-sm text-text-secondary">
+        <p
+          className={
+            project.placeholder
+              ? "mt-2 flex-1 font-sans text-xs text-text-muted"
+              : "mt-2 flex-1 font-sans text-base text-text-secondary"
+          }
+        >
           {project.oneLiner}
         </p>
         <div className="mt-4 flex items-center justify-between gap-4">
@@ -177,26 +181,26 @@ function GridCard({ project }: { project: Project }) {
           )}
           {project.clientWork
             ? project.links.live && (
-                <a
+                <ButtonAnchor
                   href={project.links.live}
                   target="_blank"
                   rel="noreferrer"
-                  className="inline-flex items-center gap-1.5 font-sans text-sm text-text-secondary hover:text-ink"
+                  variant="secondary"
                 >
                   <GlobeIcon className="h-4 w-4" aria-hidden="true" />
                   Live site
-                </a>
+                </ButtonAnchor>
               )
             : project.links.github && (
-                <a
+                <ButtonAnchor
                   href={project.links.github}
                   target="_blank"
                   rel="noreferrer"
-                  className="inline-flex items-center gap-1.5 font-sans text-sm text-text-secondary hover:text-ink"
+                  variant="secondary"
                 >
                   <GithubIcon className="h-4 w-4" aria-hidden="true" />
                   Code
-                </a>
+                </ButtonAnchor>
               )}
         </div>
       </div>
@@ -295,7 +299,7 @@ export default function Portfolio() {
         {/* Header */}
         <section className="bg-bg py-16 md:py-20">
           <Container>
-            <p className="font-sans text-xs uppercase tracking-wide text-accent-text">
+            <p className="font-sans text-xs uppercase tracking-wide text-text-muted">
               {header.eyebrow}
             </p>
             <h1 className="mt-3 max-w-3xl font-serif text-4xl text-ink md:text-5xl">
@@ -366,21 +370,24 @@ export default function Portfolio() {
         )}
 
         {/* GitHub note */}
-        <section className="bg-bg py-12">
-          <Container className="flex flex-col items-center text-center">
-            <p className="font-sans text-sm text-text-muted">
-              {githubNote.lead}
-            </p>
-            <ButtonAnchor
-              href={githubNote.href}
-              target="_blank"
-              rel="noreferrer"
-              variant="secondary"
-              className="mt-3"
-            >
-              <GithubIcon className="h-4 w-4" aria-hidden="true" />
-              {githubNote.label}
-            </ButtonAnchor>
+        <section className="bg-bg py-12 md:py-16">
+          <Container className="flex justify-center">
+            <div className="flex w-full max-w-sm flex-col items-center rounded-lg border border-border bg-surface px-8 py-8 text-center">
+              <p className="font-sans text-base text-text-secondary">
+                {githubNote.lead}
+              </p>
+              <ButtonAnchor
+                href={githubNote.href}
+                target="_blank"
+                rel="noreferrer"
+                variant="secondary"
+                className="mt-4"
+              >
+                <GithubIcon className="h-4 w-4" aria-hidden="true" />
+                {githubNote.label}
+                <ExternalLinkIcon className="h-3.5 w-3.5" aria-hidden="true" />
+              </ButtonAnchor>
+            </div>
           </Container>
         </section>
       </main>

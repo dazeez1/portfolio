@@ -64,7 +64,7 @@ export default function About() {
         <section className="bg-bg py-16 md:py-20">
           <Container className="grid grid-cols-1 gap-10 md:grid-cols-[3fr_2fr] md:gap-12">
             <div className="order-2 md:order-1">
-              <p className="font-sans text-xs uppercase tracking-wide text-accent-text">
+              <p className="font-sans text-xs uppercase tracking-wide text-text-muted">
                 {intro.eyebrow}
               </p>
               <h1 className="mt-3 font-serif text-4xl text-ink md:text-5xl">
@@ -218,7 +218,7 @@ export default function About() {
             <div className="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-2">
               {beyondTheCode.map(({ role, company, description }) => (
                 <Card key={company}>
-                  <p className="font-sans text-xs uppercase tracking-wide text-accent-text">
+                  <p className="font-sans text-xs uppercase tracking-wide text-text-muted">
                     {role}
                   </p>
                   <h3 className="mt-1 font-sans text-base font-bold text-ink">
