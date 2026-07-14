@@ -28,18 +28,20 @@ export default function NotFound() {
 
       <main className="flex flex-1 flex-col justify-center overflow-hidden bg-bg py-24 md:py-32">
         <Container className="relative flex flex-col items-center text-center">
-          <span
-            aria-hidden="true"
-            className="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 select-none whitespace-nowrap font-serif text-[8rem] text-border-strong sm:text-[12rem] md:text-[16rem] lg:text-[20rem]"
-          >
-            {ghostNumeral}
-          </span>
-
-          <div className="relative">
-            <h1 className="font-serif text-4xl text-ink md:text-5xl">
+          <div className="relative flex w-full flex-col items-center justify-center py-8 sm:py-12 md:py-16">
+            <span
+              aria-hidden="true"
+              className="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 select-none whitespace-nowrap font-serif text-[7rem] text-border-strong sm:text-[10rem] md:text-[14rem] lg:text-[18rem]"
+            >
+              {ghostNumeral}
+            </span>
+            <h1 className="relative font-serif text-4xl text-ink md:text-5xl">
               {heading}
             </h1>
-            <p className="mt-4 font-sans text-base text-text-secondary">
+          </div>
+
+          <div className="relative">
+            <p className="font-sans text-base text-text-secondary">
               {subline}
             </p>
             <p className="mt-1 font-sans text-sm text-text-muted">
