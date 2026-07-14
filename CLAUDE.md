@@ -18,6 +18,7 @@ This file is the source of truth for how this project is built. Read fully befor
 5. **Units: rem, not px.** All spacing, font sizes, radii, and layout dimensions use rem (Tailwind's default rem-based scale). The only px exceptions: 1px hairline borders and the 2px focus ring. Root font size stays at the browser default (16px = 1rem); never set a custom root px size.
 6. Work happens on the `stage` branch. Small conventional commits per meaningful change. Merge to `main` only when the owner approves a page as done (Section 13).
 7. **Never amend, rebase, reset, or otherwise rewrite git history without explicit owner approval in that session.** If a commit needs fixing, propose the fix and wait.
+8. **Commit messages are short and simple:** one conventional line (e.g. `feat: about page`, `fix: 404 route`), no body unless genuinely needed, and never any mention of Claude, AI, or co-authorship anywhere in the message.
 
 ---
 

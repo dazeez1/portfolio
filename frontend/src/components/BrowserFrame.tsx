@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import type { ReactNode } from "react";
 
 export interface BrowserFrameImage {
@@ -50,6 +50,8 @@ export function BrowserFrame({
   className = "",
 }: BrowserFrameProps) {
   const [imageFailed, setImageFailed] = useState(false);
+  const [imageLoaded, setImageLoaded] = useState(false);
+  const imgRef = useRef<HTMLImageElement>(null);
   const showImage = !children && image && !imageFailed;
   const showPlaceholder = !children && !showImage;
 
@@ -76,14 +78,27 @@ export function BrowserFrame({
           {children}
         </div>
       ) : showImage ? (
-        <div className="bg-surface-alt">
+        <div className="relative bg-surface-alt">
+          {!imageLoaded && (
+            <div
+              className="absolute inset-0 bg-border motion-safe:animate-pulse"
+              aria-hidden="true"
+            />
+          )}
           <img
+            ref={(node) => {
+              imgRef.current = node;
+              if (node?.complete) setImageLoaded(true);
+            }}
             src={image.src}
             alt={image.alt}
             width={image.width}
             height={image.height}
             loading={image.loading ?? "lazy"}
-            className="block h-auto w-full"
+            className={`relative block h-auto w-full transition-opacity duration-500 ${
+              imageLoaded ? "opacity-100" : "opacity-0"
+            }`}
+            onLoad={() => setImageLoaded(true)}
             onError={() => setImageFailed(true)}
           />
         </div>

@@ -33,14 +33,14 @@ Build order is sequential — a phase starts only when the previous one is appro
 - [x] Home
 - [x] Contact (incl. pre-filled chip state, validation state, Calendly popup)
 - [x] Thank You + form pipeline (serverless → Resend → redirect)
-- [ ] About
+- [x] About
 - [ ] Portfolio index (pagination-ready grid)
 - [ ] Case study: Sangira
 - [ ] Case study: Qure
 - [ ] Services + Pricing
 - [ ] SEO page (Resources)
 - [ ] Referrals page (Resources)
-- [ ] 404
+- [x] 404
 - [ ] Privacy · Terms (shared legal template)
 
 ## Phase 3 — Launch pass
@@ -66,6 +66,7 @@ Build order is sequential — a phase starts only when the previous one is appro
 - [ ] Resume PDF matching site content
 - [ ] SEO proof screenshots from past project (Search Console + analytics)
 - [ ] Vephla training year for the About timeline
+- [ ] About bio paragraphs (2 placeholder paragraphs currently in content/about.ts, marked for replacement)
 - [ ] Referral fixed-reward amount ($) for Starter tier
 - [ ] Real LinkedIn and Instagram profile URLs (Footer + Contact page currently link to `#` for both)
 - [ ] Privacy Policy + Terms text (template-based is fine)

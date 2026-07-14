@@ -1,4 +1,6 @@
 export interface TimelineItemProps {
+  /** Optional leading year/date label, e.g. "2021" or "Aug 2025". */
+  year?: string;
   title: string;
   context: string;
   /** Accent-filled dot instead of the neutral outline. */
@@ -8,6 +10,7 @@ export interface TimelineItemProps {
 }
 
 export function TimelineItem({
+  year,
   title,
   context,
   isFirst = false,
@@ -27,7 +30,14 @@ export function TimelineItem({
         )}
       </div>
       <div className={isLast ? "pb-0" : "pb-8"}>
-        <p className="font-sans text-sm font-medium text-ink">{title}</p>
+        {year && (
+          <p className="font-sans text-xs uppercase tracking-wide text-text-muted">
+            {year}
+          </p>
+        )}
+        <p className="mt-0.5 font-sans text-sm font-medium text-ink">
+          {title}
+        </p>
         <p className="mt-1 font-sans text-xs text-text-muted">{context}</p>
       </div>
     </div>

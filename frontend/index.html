@@ -4,6 +4,30 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!--
+      Anti-flash: read the persisted theme and set data-theme on <html>
+      before first paint, then set the matching background as critical
+      inline CSS. Runs synchronously (blocking) so the pre-JS/pre-stylesheet
+      paint is ivory (or dark) instead of browser-default white. Hex values
+      match --bg light/dark in styles/tokens.css.
+    -->
+    <script>
+      (function () {
+        try {
+          if (localStorage.getItem("theme") === "dark") {
+            document.documentElement.dataset.theme = "dark";
+          }
+        } catch (e) {}
+      })();
+    </script>
+    <style>
+      html {
+        background: #faf7f2;
+      }
+      html[data-theme="dark"] {
+        background: #191613;
+      }
+    </style>
     <link
       rel="preload"
       href="/fonts/inter-variable-normal.woff2"
