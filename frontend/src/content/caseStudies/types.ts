@@ -19,6 +19,8 @@ export interface CaseStudyMetaBar {
 export interface CaseStudyHero {
   tags: string[];
   title: string;
+  /** Optional descriptor line rendered directly under the serif title. */
+  subtitle?: string;
   summary: string;
   /** Optional second summary line, rendered below the main summary paragraph. */
   summaryDetail?: string;
@@ -37,17 +39,34 @@ export interface CaseStudySubBlock {
   text: string;
 }
 
+export interface CaseStudyJourneyStep {
+  Icon: ComponentType<IconProps>;
+  label: string;
+}
+
 export interface CaseStudySolution {
   title: string;
   intro: string;
+  /** Optional horizontal step strip (icon chips joined by arrows) rendered above the sub-blocks. */
+  journeyFlow?: CaseStudyJourneyStep[];
   subBlocks: CaseStudySubBlock[];
   images: { image: CaseStudyImage; label: string }[];
+}
+
+export interface CaseStudyDiagramStep {
+  label: string;
+  highlighted?: boolean;
 }
 
 export interface CaseStudyBuild {
   title: string;
   paragraphs: string[];
-  diagram: { image?: CaseStudyImage; label: string };
+  diagram: {
+    image?: CaseStudyImage;
+    label: string;
+    /** Alternative to the image/placeholder box — a light chips-and-arrows chain. */
+    chain?: CaseStudyDiagramStep[];
+  };
 }
 
 export interface CaseStudyFeature {
@@ -61,14 +80,24 @@ export interface CaseStudyFeatures {
   items: CaseStudyFeature[];
 }
 
+export interface CaseStudyChallengeBlock {
+  label: string;
+  text: string;
+}
+
 export interface CaseStudyChallenges {
   title: string;
-  paragraphs: string[];
+  /** Plain paragraphs (Sangira's format). */
+  paragraphs?: string[];
+  /** Alternative: small uppercase label + paragraph per block (Qure's format). */
+  blocks?: CaseStudyChallengeBlock[];
 }
 
 export interface CaseStudyMetric {
   value: string;
   label: string;
+  /** Ink/dark fill with light text — for the single highest-value metric in a row. */
+  featured?: boolean;
 }
 
 export interface CaseStudyResults {
@@ -77,11 +106,16 @@ export interface CaseStudyResults {
   footnote?: string;
 }
 
+export interface CaseStudyNavLink {
+  /** Small caption above the label, e.g. "← Previous project" or "Back to portfolio →". */
+  caption: string;
+  label: string;
+  href: string;
+}
+
 export interface CaseStudyProjectNav {
-  prevLabel: string;
-  prevHref: string;
-  nextLabel: string;
-  nextHref: string;
+  left?: CaseStudyNavLink;
+  right?: CaseStudyNavLink;
 }
 
 export interface CaseStudyClosingCta {

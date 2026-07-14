@@ -7,7 +7,7 @@ import { ButtonLink } from "./Button";
 import { Card } from "./Card";
 import { Container } from "./Container";
 import { Footer } from "./Footer";
-import { GithubIcon, GlobeIcon } from "./icons";
+import { ChevronRightIcon, GithubIcon, GlobeIcon } from "./icons";
 import { MetricCard } from "./MetricCard";
 import { Nav } from "./Nav";
 import { TagPill } from "./TagPill";
@@ -131,6 +131,11 @@ export function CaseStudyLayout({ content }: { content: CaseStudyContent }) {
             <h1 className="mt-4 font-serif text-4xl text-ink md:text-5xl">
               {hero.title}
             </h1>
+            {hero.subtitle && (
+              <p className="mt-2 max-w-[68ch] font-sans text-lg text-text-secondary">
+                {hero.subtitle}
+              </p>
+            )}
             <p className="mt-4 max-w-[68ch] font-sans text-base text-text-secondary">
               {hero.summary}
             </p>
@@ -228,6 +233,29 @@ export function CaseStudyLayout({ content }: { content: CaseStudyContent }) {
             <p className="mt-4 max-w-[68ch] font-sans text-base leading-relaxed text-text-secondary">
               {solution.intro}
             </p>
+            {solution.journeyFlow && (
+              <div className="mt-8 flex flex-col items-center gap-2 sm:flex-row sm:flex-wrap sm:justify-center">
+                {solution.journeyFlow.map((step, i) => (
+                  <div
+                    key={step.label}
+                    className="flex flex-col items-center gap-2 sm:flex-row"
+                  >
+                    <div className="flex flex-col items-center gap-1.5 rounded-lg border border-border bg-surface px-3 py-2">
+                      <step.Icon className="h-4 w-4 text-ink" aria-hidden="true" />
+                      <span className="whitespace-nowrap font-sans text-xs text-ink">
+                        {step.label}
+                      </span>
+                    </div>
+                    {i < solution.journeyFlow!.length - 1 && (
+                      <ChevronRightIcon
+                        className="h-4 w-4 shrink-0 rotate-90 text-text-muted sm:rotate-0"
+                        aria-hidden="true"
+                      />
+                    )}
+                  </div>
+                ))}
+              </div>
+            )}
             <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2">
               {solution.subBlocks.map((block) => (
                 <div
@@ -274,12 +302,39 @@ export function CaseStudyLayout({ content }: { content: CaseStudyContent }) {
               ))}
             </div>
             <div className="mt-10">
-              <CaseStudyImage
-                image={build.diagram.image}
-                label={build.diagram.label}
-                aspect="aspect-[21/9]"
-                showCaption={false}
-              />
+              {build.diagram.chain ? (
+                <div className="flex flex-col items-center gap-2 rounded-lg border border-border bg-surface-alt p-8 sm:flex-row sm:flex-wrap sm:justify-center">
+                  {build.diagram.chain.map((step, i) => (
+                    <div
+                      key={step.label}
+                      className="flex flex-col items-center gap-2 sm:flex-row"
+                    >
+                      <div
+                        className={`rounded-md border px-3 py-2 font-sans text-sm ${
+                          step.highlighted
+                            ? "border-tint-border bg-tint text-accent-text"
+                            : "border-border bg-surface text-ink"
+                        }`}
+                      >
+                        {step.label}
+                      </div>
+                      {i < build.diagram.chain!.length - 1 && (
+                        <ChevronRightIcon
+                          className="h-4 w-4 shrink-0 rotate-90 text-text-muted sm:rotate-0"
+                          aria-hidden="true"
+                        />
+                      )}
+                    </div>
+                  ))}
+                </div>
+              ) : (
+                <CaseStudyImage
+                  image={build.diagram.image}
+                  label={build.diagram.label}
+                  aspect="aspect-[21/9]"
+                  showCaption={false}
+                />
+              )}
             </div>
           </Container>
         </section>
@@ -315,16 +370,31 @@ export function CaseStudyLayout({ content }: { content: CaseStudyContent }) {
               label="Challenges and what I learned"
               title={challenges.title}
             />
-            <div className="mt-4 flex max-w-[68ch] flex-col gap-4">
-              {challenges.paragraphs.map((paragraph) => (
-                <p
-                  key={paragraph}
-                  className="font-sans text-base leading-relaxed text-text-secondary"
-                >
-                  {paragraph}
-                </p>
-              ))}
-            </div>
+            {challenges.blocks ? (
+              <div className="mt-4 flex max-w-[68ch] flex-col gap-6">
+                {challenges.blocks.map((block) => (
+                  <div key={block.label}>
+                    <p className="font-sans text-xs uppercase tracking-wide text-text-muted">
+                      {block.label}
+                    </p>
+                    <p className="mt-1 font-sans text-base leading-relaxed text-text-secondary">
+                      {block.text}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <div className="mt-4 flex max-w-[68ch] flex-col gap-4">
+                {challenges.paragraphs?.map((paragraph) => (
+                  <p
+                    key={paragraph}
+                    className="font-sans text-base leading-relaxed text-text-secondary"
+                  >
+                    {paragraph}
+                  </p>
+                ))}
+              </div>
+            )}
           </Container>
         </section>
 
@@ -338,6 +408,7 @@ export function CaseStudyLayout({ content }: { content: CaseStudyContent }) {
                   key={metric.label}
                   value={metric.value}
                   label={metric.label}
+                  featured={metric.featured}
                 />
               ))}
             </div>
@@ -350,26 +421,37 @@ export function CaseStudyLayout({ content }: { content: CaseStudyContent }) {
         </section>
 
         {/* Project navigation */}
-        <div className="border-t border-border">
-          <Container className="flex flex-col gap-6 py-8 sm:flex-row sm:items-center sm:justify-between">
-            <Link to={projectNav.prevHref} className="group">
-              <p className="font-sans text-xs uppercase tracking-wide text-text-muted">
-                ← Back to portfolio
-              </p>
-              <p className="mt-1 font-serif text-xl text-ink group-hover:text-accent-text">
-                {projectNav.prevLabel}
-              </p>
-            </Link>
-            <Link to={projectNav.nextHref} className="group text-left sm:text-right">
-              <p className="font-sans text-xs uppercase tracking-wide text-text-muted">
-                Next project →
-              </p>
-              <p className="mt-1 font-serif text-xl text-ink group-hover:text-accent-text">
-                {projectNav.nextLabel}
-              </p>
-            </Link>
-          </Container>
-        </div>
+        {(projectNav.left || projectNav.right) && (
+          <div className="border-t border-border">
+            <Container className="flex flex-col gap-6 py-8 sm:flex-row sm:items-center sm:justify-between">
+              {projectNav.left ? (
+                <Link to={projectNav.left.href} className="group">
+                  <p className="font-sans text-xs uppercase tracking-wide text-text-muted">
+                    {projectNav.left.caption}
+                  </p>
+                  <p className="mt-1 font-serif text-xl text-ink group-hover:text-accent-text">
+                    {projectNav.left.label}
+                  </p>
+                </Link>
+              ) : (
+                <span />
+              )}
+              {projectNav.right && (
+                <Link
+                  to={projectNav.right.href}
+                  className="group text-left sm:text-right"
+                >
+                  <p className="font-sans text-xs uppercase tracking-wide text-text-muted">
+                    {projectNav.right.caption}
+                  </p>
+                  <p className="mt-1 font-serif text-xl text-ink group-hover:text-accent-text">
+                    {projectNav.right.label}
+                  </p>
+                </Link>
+              )}
+            </Container>
+          </div>
+        )}
 
         {/* Closing CTA */}
         <section className="bg-bg py-16 md:py-24">

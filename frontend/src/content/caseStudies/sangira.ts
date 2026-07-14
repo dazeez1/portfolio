@@ -154,10 +154,16 @@ export const sangira: CaseStudyContent = {
     ],
   },
   projectNav: {
-    prevLabel: "All projects",
-    prevHref: "/portfolio",
-    nextLabel: "Qure Health App",
-    nextHref: "/portfolio/qure",
+    left: {
+      caption: "← Back to portfolio",
+      label: "All projects",
+      href: "/portfolio",
+    },
+    right: {
+      caption: "Next project →",
+      label: "Qure",
+      href: "/portfolio/qure",
+    },
   },
   closingCta: {
     heading: "Have a problem like this one?",

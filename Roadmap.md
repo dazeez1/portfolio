@@ -36,7 +36,7 @@ Build order is sequential — a phase starts only when the previous one is appro
 - [x] About
 - [x] Portfolio index (pagination-ready grid)
 - [x] Case study: Sangira
-- [ ] Case study: Qure
+- [x] Case study: Qure
 - [ ] Services + Pricing
 - [ ] SEO page (Resources)
 - [ ] Referrals page (Resources)
@@ -76,6 +76,8 @@ Build order is sequential — a phase starts only when the previous one is appro
 - [ ] Confirm Sangira live URL (gusangira.com is a placeholder pending confirmation — see content/projects.ts)
 - [ ] 6 placeholder projects in content/projects.ts ("PLACEHOLDER — Project 1" through 6) need real repos, screenshots, and case study links
 - [ ] Sangira architecture diagram image (placeholder slot in content/caseStudies/sangira.ts, section 03)
+- [ ] Qure case study screenshots: patient queue dashboard, waiting room management (placeholder slots in content/caseStudies/qure.ts, section 02)
+- [ ] Qure case study Live link is intentionally hidden pending the owner-supplied URL (content/caseStudies/qure.ts) — note projects.ts already has qurequeue.com confirmed for the portfolio card; confirm whether that URL should also populate the case study's Live link
 
 ## Post-launch (v2 candidates — not now)
 
