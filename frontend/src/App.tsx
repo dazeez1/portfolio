@@ -4,6 +4,7 @@ import Contact from "./pages/Contact";
 import DevComponents from "./pages/DevComponents";
 import Home from "./pages/Home";
 import NotFound from "./pages/NotFound";
+import Portfolio from "./pages/Portfolio";
 import ThankYou from "./pages/ThankYou";
 
 function App() {
@@ -11,6 +12,7 @@ function App() {
     <Routes>
       <Route path="/" element={<Home />} />
       <Route path="/about" element={<About />} />
+      <Route path="/portfolio" element={<Portfolio />} />
       <Route path="/contact" element={<Contact />} />
       <Route path="/thank-you" element={<ThankYou />} />
       <Route path="/dev/components" element={<DevComponents />} />

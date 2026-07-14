@@ -9,13 +9,15 @@ import { Nav } from "../components/Nav";
 import { SectionHeading } from "../components/SectionHeading";
 import { TagPill } from "../components/TagPill";
 import {
-  featuredProjects,
   finalCta,
   hero,
   services,
   servicesLinkHref,
   tools,
 } from "../content/home";
+import { projects, stackIcons } from "../content/projects";
+
+const featuredProjects = projects.filter((project) => project.featured);
 
 function AccentDot() {
   return (
@@ -103,36 +105,41 @@ export default function Home() {
             <div className="mt-8 grid grid-cols-1 gap-6 md:grid-cols-2">
               {featuredProjects.map((project) => (
                 <div
-                  key={project.name}
+                  key={project.slug}
                   className="overflow-hidden rounded-lg border border-border bg-surface"
                 >
                   <BrowserFrame
                     bordered={false}
-                    url={project.liveUrl}
+                    url={project.links.live?.replace(/^https?:\/\//, "")}
                     image={project.screenshot}
                   />
                   <div className="p-6">
                     <h3 className="font-serif text-xl text-ink">
-                      {project.name}
+                      {project.title}
                     </h3>
                     <div className="mt-2 flex items-center gap-3">
-                      {project.techIcons.map(({ Icon, label }) => (
-                        <Icon
-                          key={label}
-                          className="h-4 w-4 text-text-muted"
-                          aria-label={label}
-                        />
-                      ))}
+                      {project.stack.map((name) => {
+                        const Icon = stackIcons[name];
+                        return Icon ? (
+                          <Icon
+                            key={name}
+                            className="h-4 w-4 text-text-muted"
+                            aria-label={name}
+                          />
+                        ) : null;
+                      })}
                     </div>
                     <p className="mt-3 font-sans text-sm text-text-secondary">
-                      {project.description}
+                      {project.oneLiner}
                     </p>
-                    <Link
-                      to={project.caseStudyHref}
-                      className="mt-3 inline-block font-sans text-sm text-accent-text underline"
-                    >
-                      View case study →
-                    </Link>
+                    {project.links.caseStudy && (
+                      <Link
+                        to={project.links.caseStudy}
+                        className="mt-3 inline-block font-sans text-sm text-accent-text underline"
+                      >
+                        View case study →
+                      </Link>
+                    )}
                   </div>
                 </div>
               ))}

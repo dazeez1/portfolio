@@ -253,7 +253,7 @@ export default function Contact() {
         {/* Header */}
         <section className="bg-bg py-16 md:py-20">
           <Container>
-            <p className="font-sans text-xs uppercase tracking-wide text-accent-text">
+            <p className="font-sans text-xs uppercase tracking-wide text-text-muted">
               {header.eyebrow}
             </p>
             <h1 className="mt-3 font-serif text-4xl text-ink md:text-5xl">

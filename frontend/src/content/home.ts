@@ -4,11 +4,6 @@ import {
   CodeIcon,
   type IconProps,
   LightbulbIcon,
-  MongoDBIcon,
-  NodeIcon,
-  PrismaIcon,
-  ReactIcon,
-  SocketIOIcon,
 } from "../components/icons";
 import type { BrowserFrameImage } from "../components/BrowserFrame";
 
@@ -56,60 +51,6 @@ export const hero: HeroContent = {
   liveBadgeLabel: "Live in production",
   liveCaption: "Sangira food redistribution platform",
 };
-
-export interface TechBadge {
-  Icon: ComponentType<IconProps>;
-  label: string;
-}
-
-export interface FeaturedProject {
-  name: string;
-  description: string;
-  techIcons: TechBadge[];
-  liveUrl?: string;
-  screenshot: BrowserFrameImage;
-  caseStudyHref: string;
-}
-
-export const featuredProjects: FeaturedProject[] = [
-  {
-    name: "Sangira",
-    description:
-      "Verified surplus-food handoffs between donors and NGOs in Kigali.",
-    techIcons: [
-      { Icon: NodeIcon, label: "Node.js" },
-      { Icon: ReactIcon, label: "React" },
-      { Icon: SocketIOIcon, label: "Socket.io" },
-    ],
-    // Placeholder until the owner confirms the exact URL string.
-    liveUrl: "gusangira.com",
-    screenshot: {
-      src: "/images/sangira-card.png",
-      alt: "Sangira listing flow screenshot",
-      width: 800,
-      height: 500,
-    },
-    caseStudyHref: "/portfolio/sangira",
-  },
-  {
-    name: "Qure",
-    description: "Multi-hospital queue and patient flow management platform.",
-    techIcons: [
-      { Icon: NodeIcon, label: "Node.js" },
-      { Icon: PrismaIcon, label: "Prisma" },
-      { Icon: MongoDBIcon, label: "MongoDB" },
-    ],
-    // Placeholder until the owner confirms the exact URL string.
-    liveUrl: "qurequeue.com",
-    screenshot: {
-      src: "/images/qure-card.png",
-      alt: "Qure staff dashboard screenshot",
-      width: 800,
-      height: 500,
-    },
-    caseStudyHref: "/portfolio/qure",
-  },
-];
 
 export interface ServiceItem {
   Icon: ComponentType<IconProps>;
