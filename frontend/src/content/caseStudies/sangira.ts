@@ -13,7 +13,7 @@ export const sangira: CaseStudyContent = {
       "A verified food-redistribution platform that connects surplus-food donors with humanitarian organisations in Kigali, with dual-party confirmation on every handover so no transfer goes unaccounted for.",
     metaBar: {
       role: "Full-stack, end to end",
-      timeline: "Capstone project, 2026",
+      timeline: "4 Month, (2026)",
       stack: "React · Node · MongoDB · Socket.io",
       codeHref: sangiraProject.links.github,
       liveHref: sangiraProject.links.live,
