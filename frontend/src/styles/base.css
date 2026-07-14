@@ -1,4 +1,14 @@
 @layer base {
+  /*
+   * Also set on html (not just body) so elastic/rubber-band overscroll
+   * (trackpad bounce, pull-to-refresh) never reveals browser-default
+   * white beyond the document edges — matches the anti-flash background
+   * index.html sets before this stylesheet loads.
+   */
+  html {
+    background-color: var(--color-bg);
+  }
+
   body {
     background-color: var(--color-bg);
     color: var(--color-ink);

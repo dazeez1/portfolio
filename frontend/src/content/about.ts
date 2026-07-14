@@ -29,10 +29,10 @@ export interface IntroContent {
 export const intro: IntroContent = {
   eyebrow: "About me",
   headline: "Hello, I'm Azeez Damilare Gbenga.",
-  lead: "I build digital experiences that are as thoughtful under the hood as they are on the surface — I started in design before engineering, so how something looks and how it works have never been separate questions for me.",
+  lead: "I'm a full-stack software engineer based in Kigali, Rwanda, dedicated to building digital products that solve real-world problems. My approach combines technical precision with a deep understanding of user needs, ensuring that every line of code serves a purpose beyond just functionality.",
   bioParagraphs: [
-    "[PLACEHOLDER — owner to replace: first bio paragraph.]",
-    "[PLACEHOLDER — owner to replace: second bio paragraph.]",
+    "Passionate about creating beautiful, functional digital experiences.",
+    "I combine technical expertise with creative vision to bring ideas to life.",
   ],
   primaryButton: { label: "Download resume", href: "/resume.pdf" },
   secondaryButton: { label: "Get in touch", to: "/contact" },
@@ -40,6 +40,8 @@ export const intro: IntroContent = {
 };
 
 export interface JourneyEntry {
+  /** "—" where the date isn't confirmed yet (see Roadmap.md content gaps). */
+  year: string;
   title: string;
   context: string;
 }
@@ -48,33 +50,41 @@ export const journeyTitle = "My journey";
 
 export const journey: JourneyEntry[] = [
   {
-    title: "2021 — Graphics design internship · SideHustle / Jobberman",
+    year: "2021",
+    title: "Graphics design internship · SideHustle / Jobberman",
     context:
-      "Where the design instinct started — before writing a line of production code.",
+      "Started my creative journey focusing on visual communication and digital aesthetics.",
   },
   {
-    title: "2023 — Started B.Sc. Software Engineering · ALU, Kigali",
-    context: "Moved to Rwanda; formal engineering foundation begins.",
+    year: "2023",
+    title: "Started B.Sc. Software Engineering · ALU, Kigali",
+    context:
+      "Transitioned into web technologies, mastering HTML, CSS, and basic JavaScript.",
   },
   {
+    year: "—",
     title: "Full-stack training · Vephla Institute",
     context: "From design and frontend into the full stack.",
   },
   {
-    title: "2025 — Flutter and Dart (IBM) · Database Design (DataCamp)",
+    year: "2025",
+    title: "Flutter and Dart (IBM) · Database Design (DataCamp)",
     context: "Deepening the toolkit beyond the web stack.",
   },
   {
-    title: "Aug 2025 — Deep Learning Indaba · University of Rwanda, Kigali",
+    year: "Aug 2025",
+    title: "Deep Learning Indaba · University of Rwanda, Kigali",
     context: "A week inside Africa's machine learning community.",
   },
   {
+    year: "—",
     title: "Built Qure and Sangira",
     context:
       "Two full-stack platforms — hospital queues and verified food redistribution.",
   },
   {
-    title: "2026 — Graduating · First Class Honours, CGPA 4.22",
+    year: "2026",
+    title: "Graduating · First Class Honours, CGPA 4.22",
     context: "And looking for the next real problem to solve.",
   },
 ];
@@ -90,27 +100,27 @@ export const howIWorkTitle = "How I work";
 export const howIWork: ValueCard[] = [
   {
     Icon: ChatIcon,
-    title: "I speak human, not just code",
+    title: "I speak human.",
     description:
-      "Years in customer relations taught me to explain technical things to non-technical people — clients never feel lost in jargon.",
+      "Years in customer relations taught me to explain technical things to non-technical people, clients never feel lost in jargon.",
   },
   {
     Icon: PencilRulerIcon,
     title: "Design isn't an afterthought",
     description:
-      "I started in graphics design before engineering. If it works but feels clumsy to use, it's not done.",
+      "Aesthetics and usability are baked into the architecture from the very first line of code.",
   },
   {
     Icon: ShieldCheckIcon,
     title: "I verify before I ship",
     description:
-      "Every endpoint tested against live data before it's called done — not just when it breaks.",
+      "Automated testing and manual QA are integral parts of my development lifecycle.",
   },
   {
     Icon: LightbulbIcon,
-    title: "I stay curious on purpose",
+    title: "I stay curious.",
     description:
-      "From ML conferences to new tools like AI-assisted development — I'd rather learn early than catch up late.",
+      "Technology moves fast; I spend time each week researching and testing new frameworks.",
   },
 ];
 
@@ -136,7 +146,7 @@ export const skills: SkillCategory[] = [
   {
     Icon: SmartphoneIcon,
     title: "Mobile and design",
-    skills: ["Flutter", "Dart", "Graphics design", "UI design"],
+    skills: ["Flutter", "Figma", "Graphics design", "UI design"],
   },
   {
     Icon: WrenchIcon,
@@ -159,7 +169,7 @@ export const degree = {
 };
 
 export const certifications: Certification[] = [
-  { name: "Full-Stack Development · Vephla Institute", date: "—" },
+  { name: "Full-Stack Development · Vephla Institute", date: "2024" },
   { name: "Database Design · DataCamp", date: "Jun 2025" },
   { name: "Flutter and Dart · IBM", date: "Mar 2025" },
   {
@@ -182,13 +192,13 @@ export const beyondTheCode: BeyondTheCodeEntry[] = [
     role: "Virtual Assistant",
     company: "Healthertainer",
     description:
-      "Content, coordination, and working directly with non-technical stakeholders.",
+      "Streamlining operations and digital communication for health-focused entertainment platforms, managing high-volume engagement.",
   },
   {
     role: "Customer Relations",
     company: "Datahub Telecom",
     description:
-      "Explaining technical concepts to non-technical users, every day.",
+      "Bridging the gap between technical data solutions and client needs, fostering long-term professional relationships.",
   },
 ];
 

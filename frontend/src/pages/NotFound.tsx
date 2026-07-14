@@ -18,7 +18,7 @@ import {
 
 export default function NotFound() {
   return (
-    <>
+    <div className="flex min-h-screen flex-col">
       <Helmet>
         <title>Page not found — Azeez Damilare Gbenga</title>
         <meta name="robots" content="noindex" />
@@ -26,7 +26,7 @@ export default function NotFound() {
 
       <Nav />
 
-      <section className="relative overflow-hidden bg-bg py-24 md:py-32">
+      <main className="flex flex-1 flex-col justify-center overflow-hidden bg-bg py-24 md:py-32">
         <Container className="relative flex flex-col items-center text-center">
           <span
             aria-hidden="true"
@@ -80,9 +80,9 @@ export default function NotFound() {
             </div>
           </div>
         </Container>
-      </section>
+      </main>
 
       <Footer />
-    </>
+    </div>
   );
 }

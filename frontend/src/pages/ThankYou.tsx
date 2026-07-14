@@ -18,7 +18,7 @@ export default function ThankYou() {
   const state = (location.state ?? {}) as ThankYouState;
 
   return (
-    <>
+    <div className="flex min-h-screen flex-col">
       <Helmet>
         <title>Message received — Azeez Damilare Gbenga</title>
         <meta name="description" content={thankYou.subline} />
@@ -26,7 +26,7 @@ export default function ThankYou() {
 
       <Nav />
 
-      <section className="bg-bg py-16 md:py-24">
+      <main className="flex flex-1 flex-col justify-center bg-bg py-16 md:py-24">
         <Container>
           <div className="mx-auto max-w-xl text-center">
             <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full border-2 border-accent">
@@ -116,9 +116,9 @@ export default function ThankYou() {
             </p>
           </div>
         </Container>
-      </section>
+      </main>
 
       <Footer />
-    </>
+    </div>
   );
 }

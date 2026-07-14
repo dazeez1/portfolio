@@ -241,7 +241,7 @@ export default function Contact() {
   }
 
   return (
-    <>
+    <div className="flex min-h-screen flex-col">
       <Helmet>
         <title>Contact — Azeez Damilare Gbenga</title>
         <meta name="description" content={header.subhead} />
@@ -249,260 +249,262 @@ export default function Contact() {
 
       <Nav />
 
-      {/* Header */}
-      <section className="bg-bg py-16 md:py-20">
-        <Container>
-          <p className="font-sans text-xs uppercase tracking-wide text-accent-text">
-            {header.eyebrow}
-          </p>
-          <h1 className="mt-3 font-serif text-4xl text-ink md:text-5xl">
-            {header.headline}
-          </h1>
-          <p className="mt-4 max-w-[60ch] font-sans text-base text-text-secondary">
-            {header.subhead}
-          </p>
-          <div className="mt-6 flex flex-wrap gap-2">
-            {header.trustChips.map(({ Icon, label }) => (
-              <TagPill key={label} variant="tinted">
-                <Icon className="mr-1.5 h-3.5 w-3.5" aria-hidden="true" />
-                {label}
-              </TagPill>
-            ))}
-          </div>
-        </Container>
-      </section>
-
-      {/* Connect + Form */}
-      <section className="bg-bg pb-16 md:pb-24">
-        <Container>
-          <div className="grid grid-cols-1 gap-8 md:grid-cols-[42fr_58fr] md:items-start md:gap-10">
-            {/* Left column */}
-            <div>
-              <h2 className="font-serif text-2xl text-ink">{connectTitle}</h2>
-              <p className="mt-1 font-sans text-sm text-text-secondary">
-                {connectSubline}
-              </p>
-
-              <div className="mt-6 flex flex-col gap-3">
-                {connectMethods.map((method) => (
-                  <ConnectMethodRow key={method.label} method={method} />
-                ))}
-              </div>
-
-              <p className="mt-8 font-sans text-xs uppercase tracking-wide text-text-muted">
-                {socialLabel}
-              </p>
-              <div className="mt-3 flex flex-wrap gap-2">
-                {socialLinks.map((social) => {
-                  const Icon =
-                    socialIcons[social.label as keyof typeof socialIcons];
-                  return (
-                    <ButtonAnchor
-                      key={social.label}
-                      href={social.href}
-                      target="_blank"
-                      rel="noreferrer"
-                      variant="secondary"
-                    >
-                      <Icon className="h-4 w-4" aria-hidden="true" />
-                      {social.label}
-                    </ButtonAnchor>
-                  );
-                })}
-              </div>
-
-              <div className="mt-8 rounded-lg border border-dashed border-border-strong p-6">
-                <p className="font-sans text-sm font-semibold text-ink">
-                  {afterYouWrite.title}
-                </p>
-                <ol className="mt-4 flex flex-col gap-3">
-                  {afterYouWrite.steps.map((step, i) => (
-                    <li key={step} className="flex items-start gap-3">
-                      <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-tint font-sans text-xs font-semibold text-accent-text">
-                        {String(i + 1).padStart(2, "0")}
-                      </span>
-                      <span className="mt-0.5 font-sans text-sm text-text-secondary">
-                        {step}
-                      </span>
-                    </li>
-                  ))}
-                </ol>
-              </div>
-            </div>
-
-            {/* Right column: form */}
-            <div className="overflow-hidden rounded-lg border border-border bg-surface">
-              <div className="bg-tint px-6 py-5">
-                <p className="font-serif text-lg text-accent-text">
-                  {formHeader.title}
-                </p>
-                <p className="mt-1 font-sans text-sm text-text-secondary">
-                  {formHeader.subtitle}
-                </p>
-              </div>
-
-              <form onSubmit={handleSubmit} className="p-6" noValidate>
-                {showChip && (
-                  <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-tint-border bg-tint px-3 py-1.5 font-sans text-sm text-accent-text">
-                    Selected: {preFillLabel}
-                    <button
-                      type="button"
-                      onClick={handleDismissChip}
-                      aria-label="Remove selection"
-                      className="rounded-full hover:opacity-70"
-                    >
-                      <CloseIcon className="h-3.5 w-3.5" aria-hidden="true" />
-                    </button>
-                  </div>
-                )}
-
-                {/* Honeypot — hidden from real users, silently dropped server-side if filled. */}
-                <div
-                  aria-hidden="true"
-                  className="absolute -left-[9999px] h-0 w-0 overflow-hidden"
-                >
-                  <label htmlFor="company">Company</label>
-                  <input
-                    id="company"
-                    name="company"
-                    type="text"
-                    tabIndex={-1}
-                    autoComplete="off"
-                    value={honeypot}
-                    onChange={(e) => setHoneypot(e.target.value)}
-                  />
-                </div>
-
-                <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-                  <TextInput
-                    ref={nameRef}
-                    label="Your name"
-                    name="name"
-                    placeholder={namePlaceholder}
-                    autoComplete="name"
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
-                    error={errors.name}
-                  />
-                  <TextInput
-                    ref={emailRef}
-                    label="Your email"
-                    name="email"
-                    type="email"
-                    placeholder={emailPlaceholder}
-                    autoComplete="email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    error={errors.email}
-                  />
-                </div>
-
-                <div className="mt-4">
-                  <Select
-                    ref={needRef}
-                    label="What do you need?"
-                    name="need"
-                    value={need}
-                    onChange={(e) => setNeed(e.target.value)}
-                    error={errors.need}
-                  >
-                    <option value="" disabled>
-                      Select one
-                    </option>
-                    {needOptions.map((opt) => (
-                      <option key={opt.value} value={opt.value}>
-                        {opt.label}
-                      </option>
-                    ))}
-                  </Select>
-                </div>
-
-                <div className="mt-4">
-                  <Textarea
-                    ref={messageRef}
-                    label={messageLabel}
-                    name="message"
-                    placeholder={
-                      showReferralPlaceholder
-                        ? referralMessagePlaceholder
-                        : defaultMessagePlaceholder
-                    }
-                    value={message}
-                    onChange={(e) => setMessage(e.target.value)}
-                    error={errors.message}
-                    rows={5}
-                  />
-                </div>
-
-                {submitError && (
-                  <p className="mt-4 font-sans text-sm text-error">
-                    {submitError}
-                  </p>
-                )}
-
-                <Button
-                  type="submit"
-                  variant="primary"
-                  disabled={submitting}
-                  className="mt-6 w-full"
-                >
-                  <SendIcon className="h-4 w-4" aria-hidden="true" />
-                  {submitting ? "Sending…" : submitLabel}
-                </Button>
-                <p className="mt-3 text-center font-sans text-xs text-text-muted">
-                  {submitMicrocopy}
-                </p>
-              </form>
-            </div>
-          </div>
-        </Container>
-      </section>
-
-      {/* Booking */}
-      <section className="pb-16 md:pb-24">
-        <Container>
-          <div className="flex flex-col items-start gap-6 rounded-lg border border-border bg-surface p-8 sm:flex-row sm:items-center sm:justify-between">
-            <div>
-              <h2 className="font-serif text-2xl text-ink">
-                {booking.title}
-              </h2>
-              <p className="mt-1 font-sans text-sm text-text-secondary">
-                {booking.subline}
-              </p>
-            </div>
-            <Button
-              variant="secondary"
-              onClick={openCalendly}
-              onPointerEnter={warmUpCalendly}
-              onTouchStart={warmUpCalendly}
-              disabled={calendlyLoading}
-              className="shrink-0"
-            >
-              <CalendarIcon className="h-4 w-4" aria-hidden="true" />
-              {calendlyLoading ? "Opening calendar…" : booking.buttonLabel}
-            </Button>
-          </div>
-        </Container>
-      </section>
-
-      {/* FAQ */}
-      <section className="bg-surface-alt py-16 md:py-24">
-        <Container>
-          <div className="text-center">
-            <p className="font-sans text-xs uppercase tracking-wide text-text-muted">
-              {faqSectionLabel}
+      <main className="flex-1">
+        {/* Header */}
+        <section className="bg-bg py-16 md:py-20">
+          <Container>
+            <p className="font-sans text-xs uppercase tracking-wide text-accent-text">
+              {header.eyebrow}
             </p>
-            <h2 className="mt-2 font-serif text-3xl text-ink">
-              Frequently asked questions
-            </h2>
-          </div>
-          <div className="mx-auto mt-8 max-w-2xl">
-            <Accordion items={faqItems} />
-          </div>
-        </Container>
-      </section>
+            <h1 className="mt-3 font-serif text-4xl text-ink md:text-5xl">
+              {header.headline}
+            </h1>
+            <p className="mt-4 max-w-[60ch] font-sans text-base text-text-secondary">
+              {header.subhead}
+            </p>
+            <div className="mt-6 flex flex-wrap gap-2">
+              {header.trustChips.map(({ Icon, label }) => (
+                <TagPill key={label} variant="tinted">
+                  <Icon className="mr-1.5 h-3.5 w-3.5" aria-hidden="true" />
+                  {label}
+                </TagPill>
+              ))}
+            </div>
+          </Container>
+        </section>
+
+        {/* Connect + Form */}
+        <section className="bg-bg pb-16 md:pb-24">
+          <Container>
+            <div className="grid grid-cols-1 gap-8 md:grid-cols-[42fr_58fr] md:items-start md:gap-10">
+              {/* Left column */}
+              <div>
+                <h2 className="font-serif text-2xl text-ink">{connectTitle}</h2>
+                <p className="mt-1 font-sans text-sm text-text-secondary">
+                  {connectSubline}
+                </p>
+
+                <div className="mt-6 flex flex-col gap-3">
+                  {connectMethods.map((method) => (
+                    <ConnectMethodRow key={method.label} method={method} />
+                  ))}
+                </div>
+
+                <p className="mt-8 font-sans text-xs uppercase tracking-wide text-text-muted">
+                  {socialLabel}
+                </p>
+                <div className="mt-3 flex flex-wrap gap-2">
+                  {socialLinks.map((social) => {
+                    const Icon =
+                      socialIcons[social.label as keyof typeof socialIcons];
+                    return (
+                      <ButtonAnchor
+                        key={social.label}
+                        href={social.href}
+                        target="_blank"
+                        rel="noreferrer"
+                        variant="secondary"
+                      >
+                        <Icon className="h-4 w-4" aria-hidden="true" />
+                        {social.label}
+                      </ButtonAnchor>
+                    );
+                  })}
+                </div>
+
+                <div className="mt-8 rounded-lg border border-dashed border-border-strong p-6">
+                  <p className="font-sans text-sm font-semibold text-ink">
+                    {afterYouWrite.title}
+                  </p>
+                  <ol className="mt-4 flex flex-col gap-3">
+                    {afterYouWrite.steps.map((step, i) => (
+                      <li key={step} className="flex items-start gap-3">
+                        <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-tint font-sans text-xs font-semibold text-accent-text">
+                          {String(i + 1).padStart(2, "0")}
+                        </span>
+                        <span className="mt-0.5 font-sans text-sm text-text-secondary">
+                          {step}
+                        </span>
+                      </li>
+                    ))}
+                  </ol>
+                </div>
+              </div>
+
+              {/* Right column: form */}
+              <div className="overflow-hidden rounded-lg border border-border bg-surface">
+                <div className="bg-tint px-6 py-5">
+                  <p className="font-serif text-lg text-accent-text">
+                    {formHeader.title}
+                  </p>
+                  <p className="mt-1 font-sans text-sm text-text-secondary">
+                    {formHeader.subtitle}
+                  </p>
+                </div>
+
+                <form onSubmit={handleSubmit} className="p-6" noValidate>
+                  {showChip && (
+                    <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-tint-border bg-tint px-3 py-1.5 font-sans text-sm text-accent-text">
+                      Selected: {preFillLabel}
+                      <button
+                        type="button"
+                        onClick={handleDismissChip}
+                        aria-label="Remove selection"
+                        className="rounded-full hover:opacity-70"
+                      >
+                        <CloseIcon className="h-3.5 w-3.5" aria-hidden="true" />
+                      </button>
+                    </div>
+                  )}
+
+                  {/* Honeypot — hidden from real users, silently dropped server-side if filled. */}
+                  <div
+                    aria-hidden="true"
+                    className="absolute -left-[9999px] h-0 w-0 overflow-hidden"
+                  >
+                    <label htmlFor="company">Company</label>
+                    <input
+                      id="company"
+                      name="company"
+                      type="text"
+                      tabIndex={-1}
+                      autoComplete="off"
+                      value={honeypot}
+                      onChange={(e) => setHoneypot(e.target.value)}
+                    />
+                  </div>
+
+                  <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+                    <TextInput
+                      ref={nameRef}
+                      label="Your name"
+                      name="name"
+                      placeholder={namePlaceholder}
+                      autoComplete="name"
+                      value={name}
+                      onChange={(e) => setName(e.target.value)}
+                      error={errors.name}
+                    />
+                    <TextInput
+                      ref={emailRef}
+                      label="Your email"
+                      name="email"
+                      type="email"
+                      placeholder={emailPlaceholder}
+                      autoComplete="email"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      error={errors.email}
+                    />
+                  </div>
+
+                  <div className="mt-4">
+                    <Select
+                      ref={needRef}
+                      label="What do you need?"
+                      name="need"
+                      value={need}
+                      onChange={(e) => setNeed(e.target.value)}
+                      error={errors.need}
+                    >
+                      <option value="" disabled>
+                        Select one
+                      </option>
+                      {needOptions.map((opt) => (
+                        <option key={opt.value} value={opt.value}>
+                          {opt.label}
+                        </option>
+                      ))}
+                    </Select>
+                  </div>
+
+                  <div className="mt-4">
+                    <Textarea
+                      ref={messageRef}
+                      label={messageLabel}
+                      name="message"
+                      placeholder={
+                        showReferralPlaceholder
+                          ? referralMessagePlaceholder
+                          : defaultMessagePlaceholder
+                      }
+                      value={message}
+                      onChange={(e) => setMessage(e.target.value)}
+                      error={errors.message}
+                      rows={5}
+                    />
+                  </div>
+
+                  {submitError && (
+                    <p className="mt-4 font-sans text-sm text-error">
+                      {submitError}
+                    </p>
+                  )}
+
+                  <Button
+                    type="submit"
+                    variant="primary"
+                    disabled={submitting}
+                    className="mt-6 w-full"
+                  >
+                    <SendIcon className="h-4 w-4" aria-hidden="true" />
+                    {submitting ? "Sending…" : submitLabel}
+                  </Button>
+                  <p className="mt-3 text-center font-sans text-xs text-text-muted">
+                    {submitMicrocopy}
+                  </p>
+                </form>
+              </div>
+            </div>
+          </Container>
+        </section>
+
+        {/* Booking */}
+        <section className="pb-16 md:pb-24">
+          <Container>
+            <div className="flex flex-col items-start gap-6 rounded-lg border border-border bg-surface p-8 sm:flex-row sm:items-center sm:justify-between">
+              <div>
+                <h2 className="font-serif text-2xl text-ink">
+                  {booking.title}
+                </h2>
+                <p className="mt-1 font-sans text-sm text-text-secondary">
+                  {booking.subline}
+                </p>
+              </div>
+              <Button
+                variant="secondary"
+                onClick={openCalendly}
+                onPointerEnter={warmUpCalendly}
+                onTouchStart={warmUpCalendly}
+                disabled={calendlyLoading}
+                className="shrink-0"
+              >
+                <CalendarIcon className="h-4 w-4" aria-hidden="true" />
+                {calendlyLoading ? "Opening calendar…" : booking.buttonLabel}
+              </Button>
+            </div>
+          </Container>
+        </section>
+
+        {/* FAQ */}
+        <section className="bg-surface-alt py-16 md:py-24">
+          <Container>
+            <div className="text-center">
+              <p className="font-sans text-xs uppercase tracking-wide text-text-muted">
+                {faqSectionLabel}
+              </p>
+              <h2 className="mt-2 font-serif text-3xl text-ink">
+                Frequently asked questions
+              </h2>
+            </div>
+            <div className="mx-auto mt-8 max-w-2xl">
+              <Accordion items={faqItems} />
+            </div>
+          </Container>
+        </section>
+      </main>
 
       <Footer />
-    </>
+    </div>
   );
 }
