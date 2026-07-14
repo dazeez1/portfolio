@@ -12,11 +12,22 @@ import { MetricCard } from "./MetricCard";
 import { Nav } from "./Nav";
 import { TagPill } from "./TagPill";
 
-function SectionLabel({ number, label }: { number: string; label: string }) {
+function SectionHeading({
+  number,
+  label,
+  title,
+}: {
+  number: string;
+  label: string;
+  title: string;
+}) {
   return (
-    <h2 className="font-sans text-xs uppercase tracking-wide text-accent-text">
-      {number} — {label}
-    </h2>
+    <div>
+      <p className="font-sans text-xs uppercase tracking-wide text-accent-text">
+        {number} — {label}
+      </p>
+      <h2 className="mt-2 font-serif text-2xl text-ink md:text-3xl">{title}</h2>
+    </div>
   );
 }
 
@@ -119,6 +130,11 @@ export function CaseStudyLayout({ content }: { content: CaseStudyContent }) {
             <p className="mt-4 max-w-[68ch] font-sans text-base text-text-secondary">
               {hero.summary}
             </p>
+            {hero.summaryDetail && (
+              <p className="mt-2 max-w-[68ch] font-sans text-base text-text-secondary">
+                {hero.summaryDetail}
+              </p>
+            )}
 
             <div className="mt-8 grid grid-cols-2 gap-6 rounded-lg border border-border bg-surface p-6 sm:grid-cols-4">
               <div>
@@ -187,7 +203,7 @@ export function CaseStudyLayout({ content }: { content: CaseStudyContent }) {
         {/* 01 — The problem */}
         <section className="bg-bg pb-16 md:pb-24">
           <Container>
-            <SectionLabel number="01" label="The problem" />
+            <SectionHeading number="01" label="The problem" title={problem.title} />
             <div className="mt-4 flex max-w-[68ch] flex-col gap-4">
               {problem.paragraphs.map((paragraph) => (
                 <p
@@ -204,7 +220,7 @@ export function CaseStudyLayout({ content }: { content: CaseStudyContent }) {
         {/* 02 — The solution */}
         <section className="bg-surface-alt py-16 md:py-24">
           <Container>
-            <SectionLabel number="02" label="The solution" />
+            <SectionHeading number="02" label="The solution" title={solution.title} />
             <p className="mt-4 max-w-[68ch] font-sans text-base leading-relaxed text-text-secondary">
               {solution.intro}
             </p>
@@ -235,7 +251,7 @@ export function CaseStudyLayout({ content }: { content: CaseStudyContent }) {
         {/* 03 — How it's built */}
         <section className="bg-bg py-16 md:py-24">
           <Container>
-            <SectionLabel number="03" label="How it's built" />
+            <SectionHeading number="03" label="Architecture" title={build.title} />
             <div className="mt-4 flex max-w-[68ch] flex-col gap-4">
               {build.paragraphs.map((paragraph) => (
                 <p
@@ -259,9 +275,9 @@ export function CaseStudyLayout({ content }: { content: CaseStudyContent }) {
         {/* 04 — Key features */}
         <section className="bg-surface-alt py-16 md:py-24">
           <Container>
-            <SectionLabel number="04" label="Key features" />
+            <SectionHeading number="04" label="Core features" title={features.title} />
             <div className="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-2">
-              {features.map((feature) => (
+              {features.items.map((feature) => (
                 <Card key={feature.title}>
                   <h3 className="font-sans text-base font-semibold text-ink">
                     {feature.title}
@@ -278,7 +294,11 @@ export function CaseStudyLayout({ content }: { content: CaseStudyContent }) {
         {/* 05 — Challenges and what I learned */}
         <section className="bg-bg py-16 md:py-24">
           <Container>
-            <SectionLabel number="05" label="Challenges and what I learned" />
+            <SectionHeading
+              number="05"
+              label="Challenges and what I learned"
+              title={challenges.title}
+            />
             <div className="mt-4 flex max-w-[68ch] flex-col gap-4">
               {challenges.paragraphs.map((paragraph) => (
                 <p
@@ -295,7 +315,7 @@ export function CaseStudyLayout({ content }: { content: CaseStudyContent }) {
         {/* 06 — Results */}
         <section className="bg-surface-alt py-16 md:py-24">
           <Container>
-            <SectionLabel number="06" label="Results" />
+            <SectionHeading number="06" label="Results" title={results.title} />
             <div className="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-3">
               {results.metrics.map((metric) => (
                 <MetricCard
@@ -339,6 +359,11 @@ export function CaseStudyLayout({ content }: { content: CaseStudyContent }) {
             <h2 className="font-serif text-3xl text-ink md:text-4xl">
               {closingCta.heading}
             </h2>
+            {closingCta.subline && (
+              <p className="mt-4 max-w-[60ch] font-sans text-base text-text-secondary">
+                {closingCta.subline}
+              </p>
+            )}
             <div className="mt-8">
               <ButtonLink to={closingCta.buttonHref} variant="primary">
                 {closingCta.buttonLabel}

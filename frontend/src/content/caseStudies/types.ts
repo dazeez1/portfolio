@@ -17,11 +17,14 @@ export interface CaseStudyHero {
   tags: string[];
   title: string;
   summary: string;
+  /** Optional second summary line, rendered below the main summary paragraph. */
+  summaryDetail?: string;
   metaBar: CaseStudyMetaBar;
   screenshot: CaseStudyImage;
 }
 
 export interface CaseStudyProblem {
+  title: string;
   paragraphs: string[];
 }
 
@@ -31,12 +34,14 @@ export interface CaseStudySubBlock {
 }
 
 export interface CaseStudySolution {
+  title: string;
   intro: string;
   subBlocks: CaseStudySubBlock[];
   images: { image: CaseStudyImage; label: string }[];
 }
 
 export interface CaseStudyBuild {
+  title: string;
   paragraphs: string[];
   diagram: { image?: CaseStudyImage; label: string };
 }
@@ -46,7 +51,13 @@ export interface CaseStudyFeature {
   description: string;
 }
 
+export interface CaseStudyFeatures {
+  title: string;
+  items: CaseStudyFeature[];
+}
+
 export interface CaseStudyChallenges {
+  title: string;
   paragraphs: string[];
 }
 
@@ -56,6 +67,7 @@ export interface CaseStudyMetric {
 }
 
 export interface CaseStudyResults {
+  title: string;
   metrics: CaseStudyMetric[];
   footnote: string;
 }
@@ -69,6 +81,7 @@ export interface CaseStudyProjectNav {
 
 export interface CaseStudyClosingCta {
   heading: string;
+  subline?: string;
   buttonLabel: string;
   buttonHref: string;
 }
@@ -80,7 +93,7 @@ export interface CaseStudyContent {
   problem: CaseStudyProblem;
   solution: CaseStudySolution;
   build: CaseStudyBuild;
-  features: CaseStudyFeature[];
+  features: CaseStudyFeatures;
   challenges: CaseStudyChallenges;
   results: CaseStudyResults;
   projectNav: CaseStudyProjectNav;
