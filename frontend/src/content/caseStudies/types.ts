@@ -1,3 +1,6 @@
+import type { ComponentType } from "react";
+import type { IconProps } from "../../components/icons";
+
 export interface CaseStudyImage {
   src: string;
   alt: string;
@@ -29,6 +32,7 @@ export interface CaseStudyProblem {
 }
 
 export interface CaseStudySubBlock {
+  Icon: ComponentType<IconProps>;
   lead: string;
   text: string;
 }
@@ -47,6 +51,7 @@ export interface CaseStudyBuild {
 }
 
 export interface CaseStudyFeature {
+  Icon: ComponentType<IconProps>;
   title: string;
   description: string;
 }
@@ -69,7 +74,7 @@ export interface CaseStudyMetric {
 export interface CaseStudyResults {
   title: string;
   metrics: CaseStudyMetric[];
-  footnote: string;
+  footnote?: string;
 }
 
 export interface CaseStudyProjectNav {

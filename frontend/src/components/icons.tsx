@@ -678,3 +678,39 @@ export function ExternalLinkIcon(props: IconProps) {
     </svg>
   );
 }
+
+export function BellIcon(props: IconProps) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      {...props}
+    >
+      <path d="M6 10a6 6 0 0 1 12 0c0 4 1.5 5.5 2 6H4c.5-.5 2-2 2-6Z" />
+      <path d="M10 20a2 2 0 0 0 4 0" />
+    </svg>
+  );
+}
+
+export function ChartIcon(props: IconProps) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      {...props}
+    >
+      <line x1="4" y1="21" x2="20" y2="21" />
+      <rect x="5" y="14" width="3" height="7" />
+      <rect x="10.5" y="9" width="3" height="12" />
+      <rect x="16" y="4" width="3" height="17" />
+    </svg>
+  );
+}

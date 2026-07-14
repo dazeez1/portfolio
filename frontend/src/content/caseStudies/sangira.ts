@@ -1,3 +1,13 @@
+import {
+  BellIcon,
+  ChartIcon,
+  CheckIcon,
+  ClipboardIcon,
+  DocumentIcon,
+  LocationIcon,
+  MonitorIcon,
+  ShieldCheckIcon,
+} from "../../components/icons";
 import { projects } from "../projects";
 import type { CaseStudyContent } from "./types";
 
@@ -15,7 +25,7 @@ export const sangira: CaseStudyContent = {
       "We solved the trust gap to ensure surplus food reaches those in need safely and efficiently.",
     metaBar: {
       role: "Full-stack, end to end",
-      timeline: "4 Months (2025)",
+      timeline: "(2026)",
       stack: "React · Node · MongoDB · Socket.io",
       codeHref: sangiraProject.links.github,
       liveHref: sangiraProject.links.live,
@@ -25,7 +35,7 @@ export const sangira: CaseStudyContent = {
   problem: {
     title: "Bridging the Gap",
     paragraphs: [
-      "In Kigali, hotels, caterers, and supermarkets throw away good surplus food every day while shelters and orphanages nearby struggle to feed the people in their care. The food and the need exist at the same time, in the same city — what's missing is a reliable way to connect them.",
+      "In Kigali, hotels, caterers, and supermarkets throw away good surplus food every day while shelters and orphanages nearby struggle to feed the people in their care. The food and the need exist at the same time, in the same city what's missing is a reliable way to connect them.",
       "The informal channels that exist run on phone calls and personal contacts, with no way to verify the organisation on the other end, no record a handover happened, no accountability when something goes wrong. For donors, that uncertainty makes it easier to bin the surplus than risk it. Waste on one side, hunger on the other, separated by a trust gap.",
       "Our challenge was to build a digital infrastructure that didn't just move food, but moved verification and accountability alongside it in real-time.",
     ],
@@ -36,18 +46,22 @@ export const sangira: CaseStudyContent = {
       "We built a three-portal ecosystem (Donors, NGO, Administrators) that digitizes the entire chain of custody.",
     subBlocks: [
       {
+        Icon: ShieldCheckIcon,
         lead: "Verification",
         text: "Automated identity checks for every NGO and DONOR onboarded.",
       },
       {
+        Icon: DocumentIcon,
         lead: "Listing Flow",
         text: "Simple 3-step process for DONOR to list surplus in under 40 seconds.",
       },
       {
+        Icon: CheckIcon,
         lead: "Dual-party Confirmation",
         text: "QR-code or PIN based handshake at both pickup and drop-off points.",
       },
       {
+        Icon: MonitorIcon,
         lead: "Impact Dash",
         text: "Real-time reporting on meals saved and CO2 emissions reduced.",
       },
@@ -82,31 +96,37 @@ export const sangira: CaseStudyContent = {
     title: "Precision Utilities",
     items: [
       {
+        Icon: ShieldCheckIcon,
         title: "Organisation verification",
         description:
-          "Admins review registration documents and approve, reject, revoke, or reinstate — no one transacts unverified.",
+          "Admins review registration documents and approve, reject, revoke, or reinstate, no one transacts unverified.",
       },
       {
+        Icon: CheckIcon,
         title: "Dual-party pickup confirmation",
         description:
           "Donor and NGO each confirm independently (PIN + condition report); the transfer only completes when both agree.",
       },
       {
+        Icon: BellIcon,
         title: "Real-time notifications",
         description:
-          "Live in-app alerts via Socket.io, plus email for new listings, accepted requests, and completed transfers.",
+          "Live in-app alerts via Socket.io, plus email for key events.",
       },
       {
+        Icon: LocationIcon,
         title: "Location and distance",
         description:
-          "Addresses are geocoded; NGOs see how far each listing is and can view listings on an interactive map.",
+          "Addresses are geocoded: NGOs see how far each listing is and can view listings on an interactive map.",
       },
       {
+        Icon: ChartIcon,
         title: "Impact dashboards",
         description:
-          "Real meals-redistributed, waste-prevented, and transfer figures — with CSV/PDF export.",
+          "Real meals-redistributed, waste-prevented, and transfer figures, with CSV/PDF export.",
       },
       {
+        Icon: ClipboardIcon,
         title: "Admin governance",
         description:
           "Flag, suspend, revoke, and restore organisations, with a full audit trail and SLA tracking on the verification queue.",
@@ -132,8 +152,6 @@ export const sangira: CaseStudyContent = {
       },
       { value: "−82% bundle", label: "1.85 MB → 340 KB via route-level code-splitting" },
     ],
-    footnote:
-      "Live redistribution figures — meals, waste prevented, transfers — grow with real platform use and are shown live on the app.",
   },
   projectNav: {
     prevLabel: "All projects",

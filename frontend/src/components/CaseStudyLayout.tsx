@@ -35,10 +35,12 @@ function CaseStudyImage({
   image,
   label,
   aspect = "aspect-[16/10]",
+  showCaption = true,
 }: {
   image?: CaseStudyImageData;
   label: string;
   aspect?: string;
+  showCaption?: boolean;
 }) {
   const [loaded, setLoaded] = useState(false);
   const [failed, setFailed] = useState(false);
@@ -51,7 +53,7 @@ function CaseStudyImage({
           className={`flex ${aspect} items-center justify-center rounded-lg border border-border bg-surface-alt`}
         >
           <span className="font-sans text-xs text-text-muted">
-            {label} — image coming soon
+            {showCaption ? `${label} — image coming soon` : "Image coming soon"}
           </span>
         </div>
       ) : (
@@ -80,9 +82,11 @@ function CaseStudyImage({
           />
         </div>
       )}
-      <p className="mt-2 text-center font-sans text-xs text-text-muted">
-        {label}
-      </p>
+      {showCaption && (
+        <p className="mt-2 text-center font-sans text-xs text-text-muted">
+          {label}
+        </p>
+      )}
     </div>
   );
 }
@@ -224,13 +228,20 @@ export function CaseStudyLayout({ content }: { content: CaseStudyContent }) {
             <p className="mt-4 max-w-[68ch] font-sans text-base leading-relaxed text-text-secondary">
               {solution.intro}
             </p>
-            <div className="mt-8 flex max-w-[68ch] flex-col gap-6">
+            <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2">
               {solution.subBlocks.map((block) => (
-                <div key={block.lead}>
-                  <h3 className="font-sans text-base font-semibold text-ink">
+                <div
+                  key={block.lead}
+                  className="rounded-lg border border-border bg-surface p-5"
+                >
+                  <block.Icon
+                    className="h-5 w-5 text-ink"
+                    aria-hidden="true"
+                  />
+                  <h3 className="mt-3 font-sans text-base font-semibold text-ink">
                     {block.lead}
                   </h3>
-                  <p className="mt-1 font-sans text-base leading-relaxed text-text-secondary">
+                  <p className="mt-1 font-sans text-sm leading-relaxed text-text-secondary">
                     {block.text}
                   </p>
                 </div>
@@ -267,6 +278,7 @@ export function CaseStudyLayout({ content }: { content: CaseStudyContent }) {
                 image={build.diagram.image}
                 label={build.diagram.label}
                 aspect="aspect-[21/9]"
+                showCaption={false}
               />
             </div>
           </Container>
@@ -279,7 +291,11 @@ export function CaseStudyLayout({ content }: { content: CaseStudyContent }) {
             <div className="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-2">
               {features.items.map((feature) => (
                 <Card key={feature.title}>
-                  <h3 className="font-sans text-base font-semibold text-ink">
+                  <feature.Icon
+                    className="h-5 w-5 text-ink"
+                    aria-hidden="true"
+                  />
+                  <h3 className="mt-3 font-sans text-base font-semibold text-ink">
                     {feature.title}
                   </h3>
                   <p className="mt-2 font-sans text-sm text-text-secondary">
@@ -325,9 +341,11 @@ export function CaseStudyLayout({ content }: { content: CaseStudyContent }) {
                 />
               ))}
             </div>
-            <p className="mt-6 max-w-[68ch] font-sans text-xs text-text-muted">
-              {results.footnote}
-            </p>
+            {results.footnote && (
+              <p className="mt-6 max-w-[68ch] font-sans text-xs text-text-muted">
+                {results.footnote}
+              </p>
+            )}
           </Container>
         </section>
 
