@@ -31,7 +31,7 @@ export const intro: IntroContent = {
   headline: "Hello, I'm Azeez Damilare Gbenga.",
   lead: "I'm a full-stack software engineer based in Kigali, Rwanda, dedicated to building digital products that solve real-world problems. My approach combines technical precision with a deep understanding of user needs, ensuring that every line of code serves a purpose beyond just functionality.",
   bioParagraphs: [
-    "Passionate about creating beautiful, functional digital experiences.",
+    "Passionate about creating beautiful, functional digital experiences. I combine technical expertise with creative vision to bring ideas to life.",
     "I combine technical expertise with creative vision to bring ideas to life.",
   ],
   primaryButton: { label: "Download resume", href: "/resume.pdf" },
@@ -56,20 +56,15 @@ export const journey: JourneyEntry[] = [
       "Started my creative journey focusing on visual communication and digital aesthetics.",
   },
   {
-    year: "2023",
-    title: "Started B.Sc. Software Engineering · ALU, Kigali",
+    year: "2022",
+    title: "Web Foundations",
     context:
       "Transitioned into web technologies, mastering HTML, CSS, and basic JavaScript.",
   },
   {
-    year: "—",
+    year: "2023",
     title: "Full-stack training · Vephla Institute",
     context: "From design and frontend into the full stack.",
-  },
-  {
-    year: "2025",
-    title: "Flutter and Dart (IBM) · Database Design (DataCamp)",
-    context: "Deepening the toolkit beyond the web stack.",
   },
   {
     year: "Aug 2025",
@@ -77,15 +72,15 @@ export const journey: JourneyEntry[] = [
     context: "A week inside Africa's machine learning community.",
   },
   {
-    year: "—",
+    year: "2026",
     title: "Built Qure and Sangira",
     context:
-      "Two full-stack platforms — hospital queues and verified food redistribution.",
+      "Two full-stack platforms - hospital queues and verified food redistribution.",
   },
   {
     year: "2026",
-    title: "Graduating · First Class Honours, CGPA 4.22",
-    context: "And looking for the next real problem to solve.",
+    title: "Graduating at ALU · First Class Honours, CGPA 4.22",
+    context: "Completing formal studies while actively contributing to the tech ecosystem.",
   },
 ];
 
@@ -163,9 +158,11 @@ export interface Certification {
 export const educationTitle = "Education and certifications";
 
 export const degree = {
-  title: "B.Sc. Software Engineering",
-  institution: "African Leadership University, Kigali",
+  title: "B.Sc. in Software Engineering",
+  institution: "African Leadership University (ALU)",
   detail: "2023–2026 · First Class Honours · CGPA 4.22",
+  description:
+    "Specializing in full-stack architecture and scalable systems design in an entrepreneurial context."
 };
 
 export const certifications: Certification[] = [

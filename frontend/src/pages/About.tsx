@@ -182,6 +182,11 @@ export default function About() {
                   <p className="mt-2 font-sans text-sm text-text-secondary">
                     {degree.institution}
                   </p>
+                  {degree.description && (
+                    <p className="mt-3 font-sans text-sm text-text-muted">
+                      {degree.description}
+                    </p>
+                  )}
                 </Card>
               </div>
               <div>
