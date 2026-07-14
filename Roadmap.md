@@ -34,7 +34,7 @@ Build order is sequential — a phase starts only when the previous one is appro
 - [x] Contact (incl. pre-filled chip state, validation state, Calendly popup)
 - [x] Thank You + form pipeline (serverless → Resend → redirect)
 - [x] About
-- [ ] Portfolio index (pagination-ready grid)
+- [x] Portfolio index (pagination-ready grid)
 - [ ] Case study: Sangira
 - [ ] Case study: Qure
 - [ ] Services + Pricing
@@ -73,6 +73,8 @@ Build order is sequential — a phase starts only when the previous one is appro
 - [ ] Confirm Contact page budget-range select options — currently derived from the approved package prices (Section 4), not owner-specified; see content/contact.ts
 - [ ] Contact FAQ answer copy (5 questions currently show a placeholder string — see content/contact.ts)
 - [ ] Confirm Calendly URL is correct: https://calendly.com/azeezdamilare31/30mins (owner-supplied, not independently verified)
+- [ ] Confirm Sangira live URL (gusangira.com is a placeholder pending confirmation — see content/projects.ts)
+- [ ] 6 placeholder projects in content/projects.ts ("PLACEHOLDER — Project 1" through 6) need real repos, screenshots, and case study links
 
 ## Post-launch (v2 candidates — not now)
 

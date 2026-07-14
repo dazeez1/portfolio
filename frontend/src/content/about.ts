@@ -32,7 +32,6 @@ export const intro: IntroContent = {
   lead: "I'm a full-stack software engineer based in Kigali, Rwanda, dedicated to building digital products that solve real-world problems. My approach combines technical precision with a deep understanding of user needs, ensuring that every line of code serves a purpose beyond just functionality.",
   bioParagraphs: [
     "Passionate about creating beautiful, functional digital experiences. I combine technical expertise with creative vision to bring ideas to life.",
-    "I combine technical expertise with creative vision to bring ideas to life.",
   ],
   primaryButton: { label: "Download resume", href: "/resume.pdf" },
   secondaryButton: { label: "Get in touch", to: "/contact" },
