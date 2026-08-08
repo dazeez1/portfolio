@@ -167,9 +167,10 @@ export const faqItems = [
 
 // Section 7 URL-param pre-fill.
 export const packageLabels: Record<string, string> = {
-  "starter-website": "Starter website",
+  "starter-website": "Starter Website",
   "business-web-app": "Business web app",
-  "full-platform": "Full platform/SaaS",
+  "full-platform": "Enterprise System",
+  custom: "Custom project",
   "seo-starter": "SEO starter",
   "seo-growth": "SEO growth",
   "seo-ongoing": "SEO ongoing",

@@ -113,7 +113,7 @@ This site never claims what isn't true:
 - No invented metrics, client counts, or percentage improvements. The only numbers on the site are verified ones (e.g. Sangira: 3 portals, Lighthouse 95/100/96, −82% bundle; Qure: 20+ endpoints, 4 roles).
 - No placeholder testimonials rendered in production. The testimonials section does not exist until a real quote (with permission) exists.
 - The SEO page shows proof from real projects only.
-- "Starting from" prices are real commitments: Starter website $600 · Business web app $2,000 · Full platform/SaaS $4,500.
+- "Starting from" prices are real commitments: Starter Website $200 · Business web app $665 · Enterprise System $1,500.
 - Education: B.Sc. Software Engineering, African Leadership University, 2023–2026, First Class Honours, CGPA 4.22.
 - **Never write, improve, or paraphrase site copy.** All copy comes from the owner-approved data files; if copy is missing, ask.
 
@@ -224,4 +224,16 @@ Deploy from the first commit; ship page by page.
 
 ## 13. Definition of done — per page
 
-A page is done when: it matches the approved wireframe and this design system · it is responsive (mobile, tablet, desktop) · all links and buttons route correctly (including URL-param pre-fills) · it passes the accessibility checklist · Lighthouse ≥ 90 across the board · meta title/description/OG are set · content comes from data files, not hard-coded JSX · it works on the deployed staging URL, not just localhost.
+A page is done when: it matches the approved wireframe and this design system · it is responsive (mobile, tablet, desktop) · all links and buttons route correctly (including URL-param pre-fills) · it passes the accessibility checklist · Lighthouse ≥ 90 across the board · content comes from data files, not hard-coded JSX · it works on the deployed staging URL, not just localhost · **and it satisfies the SEO block below.**
+
+### SEO block — standing requirement on every page
+
+Every page ships with all of the following. This is not optional and not deferred to launch:
+
+- Unique `<title>` and unique meta description, both written for real search intent (not restatements of the page name).
+- `<link rel="canonical">` pointing at the page's clean production URL.
+- Exactly **one** `h1`, carrying the page's keyword intent. Semantic heading order with no skipped levels (`h1` → `h2` → `h3`).
+- Open Graph + Twitter card tags (`og:title`, `og:description`, `og:url`, `og:image`, `og:type`, `twitter:card`, `twitter:title`, `twitter:description`, `twitter:image`) — page-specific OG image where one exists, site default otherwise.
+- Meaningful alt text on every image (Section 3 rule 3).
+- At least one internal link to Contact or Services.
+- Structured data where a schema.org type genuinely fits the page (`Service` + `Offer` on Services, `BreadcrumbList` on case studies, `Person` site-wide). Never invent ratings or review markup.
