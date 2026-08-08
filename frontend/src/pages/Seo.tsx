@@ -182,10 +182,13 @@ export default function Seo() {
               {plans.map((plan) => (
                 <div
                   key={plan.tier}
+                  // No order override: stacking follows DOM order (Starter,
+                  // Growth, Premium) on mobile so it matches desktop reading
+                  // order and Premium's "Everything in Growth" resolves to a
+                  // tier the visitor has already passed. Growth keeps its
+                  // badge and accent border for elevation.
                   className={`flex flex-col rounded-lg border bg-surface p-6 ${
-                    plan.emphasized
-                      ? "order-first border-accent md:order-none"
-                      : "border-border"
+                    plan.emphasized ? "border-accent" : "border-border"
                   }`}
                 >
                   <div className="flex items-center justify-between gap-3">

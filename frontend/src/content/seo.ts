@@ -6,6 +6,7 @@ import {
   type IconProps,
   LocationIcon,
   SearchIcon,
+  TrendIcon,
 } from "../components/icons";
 
 export const meta = {
@@ -17,7 +18,7 @@ export const hero = {
   badge: "SEO services",
   headline: "Get found on Google.",
   subhead:
-    "Technical SEO from someone who builds websites for a living not just audits, but the fixes implemented in the code itself.",
+    "Technical SEO from someone who builds websites for a living, not just audits, but the fixes implemented in the code itself.",
   primaryCta: { label: "Get a free SEO check", to: "/contact?package=seo-starter" },
   secondaryCta: { label: "View pricing", to: "#pricing" },
 };
@@ -71,7 +72,7 @@ export const offerings: ServiceOffering[] = [
     ],
   },
   {
-    Icon: ChartIcon,
+    Icon: TrendIcon,
     title: "Analytics and reporting",
     bullets: [
       "Google Analytics setup",
