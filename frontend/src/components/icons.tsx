@@ -767,3 +767,21 @@ export function GearIcon(props: IconProps) {
     </svg>
   );
 }
+
+export function TrendIcon(props: IconProps) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      {...props}
+    >
+      <path d="M3 3v18h18" />
+      <polyline points="7 14 11 10 14.5 13 20 7" />
+      <polyline points="20 11 20 7 16 7" />
+    </svg>
+  );
+}
