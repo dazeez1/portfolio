@@ -71,10 +71,10 @@ function ThemeToggle() {
  * Desktop Resources panel — a full-bleed band that drops below the header.
  *
  * State lives in `Nav` rather than here because the panel must escape the
- * shared `Container`'s max-width to reach the viewport edges, while its two
- * links stay aligned to the Container's left edge (in line with the ADG
- * wordmark). The panel is therefore a sibling of the Container, positioned
- * against the `<header>`.
+ * shared `Container`'s max-width to reach the viewport edges. The panel is
+ * therefore a sibling of the Container, positioned against the `<header>`,
+ * with its two links centred inside the Container so they sit in the middle
+ * of the page.
  *
  * Opening is click-only. There is deliberately no hover-open and no
  * close-on-blur: both make the panel feel like it fights the user on touch,
@@ -111,7 +111,7 @@ function ResourcesPanel({
           : "pointer-events-none -translate-y-1 opacity-0"
       }`}
     >
-      <Container className="flex items-center gap-8 py-6">
+      <Container className="flex items-center justify-center gap-8 py-6">
         {resourceLinks.map((link) => (
           <NavLink
             key={link.to}
