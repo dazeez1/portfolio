@@ -85,11 +85,15 @@ function ThemePanel({ theme }: { theme: "light" | "dark" }) {
           */}
           <div className="mt-4 flex flex-wrap items-center gap-4 rounded-lg bg-button-primary-bg p-5">
             <p className="font-sans text-sm text-button-primary-text">
-              inverted — for buttons on an ink CTA band
+              inverted / invertedOutline — for buttons on an ink CTA band
             </p>
             <Button variant="inverted">inverted</Button>
             <Button variant="inverted" disabled>
               inverted disabled
+            </Button>
+            <Button variant="invertedOutline">invertedOutline</Button>
+            <Button variant="invertedOutline" disabled>
+              invertedOutline disabled
             </Button>
           </div>
         </section>

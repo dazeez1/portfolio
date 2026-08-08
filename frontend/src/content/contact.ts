@@ -171,7 +171,7 @@ export const packageLabels: Record<string, string> = {
   "business-web-app": "Business web app",
   "full-platform": "Enterprise System",
   custom: "Custom project",
-  "seo-starter": "SEO starter",
-  "seo-growth": "SEO growth",
-  "seo-ongoing": "SEO ongoing",
+  "seo-starter": "SEO Starter",
+  "seo-growth": "SEO Growth",
+  "seo-premium": "SEO Premium",
 };

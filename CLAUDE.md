@@ -155,7 +155,8 @@ This site never claims what isn't true:
 
 1. **Every conversion button funnels to `/contact` with a URL parameter.** One form, one pipeline, one thank-you page:
    - Pricing "Get started" → `/contact?package=starter-website` | `business-web-app` | `full-platform`
-   - SEO plans → `/contact?package=seo-starter` | `seo-growth` | `seo-ongoing`
+   - SEO plans → `/contact?package=seo-starter` | `seo-growth` | `seo-premium`
+   - Custom/out-of-scope work → `/contact?package=custom`
    - Referrals "Start referring now" / "Contact me to refer" → `/contact?type=referral`
 2. On arrival with a parameter: show a dismissible tinted chip ("Selected: … ✕"), pre-set the "What do you need?" select, and for referrals swap the message placeholder to: _"Who are you referring, and what do they need? Include their name and how I can reach them — or just your own details and I'll follow up."_
 3. "What do you need?" options: New project · Existing product help · Hiring or recruiting · I want to refer someone · Something else. Budget range is **optional**.

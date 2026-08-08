@@ -100,6 +100,8 @@ export interface PricingPackage {
   /** Numeric price for JSON-LD Offer markup — must match `price`. */
   priceValue: number;
   description: string;
+  /** Muted line under the price. Maintenance is stated here only, never also as a feature bullet. */
+  maintenance: string;
   features: string[];
   ctaLabel: string;
   ctaHref: string;
@@ -110,6 +112,9 @@ export interface PricingPackage {
 export const packagesSection = {
   heading: "Packages and Pricing",
   subline: "Pre-defined scopes for common project types.",
+  /** Stated once below the whole grid, not repeated per card. */
+  maintenanceClarifier:
+    "Ongoing updates, support, and maintenance are available through a monthly maintenance plan after the included period ends.",
 };
 
 export const packages: PricingPackage[] = [
@@ -120,11 +125,11 @@ export const packages: PricingPackage[] = [
     price: "$200",
     priceValue: 200,
     description: "Perfect for a small business site",
+    maintenance: "Includes 1 month of post-launch maintenance",
     features: [
       "Up to 5 pages, responsive",
       "Basic SEO optimization",
       "Contact form integration",
-      "1 month support, included",
     ],
     ctaLabel: "Get Started",
     ctaHref: "/contact?package=starter-website#get-in-touch",
@@ -136,11 +141,11 @@ export const packages: PricingPackage[] = [
     price: "$665",
     priceValue: 665,
     description: "Custom web application with backend",
+    maintenance: "Includes 3 months of post-launch maintenance",
     features: [
       "Up to 15 pages, responsive",
       "Advanced SEO optimization",
       "Custom Integration + Database",
-      "3 month support, included",
     ],
     ctaLabel: "Get Started",
     ctaHref: "/contact?package=business-web-app#get-in-touch",
@@ -154,11 +159,11 @@ export const packages: PricingPackage[] = [
     price: "$1,500",
     priceValue: 1500,
     description: "Enterprise solution",
+    maintenance: "Includes 6 months of post-launch maintenance",
     features: [
       "Unlimited pages",
       "Full SEO optimization",
       "Everything in Business",
-      "6 months support, included",
     ],
     ctaLabel: "Get Started",
     ctaHref: "/contact?package=full-platform#get-in-touch",
@@ -219,7 +224,7 @@ export const compareRows: CompareRow[] = [
   },
   { feature: "Analytics setup", starter: false, business: true, platform: true },
   {
-    feature: "Support included",
+    feature: "Post-launch maintenance",
     starter: "1 month",
     business: "3 months",
     platform: "6 months",
