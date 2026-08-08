@@ -139,7 +139,7 @@ export const packages: PricingPackage[] = [
     name: "Business web app",
     pricePrefix: "Starting from",
     price: "$665",
-    priceValue: 665,
+    priceValue: 550,
     description: "Custom web application with backend",
     maintenance: "Includes 3 months of post-launch maintenance",
     features: [
@@ -157,7 +157,7 @@ export const packages: PricingPackage[] = [
     name: "Enterprise System",
     pricePrefix: "Starting from",
     price: "$1,500",
-    priceValue: 1500,
+    priceValue: 850,
     description: "Enterprise solution",
     maintenance: "Includes 6 months of post-launch maintenance",
     features: [
