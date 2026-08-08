@@ -287,8 +287,17 @@ export default function Contact() {
                 </div>
               </div>
 
-              {/* Right column: form */}
-              <div className="overflow-hidden rounded-lg border border-border bg-surface">
+              {/*
+                Right column: form. `id` is the scroll target for conversion
+                CTAs that pre-fill a package (Services "Get Started", the
+                custom-work band). scroll-mt-24 (6rem) clears the 69px sticky
+                header and leaves a little breathing room above the card, so
+                the "Get in touch" heading is fully visible on arrival.
+              */}
+              <div
+                id="get-in-touch"
+                className="scroll-mt-24 overflow-hidden rounded-lg border border-border bg-surface"
+              >
                 <div className="bg-tint px-6 py-5">
                   <p className="font-serif text-lg text-accent-text">
                     {formHeader.title}

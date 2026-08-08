@@ -127,7 +127,7 @@ export const packages: PricingPackage[] = [
       "1 month support, included",
     ],
     ctaLabel: "Get Started",
-    ctaHref: "/contact?package=starter-website",
+    ctaHref: "/contact?package=starter-website#get-in-touch",
   },
   {
     tier: "Business",
@@ -143,7 +143,7 @@ export const packages: PricingPackage[] = [
       "3 month support, included",
     ],
     ctaLabel: "Get Started",
-    ctaHref: "/contact?package=business-web-app",
+    ctaHref: "/contact?package=business-web-app#get-in-touch",
     badge: "Most popular",
     emphasized: true,
   },
@@ -161,7 +161,7 @@ export const packages: PricingPackage[] = [
       "6 months support, included",
     ],
     ctaLabel: "Get Started",
-    ctaHref: "/contact?package=full-platform",
+    ctaHref: "/contact?package=full-platform#get-in-touch",
   },
 ];
 
@@ -232,7 +232,7 @@ export const customBand = {
   title: "Have something that doesn't fit a package?",
   subline: "I handle complex custom requirements and long-term contracts.",
   ctaLabel: "Let's talk",
-  ctaHref: "/contact?package=custom",
+  ctaHref: "/contact?package=custom#get-in-touch",
 };
 
 export interface ProcessStep {
