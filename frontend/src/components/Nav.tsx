@@ -67,31 +67,120 @@ function ThemeToggle() {
   );
 }
 
-function ResourcesDropdown() {
-  const [open, setOpen] = useState(false);
-  const containerRef = useRef<HTMLDivElement>(null);
-  const triggerRef = useRef<HTMLButtonElement>(null);
-  const menuId = useId();
+/**
+ * Desktop Resources panel — a full-bleed band that drops below the header.
+ *
+ * State lives in `Nav` rather than here because the panel must escape the
+ * shared `Container`'s max-width to reach the viewport edges. The panel is
+ * therefore a sibling of the Container, positioned against the `<header>`,
+ * with its two links centred inside the Container so they sit in the middle
+ * of the page.
+ *
+ * Opening is click-only. There is deliberately no hover-open and no
+ * close-on-blur: both make the panel feel like it fights the user on touch,
+ * where a tap registers as hover-then-click. Dismissal is explicit —
+ * Escape, click outside, or choosing a link.
+ *
+ * Kept mounted (rather than conditionally rendered) so open/close can
+ * transition; `inert` + `aria-hidden` keep it out of the tab order and the
+ * accessibility tree while closed, and the transition is `motion-safe:` so it
+ * disappears entirely under prefers-reduced-motion (CLAUDE.md Section 9).
+ */
+function ResourcesPanel({
+  open,
+  menuId,
+  onClose,
+  panelRef,
+}: {
+  open: boolean;
+  menuId: string;
+  onClose: () => void;
+  panelRef: React.RefObject<HTMLDivElement | null>;
+}) {
+  return (
+    <div
+      ref={panelRef}
+      id={menuId}
+      role="menu"
+      aria-label="Resources"
+      aria-hidden={!open}
+      inert={!open}
+      className={`absolute inset-x-0 top-full z-50 hidden bg-button-primary-bg shadow-lg md:block motion-safe:transition-[opacity,transform] motion-safe:duration-150 ${
+        open
+          ? "translate-y-0 opacity-100"
+          : "pointer-events-none -translate-y-1 opacity-0"
+      }`}
+    >
+      <Container className="flex items-center justify-center gap-8 py-6">
+        {resourceLinks.map((link) => (
+          <NavLink
+            key={link.to}
+            to={link.to}
+            role="menuitem"
+            onClick={onClose}
+            className={({ isActive }) =>
+              // Active = the current route: plain band text with an accent
+              // underline. Inactive is dimmed band text with no border — a
+              // border here reads as "disabled" rather than "not current".
+              `font-sans text-sm transition-colors ${
+                isActive
+                  ? "text-button-primary-text underline decoration-accent decoration-2 underline-offset-8"
+                  : "text-button-primary-text opacity-70 hover:opacity-100"
+              }`
+            }
+          >
+            {link.label}
+          </NavLink>
+        ))}
+      </Container>
+    </div>
+  );
+}
+
+export interface NavProps {
+  /** Set false for non-sticky comparison copies (e.g. side-by-side theme demos). Default true. */
+  sticky?: boolean;
+}
+
+export function Nav({ sticky = true }: NavProps) {
+  const [mobileOpen, setMobileOpen] = useState(false);
+  const mobileMenuId = useId();
+  const hamburgerRef = useRef<HTMLButtonElement>(null);
+
+  const [resourcesOpen, setResourcesOpen] = useState(false);
+  const resourcesMenuId = useId();
+  const resourcesTriggerRef = useRef<HTMLButtonElement>(null);
+  const resourcesPanelRef = useRef<HTMLDivElement>(null);
+
+  function closeResources() {
+    setResourcesOpen(false);
+  }
 
   useEffect(() => {
-    if (!open) return;
+    if (!resourcesOpen) return;
 
+    // Click-outside covers both the trigger and the full-bleed panel, since
+    // they are no longer inside a single wrapper element.
     function handlePointerDown(e: MouseEvent) {
-      if (!containerRef.current?.contains(e.target as Node)) {
-        setOpen(false);
+      const target = e.target as Node;
+      if (
+        !resourcesPanelRef.current?.contains(target) &&
+        !resourcesTriggerRef.current?.contains(target)
+      ) {
+        setResourcesOpen(false);
       }
     }
 
     function handleKeyDown(e: KeyboardEvent) {
       if (e.key === "Escape") {
-        setOpen(false);
-        triggerRef.current?.focus();
+        setResourcesOpen(false);
+        resourcesTriggerRef.current?.focus();
         return;
       }
       if (e.key === "ArrowDown" || e.key === "ArrowUp") {
         e.preventDefault();
         const items = Array.from(
-          containerRef.current?.querySelectorAll<HTMLElement>(
+          resourcesPanelRef.current?.querySelectorAll<HTMLElement>(
             '[role="menuitem"]',
           ) ?? [],
         );
@@ -117,76 +206,15 @@ function ResourcesDropdown() {
       document.removeEventListener("mousedown", handlePointerDown);
       document.removeEventListener("keydown", handleKeyDown);
     };
-  }, [open]);
+  }, [resourcesOpen]);
 
   useEffect(() => {
-    if (open) {
-      containerRef.current
+    if (resourcesOpen) {
+      resourcesPanelRef.current
         ?.querySelector<HTMLElement>('[role="menuitem"]')
         ?.focus();
     }
-  }, [open]);
-
-  function handleBlur(e: React.FocusEvent<HTMLDivElement>) {
-    if (!containerRef.current?.contains(e.relatedTarget as Node)) {
-      setOpen(false);
-    }
-  }
-
-  return (
-    <div ref={containerRef} className="relative" onBlur={handleBlur}>
-      <button
-        ref={triggerRef}
-        type="button"
-        aria-haspopup="menu"
-        aria-expanded={open}
-        aria-controls={menuId}
-        onClick={() => setOpen((o) => !o)}
-        className="flex items-center gap-1 font-sans text-sm text-ink transition-colors hover:text-accent-text"
-      >
-        Resources
-        <ChevronDownIcon
-          className={`h-3.5 w-3.5 transition-transform ${open ? "rotate-180" : ""}`}
-          aria-hidden="true"
-        />
-      </button>
-      {open && (
-        <div
-          id={menuId}
-          role="menu"
-          aria-label="Resources"
-          className="absolute left-0 top-full z-50 mt-2 w-48 rounded-lg border border-border bg-surface py-1 shadow-lg"
-        >
-          {resourceLinks.map((link) => (
-            <NavLink
-              key={link.to}
-              to={link.to}
-              role="menuitem"
-              onClick={() => setOpen(false)}
-              className={({ isActive }) =>
-                `block px-4 py-2.5 font-sans text-sm transition-colors hover:bg-surface-alt hover:text-accent-text ${
-                  isActive ? "text-accent-text" : "text-ink"
-                }`
-              }
-            >
-              {link.label}
-            </NavLink>
-          ))}
-        </div>
-      )}
-    </div>
-  );
-}
-
-export interface NavProps {
-  /** Set false for non-sticky comparison copies (e.g. side-by-side theme demos). Default true. */
-  sticky?: boolean;
-}
-
-export function Nav({ sticky = true }: NavProps) {
-  const [mobileOpen, setMobileOpen] = useState(false);
-  const mobileMenuId = useId();
-  const hamburgerRef = useRef<HTMLButtonElement>(null);
+  }, [resourcesOpen]);
 
   useEffect(() => {
     if (!mobileOpen) return;
@@ -221,7 +249,23 @@ export function Nav({ sticky = true }: NavProps) {
             </li>
           ))}
           <li>
-            <ResourcesDropdown />
+            <button
+              ref={resourcesTriggerRef}
+              type="button"
+              aria-haspopup="menu"
+              aria-expanded={resourcesOpen}
+              aria-controls={resourcesMenuId}
+              onClick={() => setResourcesOpen((o) => !o)}
+              className="flex items-center gap-1 font-sans text-sm text-ink transition-colors hover:text-accent-text"
+            >
+              Resources
+              <ChevronDownIcon
+                className={`h-3.5 w-3.5 motion-safe:transition-transform ${
+                  resourcesOpen ? "rotate-180" : ""
+                }`}
+                aria-hidden="true"
+              />
+            </button>
           </li>
           <li>
             <NavLink to="/contact" className={navLinkClass}>
@@ -253,6 +297,13 @@ export function Nav({ sticky = true }: NavProps) {
           )}
         </button>
       </Container>
+
+      <ResourcesPanel
+        open={resourcesOpen}
+        menuId={resourcesMenuId}
+        onClose={closeResources}
+        panelRef={resourcesPanelRef}
+      />
 
       {mobileOpen && (
         <div id={mobileMenuId} className="border-t border-border md:hidden">

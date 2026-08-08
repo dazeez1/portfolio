@@ -235,6 +235,9 @@ export default function Services() {
                     {pkg.pricePrefix}
                   </p>
                   <p className="font-serif text-4xl text-ink">{pkg.price}</p>
+                  <p className="mt-1 font-sans text-xs text-text-muted">
+                    {pkg.maintenance}
+                  </p>
                   <p className="mt-2 font-sans text-sm text-text-secondary">
                     {pkg.description}
                   </p>
@@ -264,6 +267,10 @@ export default function Services() {
                 </div>
               ))}
             </div>
+
+            <p className="mx-auto mt-8 max-w-[60ch] text-center font-sans text-sm text-text-muted">
+              {packagesSection.maintenanceClarifier}
+            </p>
           </Container>
         </section>
 

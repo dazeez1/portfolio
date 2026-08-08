@@ -6,7 +6,16 @@ import { Link, type LinkProps } from "react-router";
 // "inverted" is for buttons sitting on an ink CTA band (CLAUDE.md 1: ink is
 // used for "dark CTA bands"): it swaps the primary pair so the button always
 // contrasts against the band in both themes.
-export type ButtonVariant = "primary" | "accent" | "secondary" | "inverted";
+// "invertedOutline" is the secondary partner to "inverted" — an outline button
+// on the same ink band. It exists as a variant rather than className overrides
+// because `secondary`'s own `text-ink`/`border-border-strong` are same-specificity
+// utilities that silently win the cascade, rendering the label invisible.
+export type ButtonVariant =
+  | "primary"
+  | "accent"
+  | "secondary"
+  | "inverted"
+  | "invertedOutline";
 
 const baseButtonClasses =
   "inline-flex shrink-0 items-center justify-center gap-2 whitespace-nowrap rounded-md px-4 py-2 font-sans text-sm font-medium transition-colors disabled:pointer-events-none disabled:opacity-50";
@@ -17,6 +26,8 @@ const variantClasses: Record<ButtonVariant, string> = {
   secondary:
     "border border-border-strong bg-transparent text-ink hover:bg-surface-alt",
   inverted: "bg-button-primary-text text-button-primary-bg hover:opacity-90",
+  invertedOutline:
+    "border border-button-primary-text bg-transparent text-button-primary-text hover:opacity-80",
 };
 
 export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
