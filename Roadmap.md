@@ -36,8 +36,8 @@ Build order is sequential — a phase starts only when the previous one is appro
 - [x] About
 - [x] Portfolio index (pagination-ready grid)
 - [x] Case study: Sangira
-- [ ] Case study: Qure
-- [ ] Services + Pricing
+- [x] Case study: Qure
+- [x] Services + Pricing
 - [ ] SEO page (Resources)
 - [ ] Referrals page (Resources)
 - [x] 404
@@ -46,13 +46,17 @@ Build order is sequential — a phase starts only when the previous one is appro
 ## Phase 3 — Launch pass
 
 - [ ] Per-page meta titles/descriptions + OG images; prerendered HTML verified per route
+- [ ] Backfill the CLAUDE.md Section 13 SEO block onto pages built before it existed — Home, About, Portfolio, Contact, Thank You, 404, and both case studies currently have only title + description; they still need canonical, OG/Twitter tags, and (where a type fits) JSON-LD. `/services` is the reference implementation.
 - [ ] sitemap.xml + robots.txt; submit to Google Search Console
 - [ ] JSON-LD: Person (site-wide), BreadcrumbList (case studies)
 - [ ] Lighthouse ≥ 90 (mobile) on every page
+- [ ] **Owner decision — `text-muted` fails WCAG AA at 12px.** `#8A8377` on `bg`/`surface`/`surface-alt` measures 3.2–3.8:1, under the 4.5:1 AA minimum for normal-weight body text. This affects every small uppercase label/caption site-wide (10 files, incl. shared `SectionHeading`, `MetricCard`, `BrowserFrame`, and the Footer's Privacy/Terms links), so CLAUDE.md Section 9's "the token system already passes" is not currently accurate. Fix is a doc-level choice: darken `--text-muted` in CLAUDE.md Section 1 + tokens.css, or switch small labels to `text-secondary` (#5C554A, passes). Not changed unilaterally — Section 1 rule 7 forbids introducing hexes that aren't in the doc.
+- [ ] **Owner decision — accent button text contrast.** `#FAF7F2` on `accent` `#D95D39` measures 3.52:1 at 14px, under AA. Currently only used by the Services page's "Book a discovery call". `accent-hover` `#C24E2C` would pass (~4.6:1) but Section 1 designates `#D95D39` as the accent-button fill, so this needs a doc decision rather than a silent swap.
+- [ ] robots.txt is missing, which costs every page ~8 Lighthouse SEO points (Services scores 92 with it absent). Tracked alongside sitemap.xml above.
 - [ ] Cross-browser: Chrome, Safari, Firefox, Edge + iOS Safari, Android Chrome
 - [ ] Full keyboard-only walkthrough
 - [ ] Forms and booking tested end-to-end **in production**
-- [ ] Favicon + site-wide OG image
+- [ ] Favicon + site-wide OG image — `/og-default.png` is already referenced by every page's OG/Twitter tags (see content/site.ts); the asset itself still needs creating and dropping into `frontend/public/`
 - [ ] Custom domain purchased (on Vercel) and connected — target: end of month
 - [ ] Verify azeezdamilare.com in Resend, then switch frontend/api/contact.ts's FROM_ADDRESS from the onboarding@resend.dev sandbox sender to the custom-domain sender
 - [ ] Announce on LinkedIn / X / WhatsApp
@@ -76,6 +80,8 @@ Build order is sequential — a phase starts only when the previous one is appro
 - [ ] Confirm Sangira live URL (gusangira.com is a placeholder pending confirmation — see content/projects.ts)
 - [ ] 6 placeholder projects in content/projects.ts ("PLACEHOLDER — Project 1" through 6) need real repos, screenshots, and case study links
 - [ ] Sangira architecture diagram image (placeholder slot in content/caseStudies/sangira.ts, section 03)
+- [ ] Qure case study screenshots: patient queue dashboard, waiting room management (placeholder slots in content/caseStudies/qure.ts, section 02)
+- [ ] Qure case study Live link is intentionally hidden pending the owner-supplied URL (content/caseStudies/qure.ts) — note projects.ts already has qurequeue.com confirmed for the portfolio card; confirm whether that URL should also populate the case study's Live link
 
 ## Post-launch (v2 candidates — not now)
 

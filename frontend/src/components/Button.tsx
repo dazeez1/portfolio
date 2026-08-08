@@ -3,7 +3,10 @@ import { Link, type LinkProps } from "react-router";
 
 // "accent" is the single highest-value CTA per page (CLAUDE.md 1.1) — a
 // page-composition rule, not something this component enforces.
-export type ButtonVariant = "primary" | "accent" | "secondary";
+// "inverted" is for buttons sitting on an ink CTA band (CLAUDE.md 1: ink is
+// used for "dark CTA bands"): it swaps the primary pair so the button always
+// contrasts against the band in both themes.
+export type ButtonVariant = "primary" | "accent" | "secondary" | "inverted";
 
 const baseButtonClasses =
   "inline-flex shrink-0 items-center justify-center gap-2 whitespace-nowrap rounded-md px-4 py-2 font-sans text-sm font-medium transition-colors disabled:pointer-events-none disabled:opacity-50";
@@ -13,6 +16,7 @@ const variantClasses: Record<ButtonVariant, string> = {
   accent: "bg-accent text-button-primary-text hover:bg-accent-hover",
   secondary:
     "border border-border-strong bg-transparent text-ink hover:bg-surface-alt",
+  inverted: "bg-button-primary-text text-button-primary-bg hover:opacity-90",
 };
 
 export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
