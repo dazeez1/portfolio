@@ -8,6 +8,7 @@ import { MetricCard } from "../components/MetricCard";
 import { Nav } from "../components/Nav";
 import { SectionHeading } from "../components/SectionHeading";
 import { TagPill } from "../components/TagPill";
+import { TestimonialCarousel } from "../components/TestimonialCarousel";
 import { TimelineItem } from "../components/TimelineItem";
 
 const faqItems = [
@@ -204,6 +205,58 @@ function ThemePanel({ theme }: { theme: "light" | "dark" }) {
               isLast
               title="SideHustle — 2021"
               context="Graphics design internship"
+            />
+          </div>
+        </section>
+
+        <section className="mb-10">
+          <SectionHeading
+            title="TestimonialCarousel"
+            variant="label"
+            as="h3"
+          />
+          <p className="mt-3 text-xs text-text-muted">
+            Demo rows below are instrumentation, not testimonials — real quotes
+            live in content/testimonials.ts and none exist yet. First card omits
+            a photo to show the initial-avatar fallback. Auto-advances every 6s;
+            pauses on hover or focus; does not auto-advance at all under
+            prefers-reduced-motion. Renders <code>null</code> below three
+            entries, which is why Home currently shows no testimonials section.
+          </p>
+          <div className="mt-4">
+            <TestimonialCarousel
+              label="Component gallery demo"
+              items={[
+                {
+                  id: "demo-a",
+                  quote:
+                    "Demo entry A. This string exercises the card layout and wrapping; it is not a quote from anyone.",
+                  name: "Aa Demo",
+                  role: "Demo role",
+                },
+                {
+                  id: "demo-b",
+                  quote:
+                    "Demo entry B, with a company and an outbound link to show the external-arrow treatment.",
+                  name: "Bb Demo",
+                  role: "Demo role",
+                  company: "Demo Co",
+                  link: "https://example.com",
+                },
+                {
+                  id: "demo-c",
+                  quote: "Demo entry C, deliberately short.",
+                  name: "Cc Demo",
+                  role: "Demo role",
+                },
+                {
+                  id: "demo-d",
+                  quote:
+                    "Demo entry D exists so the carousel has more than one page and the dots and arrows are exercised.",
+                  name: "Dd Demo",
+                  role: "Demo role",
+                },
+              ]}
             />
           </div>
         </section>

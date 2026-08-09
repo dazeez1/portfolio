@@ -185,7 +185,7 @@ export const qure: CaseStudyContent = {
   closingCta: {
     heading: "Have a problem like this one?",
     subline:
-      "We help social enterprises and modern startups build robust, real-time digital solutions that scale.",
+      "I help social enterprises and modern startups build robust, real-time digital solutions that scale.",
     buttonLabel: "Book a discovery call",
     buttonHref: "/contact",
   },

@@ -22,7 +22,7 @@ export const sangira: CaseStudyContent = {
     summary:
       "A verified food-redistribution platform that connects surplus-food donors with humanitarian organisations in Kigali, with dual-party confirmation on every handover so no transfer goes unaccounted for.",
     summaryDetail:
-      "We solved the trust gap to ensure surplus food reaches those in need safely and efficiently.",
+      "I solved the trust gap to ensure surplus food reaches those in need safely and efficiently.",
     metaBar: {
       role: "Full-stack, end to end",
       timeline: "(2026)",
@@ -37,13 +37,13 @@ export const sangira: CaseStudyContent = {
     paragraphs: [
       "In Kigali, hotels, caterers, and supermarkets throw away good surplus food every day while shelters and orphanages nearby struggle to feed the people in their care. The food and the need exist at the same time, in the same city what's missing is a reliable way to connect them.",
       "The informal channels that exist run on phone calls and personal contacts, with no way to verify the organisation on the other end, no record a handover happened, no accountability when something goes wrong. For donors, that uncertainty makes it easier to bin the surplus than risk it. Waste on one side, hunger on the other, separated by a trust gap.",
-      "Our challenge was to build a digital infrastructure that didn't just move food, but moved verification and accountability alongside it in real-time.",
+      "My challenge was to build a digital infrastructure that didn't just move food, but moved verification and accountability alongside it in real-time.",
     ],
   },
   solution: {
     title: "Automated Accountability",
     intro:
-      "We built a three-portal ecosystem (Donors, NGO, Administrators) that digitizes the entire chain of custody.",
+      "I built a three-portal ecosystem (Donors, NGO, Administrators) that digitizes the entire chain of custody.",
     subBlocks: [
       {
         Icon: ShieldCheckIcon,
@@ -86,7 +86,7 @@ export const sangira: CaseStudyContent = {
   build: {
     title: "Engineered for Speed",
     paragraphs: [
-      "Leveraging a modern MERN stack with Socket.io allowed us to provide the real-time feedback required for logistics while maintaining a lightweight footprint for mobile users on varied network speeds.",
+      "Leveraging a modern MERN stack with Socket.io allowed me to provide the real-time feedback required for logistics while maintaining a lightweight footprint for mobile users on varied network speeds.",
     ],
     diagram: {
       label: "Architecture diagram",
@@ -136,10 +136,10 @@ export const sangira: CaseStudyContent = {
   challenges: {
     title: "Lessons Learned",
     paragraphs: [
-      "The primary technical hurdle was handling edge cases during simultaneous pickups. We initially encountered race conditions where two drivers would attempt to claim the same donation. Solving this required implementing a locking mechanism in MongoDB with optimistic concurrency control.",
-      "We also fought 'phantom bugs' related to GPS accuracy in dense urban pockets. We solved this by implementing a fallback system that used manual landmark verification if the geofence wasn't triggered reliably.",
-      "On the deployment front, we learned that Rwandese users predominantly use mobile data with high latency. This forced us to ruthlessly optimize our asset delivery pipeline, stripping out heavy libraries in favor of native browser APIs.",
-      "Building Sangira taught us that the most elegant code is worthless if it doesn't survive the chaos of real-world logistics. Robustness isn't a feature; it's the foundation.",
+      "The primary technical hurdle was handling edge cases during simultaneous pickups. I initially encountered race conditions where two drivers would attempt to claim the same donation. Solving this required implementing a locking mechanism in MongoDB with optimistic concurrency control.",
+      "I also fought 'phantom bugs' related to GPS accuracy in dense urban pockets. I solved this by implementing a fallback system that used manual landmark verification if the geofence wasn't triggered reliably.",
+      "On the deployment front, I learned that Rwandese users predominantly use mobile data with high latency. This forced me to ruthlessly optimize my asset delivery pipeline, stripping out heavy libraries in favor of native browser APIs.",
+      "Building Sangira taught me that the most elegant code is worthless if it doesn't survive the chaos of real-world logistics. Robustness isn't a feature; it's the foundation.",
     ],
   },
   results: {
@@ -168,7 +168,7 @@ export const sangira: CaseStudyContent = {
   closingCta: {
     heading: "Have a problem like this one?",
     subline:
-      "We help social enterprises and modern startups build robust, real-time digital solutions that scale.",
+      "I help social enterprises and modern startups build robust, real-time digital solutions that scale.",
     buttonLabel: "Book a discovery call",
     buttonHref: "/contact",
   },

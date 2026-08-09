@@ -8,6 +8,12 @@ import { Footer } from "../components/Footer";
 import { Nav } from "../components/Nav";
 import { SectionHeading } from "../components/SectionHeading";
 import { TagPill } from "../components/TagPill";
+import { TestimonialCarousel } from "../components/TestimonialCarousel";
+import {
+  minimumToRender,
+  testimonials,
+  testimonialsSection,
+} from "../content/testimonials";
 import {
   finalCta,
   hero,
@@ -191,6 +197,26 @@ export default function Home() {
             </div>
           </Container>
         </section>
+
+        {/*
+          Testimonials. The whole section — heading included — is omitted
+          until there are enough real, permissioned quotes in
+          content/testimonials.ts (CLAUDE.md Section 4: no placeholder
+          testimonials in production).
+        */}
+        {testimonials.length >= minimumToRender && (
+          <section className="bg-bg py-16 md:py-24">
+            <Container>
+              <SectionHeading title={testimonialsSection.heading} />
+              <div className="mt-8">
+                <TestimonialCarousel
+                  items={testimonials}
+                  label={testimonialsSection.heading}
+                />
+              </div>
+            </Container>
+          </section>
+        )}
 
         {/* Final CTA */}
         <section className="bg-surface-alt py-16 md:py-24">
