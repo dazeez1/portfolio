@@ -785,3 +785,93 @@ export function TrendIcon(props: IconProps) {
     </svg>
   );
 }
+
+// Referrals page icons.
+
+export function UsersIcon(props: IconProps) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      {...props}
+    >
+      <circle cx="9" cy="8" r="3.5" />
+      <path d="M2.5 20a6.5 6.5 0 0 1 13 0" />
+      <path d="M16.5 5.2a3.5 3.5 0 0 1 0 6.6" />
+      <path d="M18 14.4a6.5 6.5 0 0 1 3.5 5.6" />
+    </svg>
+  );
+}
+
+export function NetworkIcon(props: IconProps) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      {...props}
+    >
+      <circle cx="12" cy="4.5" r="2.5" />
+      <circle cx="4.5" cy="19.5" r="2.5" />
+      <circle cx="19.5" cy="19.5" r="2.5" />
+      <path d="M10.4 6.6 6.1 17.4M13.6 6.6l4.3 10.8M7 19.5h10" />
+    </svg>
+  );
+}
+
+export function WalletIcon(props: IconProps) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      {...props}
+    >
+      <rect x="3" y="6" width="18" height="13" rx="2" />
+      <path d="M3 10h18" />
+      <line x1="7" y1="14.5" x2="10" y2="14.5" />
+    </svg>
+  );
+}
+
+export function InfinityIcon(props: IconProps) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      {...props}
+    >
+      <path d="M6.5 8.5a3.5 3.5 0 1 0 0 7c1.6 0 2.7-1.1 3.6-2.2l3.8-2.6c.9-1.1 2-2.2 3.6-2.2a3.5 3.5 0 0 1 0 7c-1.6 0-2.7-1.1-3.6-2.2l-3.8-2.6C9.2 9.6 8.1 8.5 6.5 8.5Z" />
+    </svg>
+  );
+}
+
+export function ZapIcon(props: IconProps) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      {...props}
+    >
+      <polygon points="13 2 4 14 11 14 10 22 20 10 13 10" />
+    </svg>
+  );
+}

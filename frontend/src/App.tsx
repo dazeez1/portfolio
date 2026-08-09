@@ -7,6 +7,7 @@ import Home from "./pages/Home";
 import NotFound from "./pages/NotFound";
 import Portfolio from "./pages/Portfolio";
 import Qure from "./pages/Qure";
+import Referrals from "./pages/Referrals";
 import Sangira from "./pages/Sangira";
 import Seo from "./pages/Seo";
 import Services from "./pages/Services";
@@ -24,6 +25,7 @@ function App() {
         <Route path="/portfolio/qure" element={<Qure />} />
         <Route path="/services" element={<Services />} />
         <Route path="/seo" element={<Seo />} />
+        <Route path="/referrals" element={<Referrals />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/thank-you" element={<ThankYou />} />
         <Route path="/dev/components" element={<DevComponents />} />

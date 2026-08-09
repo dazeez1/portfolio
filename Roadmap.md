@@ -39,7 +39,7 @@ Build order is sequential — a phase starts only when the previous one is appro
 - [x] Case study: Qure
 - [x] Services + Pricing
 - [x] SEO page (Resources)
-- [ ] Referrals page (Resources)
+- [x] Referrals page (Resources)
 - [x] 404
 - [ ] Privacy · Terms (shared legal template)
 
@@ -71,7 +71,7 @@ Build order is sequential — a phase starts only when the previous one is appro
 - [ ] SEO proof screenshots from past project (Search Console + analytics)
 - [ ] Vephla training year for the About timeline
 - [ ] About bio paragraphs (2 placeholder paragraphs currently in content/about.ts, marked for replacement)
-- [ ] Referral fixed-reward amount ($) for Starter tier
+- [x] Referral fixed-reward amount ($) for Starter tier — confirmed $20 (see content/referrals.ts)
 - [ ] Real LinkedIn and Instagram profile URLs (Footer + Contact page currently link to `#` for both)
 - [ ] Privacy Policy + Terms text (template-based is fine)
 - [ ] Confirm Contact page budget-range select options — currently derived from the approved package prices (Section 4), not owner-specified; see content/contact.ts
