@@ -205,8 +205,11 @@ export default function Services() {
           </Container>
         </section>
 
-        {/* Packages and pricing */}
-        <section className="bg-surface-alt py-16 md:py-24">
+        {/* Packages and pricing — #pricing is linked from /referrals. */}
+        <section
+          id="pricing"
+          className="scroll-mt-24 bg-surface-alt py-16 md:py-24"
+        >
           <Container>
             <SectionHeading title={packagesSection.heading} />
             <p className="mt-2 font-sans text-base text-text-secondary">
