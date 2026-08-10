@@ -35,7 +35,7 @@ Light mode is the **default** theme. Dark mode is a user toggle, never the defau
 | `surface-alt`    | `#F3EEE5` | Alternate section bands, hover fills                                      |
 | `ink`            | `#211D18` | Headings, primary text, primary buttons, dark CTA bands                   |
 | `text-secondary` | `#5C554A` | Body text                                                                 |
-| `text-muted`     | `#8A8377` | Captions, labels, metadata                                                |
+| `text-muted`     | `#706A61` | Captions, labels, metadata — 4.63:1 on `surface-alt`, passes AA at 12px    |
 | `accent`         | `#D95D39` | Terracotta — accent button, italic hero word, availability dot, key icons |
 | `accent-hover`   | `#C24E2C` | Accent button hover                                                       |
 | `accent-text`    | `#B04525` | **All accent-colored text below 18px** — links, small labels              |
@@ -57,6 +57,7 @@ Light mode is the **default** theme. Dark mode is a user toggle, never the defau
 | `surface-alt`    | `#2B2720` (one step lighter than dark `surface`, same warm undertone) |
 | `text`           | `#F0EBE3`                                                             |
 | `text-secondary` | `#A89F91`                                                             |
+| `text-muted`     | `#968F81` (lightened — the light-mode muted fails contrast on dark)    |
 | `border`         | `#33302B`                                                             |
 | `accent`         | `#E8825F` (brightened — light-mode terracotta fails contrast on dark) |
 
@@ -227,6 +228,17 @@ Deploy from the first commit; ship page by page.
 ## 13. Definition of done — per page
 
 A page is done when: it matches the approved wireframe and this design system · it is responsive (mobile, tablet, desktop) · all links and buttons route correctly (including URL-param pre-fills) · it passes the accessibility checklist · Lighthouse ≥ 90 on Performance, Accessibility, and Best Practices, plus SEO where the page is indexable (see the exemption below) · content comes from data files, not hard-coded JSX · it works on the deployed staging URL, not just localhost · **and it satisfies the SEO block below.**
+
+### Lighthouse gates are measured against a PRODUCTION build, never a preview URL
+
+Run the gate against a production build (`npm run build` + `vite preview`, or the production deployment). **A preview URL cannot measure these scores honestly**, because the preview host injects things the real page never serves:
+
+- **The Vercel preview toolbar** (`vercel.live/_next-live/feedback/feedback.js`) is a third-party script absent from our HTML. It paints into the viewport late, inflating Speed Index and pulling Performance down.
+- **`x-robots-tag: noindex`** is sent on every preview response. Lighthouse's `is-crawlable` audit therefore fails for host reasons even when the page carries no robots meta of its own, dragging SEO down.
+
+Measured example on `/seo`: **Performance 86 · SEO 61 on the preview URL, versus Performance 95 · SEO 92 on a production build** of the identical commit — Speed Index alone went 7.5s → 1.5s. Preview scores understate Performance and SEO for reasons unrelated to the page.
+
+A page must still *work* on the deployed staging URL (Section 13's definition of done). Verify behaviour there; measure the gate on production.
 
 ### Lighthouse SEO gate — indexable pages only
 

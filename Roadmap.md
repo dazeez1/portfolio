@@ -68,9 +68,11 @@ Build order is sequential — a phase starts only when the previous one is appro
 - [ ] **Sangira datastore conflict — owner decision needed.** The architecture diagram's data layer shows **PostgreSQL** ("Primary relational DB, UUID keys · ACID compliant") + **Redis Cache**, but the case study copy says **MongoDB** in three places: the meta bar (`stack: "React · Node · MongoDB · Socket.io"`), the build paragraph ("a modern MERN stack"), and the challenge paragraph ("a locking mechanism in MongoDB with optimistic concurrency control"). Both cannot be true and a technical reader will spot it. Confirm which is real, then fix the other. Per §4 no copy was rewritten and the diagram was not edited — the diagram's alt text summarises the layers without naming the datastore so the page does not assert a database that may be wrong.
 - [ ] Real light-mode screenshots: Sangira (dashboard, listing flow, PIN confirmation) and Qure (staff dashboard, queue mgmt, waiting areas, analytics) — listing flow, PIN confirmation, architecture diagram, and both Qure screenshots now supplied; Sangira dashboard and Qure analytics still outstanding
 - [x] Qure live demo URL (confirmed: qurequeue.com)
-- [ ] Professional photo for About
+- [x] Professional photo for About — supplied, at `/images/about-photo.webp`
 - [x] Resume PDF — supplied by owner, at frontend/public/resume.pdf (2 pages, serves application/pdf)
-- [ ] SEO proof screenshots from past project (Search Console + analytics)
+- [x] SEO proof screenshots — /seo now shows search-result proof from the owner's own platforms (Qure, Sangira), not client work
+- [ ] **Search Console + analytics proof — expected around Oct–Nov 2026.** A third proof card sits commented out in `content/seo.ts` with the shape ready to fill; nothing renders until real data exists. Drop the screenshot as `/images/seo-proof-search-console.webp`.
+- [ ] Re-shoot the two /seo proof screenshots in **light mode** if the dark Google captures bother you — they read as dark blocks against the ivory theme (CLAUDE.md §3.2 wants light backgrounds). Legibility is also limited at half-card width; a tighter crop around the result itself would read better. Left as supplied — proof screenshots should not be doctored.
 - [ ] Vephla training year for the About timeline
 - [ ] About bio paragraphs (2 placeholder paragraphs currently in content/about.ts, marked for replacement)
 - [x] Referral fixed-reward amount ($) for Starter tier — confirmed $20 (see content/referrals.ts)

@@ -35,7 +35,10 @@ export const intro: IntroContent = {
   ],
   primaryButton: { label: "Download resume", href: "/resume.pdf" },
   secondaryButton: { label: "Get in touch", to: "/contact" },
-  photo: { src: "/images/about-photo.jpg", alt: "Azeez Damilare Gbenga" },
+  photo: {
+    src: "/images/about-photo.webp",
+    alt: "Azeez Damilare Gbenga, a full-stack software engineer based in Kigali, Rwanda",
+  },
 };
 
 export interface JourneyEntry {

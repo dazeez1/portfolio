@@ -17,7 +17,12 @@
   --surface-alt: #f3eee5;
   --ink: #211d18;
   --text-secondary: #5c554a;
-  --text-muted: #8a8377;
+  /*
+   * Clears WCAG AA 4.5:1 for normal-size text against every light surface it
+   * is used on — the binding constraint is surface-alt (the darkest of them),
+   * not bg. The previous #8a8377 measured 3.25:1 there and failed site-wide.
+   */
+  --text-muted: #706a61;
   --accent: #d95d39;
   --accent-hover: #c24e2c;
   --accent-text: #b04525;
@@ -47,9 +52,9 @@
 
 /*
  * CLAUDE.md Section 1 dark table redefines bg, surface, surface-alt,
- * text (→ ink), text-secondary, border, and accent. Every other token
- * below (text-muted, accent-hover, accent-text, tint, tint-border,
- * border-strong, success, warning, error) has no dark-specific hex in
+ * text (→ ink), text-secondary, border, accent, and text-muted. The
+ * remaining tokens (accent-hover, accent-text, tint, tint-border,
+ * border-strong, success, warning, error) have no dark-specific hex in
  * that table, and Section 1 rule 7 forbids introducing hex values that
  * aren't in the file — so those tokens intentionally carry their
  * light-mode value into dark mode unchanged until the doc is updated
@@ -61,6 +66,13 @@
   --surface-alt: #2b2720;
   --ink: #f0ebe3;
   --text-secondary: #a89f91;
+  /*
+   * Dark mode needs its own muted value: inheriting the light #8a8377 gave
+   * only 4.33:1 on surface and 3.96:1 on surface-alt. Lightened until it
+   * clears 4.5:1 against all three dark surfaces, with surface-alt (the
+   * lightest, so the worst case for light text) binding.
+   */
+  --text-muted: #968f81;
   --border: #33302b;
   --accent: #e8825f;
 }
@@ -78,7 +90,7 @@
   --surface-alt: #f3eee5;
   --ink: #211d18;
   --text-secondary: #5c554a;
-  --text-muted: #8a8377;
+  --text-muted: #706a61;
   --accent: #d95d39;
   --accent-hover: #c24e2c;
   --accent-text: #b04525;
