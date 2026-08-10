@@ -29,7 +29,24 @@
   --tint: #f7e7df;
   --tint-border: #edd5c8;
   --border: #eae4da;
-  --border-strong: #d8d0c2;
+  /*
+   * Functional boundaries only — inputs, the secondary button, filter pills,
+   * pagination and carousel controls, timeline nodes, dashed cards. WCAG
+   * 1.4.11 asks 3:1 for anything a user must perceive to operate a control,
+   * and the previous #d8d0c2 gave just 1.53:1 on a white input. Hue kept at
+   * 38 degrees; saturation drops 22% to 7% because 22% reads olive at this
+   * lightness rather than as a warm grey. Still lighter than text-muted, so
+   * the neutral ramp keeps its order.
+   */
+  --border-strong: #888176;
+  /*
+   * Ornament that must NOT be pushed to 3:1 — the BrowserFrame window dots
+   * and the 404 ghost numeral. The numeral is a 7-18rem watermark sitting
+   * behind the real heading and is aria-hidden (Section 9), so darkening it
+   * would fight the text layered on top. No contrast threshold applies to
+   * either. This is the value border-strong used to carry.
+   */
+  --border-decorative: #d8d0c2;
   --focus: var(--accent);
   --success: #4f7942;
   --warning: #c2790f;
@@ -51,14 +68,15 @@
 }
 
 /*
- * CLAUDE.md Section 1 dark table redefines bg, surface, surface-alt,
- * text (→ ink), text-secondary, border, accent, and text-muted. The
- * remaining tokens (accent-hover, accent-text, tint, tint-border,
- * border-strong, success, warning, error) have no dark-specific hex in
- * that table, and Section 1 rule 7 forbids introducing hex values that
- * aren't in the file — so those tokens intentionally carry their
- * light-mode value into dark mode unchanged until the doc is updated
- * with real dark values for them.
+ * Every token in the light block now has a dark counterpart here, except
+ * focus / button-primary-bg / button-primary-text (var() aliases that follow
+ * accent / ink / bg automatically) and the three external brand colors.
+ * Nothing is silently inherited any more — if you add a token to :root, add
+ * it here too, and to the Section 1 dark table.
+ *
+ * The binding surface for light-on-dark text is `tint` (#31251f, luminance
+ * 0.0208), a hair lighter than surface-alt — so every text value below is
+ * measured against all four dark surfaces, not just bg.
  */
 [data-theme="dark"] {
   --bg: #191613;
@@ -75,6 +93,53 @@
   --text-muted: #968f81;
   --border: #33302b;
   --accent: #e8825f;
+  /*
+   * accent-text exists only because the light-mode accent (#d95d39) fails
+   * contrast for text below 18px. Dark mode already lightens the accent to
+   * #e8825f, which clears 4.5:1 on every dark surface (6.68 bg / 6.03
+   * surface / 5.51 surface-alt), so the workaround is unnecessary here and
+   * the two collapse into one value. Inheriting the light #b04525 was the
+   * bug: it measured 3.19 / 2.88 / 2.63:1.
+   */
+  --accent-text: var(--accent);
+  /*
+   * The light tint is a pale terracotta wash. Inherited into dark mode it
+   * stayed pale, so dark text-secondary landed on it at 2.17:1. This is the
+   * same wash rebuilt dark: same hue, sitting just above surface-alt, and
+   * every dark foreground clears 4.5:1 on it (ink 12.51, text-secondary
+   * 5.68, accent-text 5.50, text-muted 4.62).
+   */
+  --tint: #31251f;
+  /* Keeps the light pair's subtle 1.2-1.4:1 edge against its own tint. */
+  --tint-border: #483a32;
+  /*
+   * accent-hover is only ever a fill (Button's `accent` variant:
+   * hover:bg-accent-hover), so what matters is the button label on it —
+   * button-primary-text, which is var(--bg) = #191613 in dark mode. That
+   * reads 5.31:1 here. Lightness sits 8 points under the dark accent, giving
+   * a 1.26:1 step — the exact step the light pair has (#d95d39 → #c24e2c).
+   */
+  --accent-hover: #e3653b;
+  /*
+   * error/success/warning carry text (field errors are 12px), so all three
+   * clear 4.5:1 against every dark surface including tint. Hues preserved
+   * from their light values: error 8°, success 106°, warning 36°→35°.
+   */
+  --success: #669d55;
+  --warning: #cb7e10;
+  --error: #d77363;
+  /*
+   * border-strong is never text. It draws input borders and the pagination,
+   * filter-pill and carousel controls — UI components, so the governing
+   * threshold is WCAG 1.4.11 non-text contrast at 3:1, not 1.4.3's 4.5:1.
+   * This clears 3:1 on all four dark surfaces (worst 3.41:1 on tint).
+   * Purely ornamental uses live on border-decorative below.
+   */
+  --border-strong: #81786a;
+  /* Ornament stays faint in dark too: 1.57:1 on bg, mirroring light's 1.43:1.
+     Inheriting border-strong put the ghost numeral at 4.14:1 — far louder
+     than the same numeral in light mode. */
+  --border-decorative: #3c3934;
 }
 
 /*
@@ -97,7 +162,8 @@
   --tint: #f7e7df;
   --tint-border: #edd5c8;
   --border: #eae4da;
-  --border-strong: #d8d0c2;
+  --border-strong: #888176;
+  --border-decorative: #d8d0c2;
   --focus: var(--accent);
   --success: #4f7942;
   --warning: #c2790f;
@@ -118,6 +184,7 @@
   --color-tint-border: var(--tint-border);
   --color-border: var(--border);
   --color-border-strong: var(--border-strong);
+  --color-border-decorative: var(--border-decorative);
   --color-focus: var(--focus);
   --color-success: var(--success);
   --color-warning: var(--warning);

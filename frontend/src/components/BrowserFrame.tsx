@@ -35,9 +35,9 @@ function Dots({ invisible = false }: { invisible?: boolean }) {
       className={`flex gap-1.5 ${invisible ? "invisible" : ""}`}
       aria-hidden="true"
     >
-      <span className="h-2.5 w-2.5 rounded-full bg-border-strong" />
-      <span className="h-2.5 w-2.5 rounded-full bg-border-strong" />
-      <span className="h-2.5 w-2.5 rounded-full bg-border-strong" />
+      <span className="h-2.5 w-2.5 rounded-full bg-border-decorative" />
+      <span className="h-2.5 w-2.5 rounded-full bg-border-decorative" />
+      <span className="h-2.5 w-2.5 rounded-full bg-border-decorative" />
     </span>
   );
 }

@@ -31,7 +31,7 @@ export default function NotFound() {
           <div className="relative flex w-full flex-col items-center justify-center py-8 sm:py-12 md:py-16">
             <span
               aria-hidden="true"
-              className="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 select-none whitespace-nowrap font-serif text-[7rem] text-border-strong sm:text-[10rem] md:text-[14rem] lg:text-[18rem]"
+              className="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 select-none whitespace-nowrap font-serif text-[7rem] text-border-decorative sm:text-[10rem] md:text-[14rem] lg:text-[18rem]"
             >
               {ghostNumeral}
             </span>
