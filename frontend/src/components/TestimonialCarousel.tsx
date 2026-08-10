@@ -96,7 +96,7 @@ function TestimonialCard({ testimonial }: { testimonial: Testimonial }) {
                 <a
                   href={link}
                   target="_blank"
-                  rel="noreferrer"
+                  rel="noopener noreferrer"
                   className="inline-flex items-center gap-1 text-accent-text underline"
                 >
                   {company}

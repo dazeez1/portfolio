@@ -103,7 +103,7 @@ export default function ThankYou() {
               <ButtonAnchor
                 href={thankYou.secondaryButton.href}
                 target="_blank"
-                rel="noreferrer"
+                rel="noopener noreferrer"
                 variant="secondary"
               >
                 <WhatsAppIcon className="h-4 w-4" aria-hidden="true" />

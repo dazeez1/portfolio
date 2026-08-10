@@ -46,11 +46,17 @@ function CaseStudyImage({
   const [failed, setFailed] = useState(false);
   const imgRef = useRef<HTMLImageElement>(null);
 
+  // The image can override the frame it sits in. A diagram or a tall portrait
+  // screenshot is destroyed by object-cover — it crops away the half that
+  // carries the meaning — so those declare fit: "contain" and their own aspect.
+  const frameAspect = image?.aspect ?? aspect;
+  const objectFit = image?.fit === "contain" ? "object-contain" : "object-cover";
+
   return (
     <div>
       {!image || failed ? (
         <div
-          className={`flex ${aspect} items-center justify-center rounded-lg border border-border bg-surface-alt`}
+          className={`flex ${frameAspect} items-center justify-center rounded-lg border border-border bg-surface-alt`}
         >
           <span className="font-sans text-xs text-text-muted">
             {showCaption ? `${label} — image coming soon` : "Image coming soon"}
@@ -58,7 +64,7 @@ function CaseStudyImage({
         </div>
       ) : (
         <div
-          className={`relative ${aspect} overflow-hidden rounded-lg border border-border bg-surface-alt`}
+          className={`relative ${frameAspect} overflow-hidden rounded-lg border border-border bg-surface-alt`}
         >
           {!loaded && (
             <div
@@ -74,7 +80,7 @@ function CaseStudyImage({
             src={image.src}
             alt={image.alt}
             loading="lazy"
-            className={`relative block h-full w-full object-cover transition-opacity duration-500 ${
+            className={`relative block h-full w-full ${objectFit} transition-opacity duration-500 ${
               loaded ? "opacity-100" : "opacity-0"
             }`}
             onLoad={() => setLoaded(true)}
@@ -175,7 +181,7 @@ export function CaseStudyLayout({ content }: { content: CaseStudyContent }) {
                     <a
                       href={hero.metaBar.codeHref}
                       target="_blank"
-                      rel="noreferrer"
+                      rel="noopener noreferrer"
                       className="inline-flex items-center gap-1.5 font-sans text-sm text-ink hover:text-accent-text"
                     >
                       <GithubIcon className="h-4 w-4" aria-hidden="true" />
@@ -186,7 +192,7 @@ export function CaseStudyLayout({ content }: { content: CaseStudyContent }) {
                     <a
                       href={hero.metaBar.liveHref}
                       target="_blank"
-                      rel="noreferrer"
+                      rel="noopener noreferrer"
                       className="inline-flex items-center gap-1.5 font-sans text-sm text-ink hover:text-accent-text"
                     >
                       <GlobeIcon className="h-4 w-4" aria-hidden="true" />
@@ -275,7 +281,7 @@ export function CaseStudyLayout({ content }: { content: CaseStudyContent }) {
                 </div>
               ))}
             </div>
-            <div className="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-2">
+            <div className="mt-10 grid grid-cols-1 items-start gap-6 sm:grid-cols-2">
               {solution.images.map((item) => (
                 <CaseStudyImage
                   key={item.label}

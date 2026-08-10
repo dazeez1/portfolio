@@ -69,15 +69,21 @@ export const sangira: CaseStudyContent = {
     images: [
       {
         image: {
-          src: "/images/sangira-listing-flow.png",
-          alt: "Sangira listing flow screenshot",
+          src: "/images/sangira-listing-flow.webp",
+          alt: "Sangira listing flow on mobile: a donor entering surplus food details and a pickup window",
+          // Tall mobile capture (900×1667) — cropping it to a landscape frame
+          // would leave a meaningless horizontal band.
+          fit: "contain",
+          aspect: "aspect-[3/4]",
         },
         label: "Listing flow",
       },
       {
         image: {
-          src: "/images/sangira-pin-confirmation.png",
-          alt: "Sangira PIN confirmation screenshot",
+          src: "/images/sangira-pin-confirmation.webp",
+          alt: "Sangira PIN confirmation screen where donor and NGO each confirm a handoff",
+          fit: "contain",
+          aspect: "aspect-[3/4]",
         },
         label: "PIN confirmation",
       },
@@ -90,6 +96,14 @@ export const sangira: CaseStudyContent = {
     ],
     diagram: {
       label: "Architecture diagram",
+      image: {
+        src: "/images/sangira-architecture-diagram.webp",
+        alt: "Sangira's five-layer architecture: a presentation layer with donor, NGO, and admin portals; an API gateway handling REST routing, JWT authentication, rate limiting, and TLS; application services for auth, listings, matching, notifications, and impact reporting; a data layer for the database, cache, and file storage; and external integrations for SMS, WhatsApp, and maps.",
+        // A diagram must be read, not cropped — contain, in a frame close to
+        // its own 1.12 ratio so the letterboxing stays minimal.
+        fit: "contain",
+        aspect: "aspect-[4/3]",
+      },
     },
   },
   features: {

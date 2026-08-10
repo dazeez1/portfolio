@@ -139,7 +139,7 @@ function FeaturedCard({ project, reverse }: { project: Project; reverse: boolean
             <ButtonAnchor
               href={project.links.github}
               target="_blank"
-              rel="noreferrer"
+              rel="noopener noreferrer"
               variant="secondary"
             >
               <GithubIcon className="h-4 w-4" aria-hidden="true" />
@@ -170,6 +170,14 @@ function GridCard({ project }: { project: Project }) {
         >
           {project.oneLiner}
         </p>
+        {/*
+          Placeholder entries render no clickable links at all — no Details, no
+          Code, no Live site. Their case studies do not exist and their repo/live
+          URLs are unknown, and a dead or wrong link is worse than no link. The
+          guard is here as well as in projects.ts so a stray link in data can
+          never surface on a placeholder card.
+        */}
+        {!project.placeholder && (
         <div className="mt-4 flex items-center justify-between gap-4">
           {project.links.caseStudy && (
             <Link
@@ -184,7 +192,7 @@ function GridCard({ project }: { project: Project }) {
                 <ButtonAnchor
                   href={project.links.live}
                   target="_blank"
-                  rel="noreferrer"
+                  rel="noopener noreferrer"
                   variant="secondary"
                 >
                   <GlobeIcon className="h-4 w-4" aria-hidden="true" />
@@ -195,7 +203,7 @@ function GridCard({ project }: { project: Project }) {
                 <ButtonAnchor
                   href={project.links.github}
                   target="_blank"
-                  rel="noreferrer"
+                  rel="noopener noreferrer"
                   variant="secondary"
                 >
                   <GithubIcon className="h-4 w-4" aria-hidden="true" />
@@ -203,6 +211,7 @@ function GridCard({ project }: { project: Project }) {
                 </ButtonAnchor>
               )}
         </div>
+        )}
       </div>
     </div>
   );
@@ -379,7 +388,7 @@ export default function Portfolio() {
               <ButtonAnchor
                 href={githubNote.href}
                 target="_blank"
-                rel="noreferrer"
+                rel="noopener noreferrer"
                 variant="secondary"
                 className="mt-4"
               >

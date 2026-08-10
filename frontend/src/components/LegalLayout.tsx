@@ -59,7 +59,7 @@ function Blocks({ blocks }: { blocks: LegalBlock[] }) {
                     <a
                       href={item.href}
                       target="_blank"
-                      rel="noreferrer"
+                      rel="noopener noreferrer"
                       className="font-semibold text-accent-text underline"
                     >
                       {item.name}

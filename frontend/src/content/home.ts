@@ -42,10 +42,10 @@ export const hero: HeroContent = {
   
   screenshotUrl: "gusangira.com",
   screenshot: {
-    src: "/images/sangira-card.png",
+    src: "/images/sangira-card.webp",
     alt: "Sangira dashboard showing active food donation listings",
-    width: 1200,
-    height: 750,
+    width: 1400,
+    height: 730,
     loading: "eager",
   },
   liveBadgeLabel: "Live in production",

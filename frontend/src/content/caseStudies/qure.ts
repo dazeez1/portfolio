@@ -28,8 +28,7 @@ export const qure: CaseStudyContent = {
       timeline: "6+ months, 2026",
       stack: "Node.js · Express · Prisma · MongoDB",
       codeHref: qureProject.links.github,
-      // Live link stays hidden until the owner supplies the URL.
-      liveHref: undefined,
+      liveHref: qureProject.links.live,
     },
     screenshot: qureProject.screenshot,
   },
@@ -71,15 +70,15 @@ export const qure: CaseStudyContent = {
     images: [
       {
         image: {
-          src: "/images/qure-patient-queue-dashboard.png",
-          alt: "Qure patient queue dashboard screenshot",
+          src: "/images/qure-patient-queue-dashboard.webp",
+          alt: "Qure patient queue dashboard listing waiting patients and their queue positions",
         },
         label: "Patient queue dashboard",
       },
       {
         image: {
-          src: "/images/qure-waiting-room-management.png",
-          alt: "Qure waiting room management screenshot",
+          src: "/images/qure-waiting-room-management.webp",
+          alt: "Qure waiting room management view showing rooms, capacity, and assigned patients",
         },
         label: "Waiting room management",
       },

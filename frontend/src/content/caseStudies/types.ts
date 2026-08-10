@@ -6,6 +6,14 @@ export interface CaseStudyImage {
   alt: string;
   width?: number;
   height?: number;
+  /**
+   * "contain" letterboxes the whole image instead of cropping it to fill the
+   * frame. Use it for anything that loses meaning when cropped — architecture
+   * diagrams and tall portrait screenshots. Defaults to "cover".
+   */
+  fit?: "cover" | "contain";
+  /** Overrides the frame's aspect box, e.g. "aspect-[3/4]" for a portrait mobile shot. */
+  aspect?: string;
 }
 
 export interface CaseStudyMetaBar {
