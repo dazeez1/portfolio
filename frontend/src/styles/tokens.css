@@ -52,13 +52,16 @@
 
 /*
  * CLAUDE.md Section 1 dark table redefines bg, surface, surface-alt,
- * text (→ ink), text-secondary, border, accent, and text-muted. The
- * remaining tokens (accent-hover, accent-text, tint, tint-border,
- * border-strong, success, warning, error) have no dark-specific hex in
- * that table, and Section 1 rule 7 forbids introducing hex values that
- * aren't in the file — so those tokens intentionally carry their
- * light-mode value into dark mode unchanged until the doc is updated
- * with real dark values for them.
+ * text (→ ink), text-secondary, text-muted, border, accent, accent-text,
+ * tint, and tint-border.
+ *
+ * Four tokens still have no dark-specific hex there and so carry their
+ * light-mode value into dark mode: accent-hover, border-strong, success,
+ * warning, and error. None of them currently renders failing text in dark
+ * mode, but all five measure below 4.5:1 on dark surfaces and will fail the
+ * moment they do (see Roadmap.md). Section 1 rule 7 forbids inventing hex
+ * values that aren't in the doc, so they stay inherited until the owner
+ * approves real dark values.
  */
 [data-theme="dark"] {
   --bg: #191613;
@@ -75,6 +78,25 @@
   --text-muted: #968f81;
   --border: #33302b;
   --accent: #e8825f;
+  /*
+   * accent-text exists only because the light-mode accent (#d95d39) fails
+   * contrast for text below 18px. Dark mode already lightens the accent to
+   * #e8825f, which clears 4.5:1 on every dark surface (6.68 bg / 6.03
+   * surface / 5.51 surface-alt), so the workaround is unnecessary here and
+   * the two collapse into one value. Inheriting the light #b04525 was the
+   * bug: it measured 3.19 / 2.88 / 2.63:1.
+   */
+  --accent-text: var(--accent);
+  /*
+   * The light tint is a pale terracotta wash. Inherited into dark mode it
+   * stayed pale, so dark text-secondary landed on it at 2.17:1. This is the
+   * same wash rebuilt dark: same hue, sitting just above surface-alt, and
+   * every dark foreground clears 4.5:1 on it (ink 12.51, text-secondary
+   * 5.68, accent-text 5.50, text-muted 4.62).
+   */
+  --tint: #31251f;
+  /* Keeps the light pair's subtle 1.2-1.4:1 edge against its own tint. */
+  --tint-border: #483a32;
 }
 
 /*

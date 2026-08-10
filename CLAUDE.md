@@ -58,10 +58,25 @@ Light mode is the **default** theme. Dark mode is a user toggle, never the defau
 | `text`           | `#F0EBE3`                                                             |
 | `text-secondary` | `#A89F91`                                                             |
 | `text-muted`     | `#968F81` (lightened — the light-mode muted fails contrast on dark)    |
+| `accent-text`    | `#E8825F` — **same as dark `accent`**, declared as `var(--accent)`     |
+| `tint`           | `#31251F` (the terracotta wash rebuilt dark, just above `surface-alt`) |
+| `tint-border`    | `#483A32` (subtle edge on the dark `tint`, matching the light pair)    |
 | `border`         | `#33302B`                                                             |
 | `accent`         | `#E8825F` (brightened — light-mode terracotta fails contrast on dark) |
 
 Primary buttons invert in dark mode: `#F0EBE3` fill, `#191613` text.
+
+**Tokens with no dark value — they inherit light mode, and all five measure below 4.5:1 on dark surfaces.** None currently renders failing text in dark mode, so none is a live violation; each becomes one the first time it is used for text there. Any token added to the light table needs a deliberate decision here, not silence:
+
+| Token           | Light hex | Worst ratio on a dark surface | Where it would bite               |
+| --------------- | --------- | ----------------------------- | --------------------------------- |
+| `accent-hover`  | `#C24E2C` | 3.13:1                        | accent button hover in dark mode  |
+| `success`       | `#4F7942` | 2.93:1                        | form success text                 |
+| `warning`       | `#C2790F` | 4.27:1                        | warning text                      |
+| `error`         | `#A63B2A` | 2.32:1                        | form validation errors            |
+| `border-strong` | `#D8D0C2` | n/a (border, not text)        | input borders read too light      |
+
+`focus`, `button-primary-bg`, and `button-primary-text` need no dark value — they are `var()` aliases and follow `accent`, `ink`, and `bg` automatically. The three brand icon colors are external and theme-independent by design.
 
 ### Brand icon colors (Footer social icons, hover only)
 
@@ -184,7 +199,16 @@ This site never claims what isn't true:
 
 ## 9. Accessibility — every page
 
-- WCAG 2.1 AA contrast (the token system already passes if the color rules are followed).
+- WCAG 2.1 AA contrast. The token system passes in **both** themes only because each theme has its own values — see the dark table in Section 1 and the list of tokens that still inherit light mode.
+
+### Contrast must be verified with a two-theme axe sweep
+
+**Lighthouse only tests light mode.** An Accessibility score of 100 says nothing about dark mode, and it is not evidence that a page passes. Verify contrast by running axe over every route in **both** themes (toggle `data-theme="dark"` on `<html>`, scroll the full page so lazy content mounts, then run axe).
+
+This is not hypothetical. Measured on this site: Lighthouse reported Accessibility **100** on `/seo`, `/about`, and `/portfolio` while a two-theme axe sweep found **44 dark-mode contrast violations** across 12 routes — `accent-text` had no dark value and inherited the light `#B04525` onto dark backgrounds at 2.63–3.19:1. Lighthouse could not see any of it.
+
+A token that exists in the light block and not the dark block is a latent contrast bug, whatever Lighthouse reports.
+
 - Full keyboard operability: nav dropdown, accordions, copy buttons, form, dismissible chip.
 - Visible focus ring (2px accent) on all interactive elements.
 - Real `<label>` elements on form fields (never placeholder-only). Errors programmatically associated with fields.
