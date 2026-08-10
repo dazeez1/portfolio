@@ -68,12 +68,12 @@ Build order is sequential — a phase starts only when the previous one is appro
 - [ ] Real light-mode screenshots: Sangira (dashboard, listing flow, PIN confirmation) and Qure (staff dashboard, queue mgmt, waiting areas, analytics)
 - [x] Qure live demo URL (confirmed: qurequeue.com)
 - [ ] Professional photo for About
-- [ ] Resume PDF matching site content
+- [x] Resume PDF — supplied by owner, at frontend/public/resume.pdf (2 pages, serves application/pdf)
 - [ ] SEO proof screenshots from past project (Search Console + analytics)
 - [ ] Vephla training year for the About timeline
 - [ ] About bio paragraphs (2 placeholder paragraphs currently in content/about.ts, marked for replacement)
 - [x] Referral fixed-reward amount ($) for Starter tier — confirmed $20 (see content/referrals.ts)
-- [ ] Real LinkedIn and Instagram profile URLs (Footer + Contact page currently link to `#` for both)
+- [x] Real LinkedIn and Instagram profile URLs — supplied by owner, now set once in content/social.ts (Footer + Contact both read from it)
 - [x] Privacy Policy text — written from a live audit of the deployed site (cookies, storage, third-party hosts, Resend payload), not a template
 - [x] Terms of Service text
 - [ ] Confirm Contact page budget-range select options — currently derived from the approved package prices (Section 4), not owner-specified; see content/contact.ts
