@@ -26,7 +26,7 @@ export const privacy: LegalDocument = {
         },
         {
           kind: "paragraph",
-          text: "It covers this website only. It does not extend to third-party sites linked from the portfolio — those have their own policies, and visiting them is outside my control.",
+          text: "It covers this website only. It does not extend to third-party sites linked from the portfolio, those have their own policies, and visiting them is outside my control.",
         },
       ],
     },
@@ -39,7 +39,7 @@ export const privacy: LegalDocument = {
           items: [
             {
               label: "Contact form.",
-              text: "Your name, your email address, and whatever you write in the message field. If you arrived through a pre-filled link — for example from a pricing card — the request type and the package name come through with it.",
+              text: "Your name, your email address, and whatever you write in the message field. If you arrived through a pre-filled link for example from a pricing card the request type and the package name come through with it.",
             },
             {
               label: "Booking a call.",
@@ -92,7 +92,7 @@ export const privacy: LegalDocument = {
             },
             {
               label: "Calendly.",
-              text: "If — and only if — you open the booking window, Calendly sets two cookies on its own domain, calendly.com: \"__cf_bm\" and \"_cfuvid\". Both come from its Cloudflare bot protection. They are not set on this site, and they do not appear unless you open the booking window.",
+              text: "If, and only if, you open the booking window, Calendly sets two cookies on its own domain, calendly.com: \"__cf_bm\" and \"_cfuvid\". Both come from its Cloudflare bot protection. They are not set on this site, and they do not appear unless you open the booking window.",
             },
           ],
         },
@@ -143,7 +143,7 @@ export const privacy: LegalDocument = {
       body: [
         {
           kind: "paragraph",
-          text: "Contact form submissions arrive as email and stay in my inbox. I keep them for as long as they are useful — an ongoing conversation, a project record, a quote I may need to refer back to. I am not running a separate database of enquiries, so there is no retention schedule beyond that to describe honestly.",
+          text: "Contact form submissions arrive as email and stay in my inbox. I keep them for as long as they are useful, an ongoing conversation, a project record, a quote I may need to refer back to. I am not running a separate database of enquiries, so there is no retention schedule beyond that to describe honestly.",
         },
         {
           kind: "paragraph",

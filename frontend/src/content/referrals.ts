@@ -121,12 +121,12 @@ export const benefits: Benefit[] = [
     Icon: WalletIcon,
     title: "Easy money",
     description:
-      "Earn without doing any work — just connect people who need services.",
+      "Earn without doing any work, just connect people who need services.",
   },
   {
     Icon: InfinityIcon,
     title: "No limits",
-    description: "Refer as many clients as you want — every one counts.",
+    description: "Refer as many clients as you want, every one counts.",
   },
   {
     Icon: NetworkIcon,
@@ -162,7 +162,7 @@ export const faqItems = [
   {
     question: "Is there a limit to how many people I can refer?",
     answer:
-      "There's no cap. Refer as many people as you like — each completed project earns its own commission.",
+      "There's no cap. Refer as many people as you like, each completed project earns its own commission.",
   },
   {
     question: "What if the client doesn't mention my name?",

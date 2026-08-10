@@ -92,7 +92,7 @@ export const terms: LegalDocument = {
         },
         {
           kind: "paragraph",
-          text: "If an invoice is overdue, I may suspend work, support, maintenance, deployments, and access to staging or production environments until the balance is cleared. Suspension is not termination — work resumes once payment is received.",
+          text: "If an invoice is overdue, I may suspend work, support, maintenance, deployments, and access to staging or production environments until the balance is cleared. Suspension is not termination, work resumes once payment is received.",
         },
       ],
     },
@@ -144,7 +144,7 @@ export const terms: LegalDocument = {
       body: [
         {
           kind: "paragraph",
-          text: "Unless you ask otherwise in writing, I may show completed work in my portfolio and in professional contexts — screenshots, your name or company name, and a description of what was built.",
+          text: "Unless you ask otherwise in writing, I may show completed work in my portfolio and in professional contexts, screenshots, your name or company name, and a description of what was built.",
         },
         {
           kind: "paragraph",
@@ -162,7 +162,7 @@ export const terms: LegalDocument = {
         },
         {
           kind: "paragraph",
-          text: "Included maintenance covers fixes and small adjustments to delivered work — it is not open-ended free development, and new features are quoted separately.",
+          text: "Included maintenance covers fixes and small adjustments to delivered work, it is not open-ended free development, and new features are quoted separately.",
         },
       ],
     },
@@ -176,7 +176,7 @@ export const terms: LegalDocument = {
         },
         {
           kind: "paragraph",
-          text: "I cannot guarantee specific business outcomes — search rankings, traffic, revenue, or conversions — because these depend on factors outside the code.",
+          text: "I cannot guarantee specific business outcomes such as search rankings, traffic, revenue, or conversions, because these depend on factors outside the code.",
         },
         {
           kind: "paragraph",
