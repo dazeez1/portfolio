@@ -114,6 +114,13 @@ function ThemePanel({ theme }: { theme: "light" | "dark" }) {
                 Hover to see the lift and shadow.
               </p>
             </Card>
+            <Card tone="alt">
+              <p className="font-serif text-lg">tone="alt"</p>
+              <p className="mt-2 text-sm text-text-secondary">
+                surface-alt background, for a card sitting on a `surface`
+                section — used by the legal pages' "At a glance" summary.
+              </p>
+            </Card>
           </div>
         </section>
 

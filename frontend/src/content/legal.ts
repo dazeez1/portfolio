@@ -25,6 +25,16 @@ export interface LegalSection {
   body: LegalBlock[];
 }
 
+/**
+ * Optional orientation summary rendered in a card above section 1 — the
+ * headline terms at a glance. The full sections remain authoritative.
+ */
+export interface LegalSummary {
+  label: string;
+  items: { label: string; text: string }[];
+  footnote: string;
+}
+
 export interface LegalDocument {
   metaTitle: string;
   metaDescription: string;
@@ -32,5 +42,7 @@ export interface LegalDocument {
   title: string;
   lastUpdated: string;
   tocLabel: string;
+  /** Omitted on documents that do not need a summary (e.g. /privacy). */
+  summary?: LegalSummary;
   sections: LegalSection[];
 }
