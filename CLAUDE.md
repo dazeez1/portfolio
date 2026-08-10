@@ -62,21 +62,20 @@ Light mode is the **default** theme. Dark mode is a user toggle, never the defau
 | `tint`           | `#31251F` (the terracotta wash rebuilt dark, just above `surface-alt`) |
 | `tint-border`    | `#483A32` (subtle edge on the dark `tint`, matching the light pair)    |
 | `border`         | `#33302B`                                                             |
+| `border-strong`  | `#81786A` (borders/controls only — 3:1 per 1.4.11, see note below)     |
 | `accent`         | `#E8825F` (brightened — light-mode terracotta fails contrast on dark) |
+| `accent-hover`   | `#E3653B` (8 lightness points under `accent`, the same 1.26:1 step the light pair has) |
+| `success`        | `#669D55`                                                             |
+| `warning`        | `#CB7E10`                                                             |
+| `error`          | `#D77363`                                                             |
 
 Primary buttons invert in dark mode: `#F0EBE3` fill, `#191613` text.
 
-**Tokens with no dark value — they inherit light mode, and all five measure below 4.5:1 on dark surfaces.** None currently renders failing text in dark mode, so none is a live violation; each becomes one the first time it is used for text there. Any token added to the light table needs a deliberate decision here, not silence:
+**Every token in the light table now has a dark counterpart.** The only exceptions are deliberate: `focus`, `button-primary-bg`, and `button-primary-text` are `var()` aliases that follow `accent`, `ink`, and `bg` automatically, and the three brand icon colors are external and theme-independent by design. **A token defined only in the light block is a latent contrast bug** — if you add one to `:root`, add its dark value here in the same change.
 
-| Token           | Light hex | Worst ratio on a dark surface | Where it would bite               |
-| --------------- | --------- | ----------------------------- | --------------------------------- |
-| `accent-hover`  | `#C24E2C` | 3.13:1                        | accent button hover in dark mode  |
-| `success`       | `#4F7942` | 2.93:1                        | form success text                 |
-| `warning`       | `#C2790F` | 4.27:1                        | warning text                      |
-| `error`         | `#A63B2A` | 2.32:1                        | form validation errors            |
-| `border-strong` | `#D8D0C2` | n/a (border, not text)        | input borders read too light      |
+The binding surface for light-on-dark text is `tint` (`#31251F`), a hair lighter than `surface-alt` — measure dark text values against all four dark surfaces, not just `bg`.
 
-`focus`, `button-primary-bg`, and `button-primary-text` need no dark value — they are `var()` aliases and follow `accent`, `ink`, and `bg` automatically. The three brand icon colors are external and theme-independent by design.
+**Which threshold applies to which token.** WCAG 1.4.3 (4.5:1) governs text; 1.4.11 (3:1) governs UI-component boundaries and graphics. `border-strong` is never text — it draws input borders, pagination and carousel controls, the BrowserFrame dots and the decorative 404 numeral — so 3:1 is the correct bar for it and `#81786A` clears it on all four dark surfaces (worst 3.41:1). `error`, `success`, and `warning` do carry text, so all three clear 4.5:1. `accent-hover` is only ever a fill, so what is measured is the button label on it (5.31:1).
 
 ### Brand icon colors (Footer social icons, hover only)
 
@@ -93,11 +92,12 @@ Not part of the theme system — these don't swap between light/dark, and don't 
 
 1. **The dark ink button is the default primary.** The terracotta accent button appears **at most once per page** — the single highest-value CTA (usually "Book a call" / "Book a discovery call").
 2. **`#D95D39` never carries text below 18px.** Small accent text always uses `#B04525` (passes WCAG AA on ivory).
-3. **The accent appears in roughly five places per page, no more.** Neutral base + dark text does 95% of the work; the accent does 5% loudly. When everything is bold, nothing stands out.
-4. The tint (`#F7E7DF`) is how terracotta shows up quietly — quotes, chips, availability badge, selected/pre-filled states.
-5. Form validation uses `error` red, never the accent.
-6. Implement all tokens as CSS variables / Tailwind theme extensions so dark mode is a token swap, not a rewrite.
-7. **Never take colors from Figma, Stitch exports, or screenshots.** Design files are layout references; this table is the only color source. Any hex value in code must exist in this file.
+3. **The accent *fill* carries large text only.** `bg` on `accent` measures **3.52:1** — it can never satisfy 1.4.3's 4.5:1 for normal text, but it does satisfy the **3:1 large-text** threshold. So the `accent` button variant locks its label to **1.25rem/700** (20px bold = 15pt bold), and the accent fill must never carry a smaller or lighter label. Note the unit: WCAG large-scale text means **≥18pt (24px) regular, or ≥14pt bold (18.67px bold)** — an 18**px** regular label is only 13.5pt and still needs 4.5:1, so 18px alone does not fix this. Enforced in `Button.tsx`'s `accent` variant; shrinking that label re-breaks contrast. If a small accent-colored call to action is ever needed, use accent *text* on a neutral fill, not the accent fill.
+4. **The accent appears in roughly five places per page, no more.** Neutral base + dark text does 95% of the work; the accent does 5% loudly. When everything is bold, nothing stands out.
+5. The tint (`#F7E7DF`) is how terracotta shows up quietly — quotes, chips, availability badge, selected/pre-filled states.
+6. Form validation uses `error` red, never the accent.
+7. Implement all tokens as CSS variables / Tailwind theme extensions so dark mode is a token swap, not a rewrite.
+8. **Never take colors from Figma, Stitch exports, or screenshots.** Design files are layout references; this table is the only color source. Any hex value in code must exist in this file.
 
 ---
 

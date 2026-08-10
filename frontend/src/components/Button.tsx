@@ -17,17 +17,30 @@ export type ButtonVariant =
   | "inverted"
   | "invertedOutline";
 
+/*
+ * Type size lives on each variant, not here. `accent` needs a larger, bolder
+ * label than the rest (see below) and a variant cannot reliably override a
+ * base `text-sm` — same-specificity utilities are resolved by generated
+ * stylesheet order, not class-attribute order.
+ */
 const baseButtonClasses =
-  "inline-flex shrink-0 items-center justify-center gap-2 whitespace-nowrap rounded-md px-4 py-2 font-sans text-sm font-medium transition-colors disabled:pointer-events-none disabled:opacity-50";
+  "inline-flex shrink-0 items-center justify-center gap-2 whitespace-nowrap rounded-md transition-colors disabled:pointer-events-none disabled:opacity-50";
+
+const defaultType = "px-4 py-2 font-sans text-sm font-medium";
 
 const variantClasses: Record<ButtonVariant, string> = {
-  primary: "bg-button-primary-bg text-button-primary-text hover:opacity-90",
-  accent: "bg-accent text-button-primary-text hover:bg-accent-hover",
-  secondary:
-    "border border-border-strong bg-transparent text-ink hover:bg-surface-alt",
-  inverted: "bg-button-primary-text text-button-primary-bg hover:opacity-90",
-  invertedOutline:
-    "border border-button-primary-text bg-transparent text-button-primary-text hover:opacity-80",
+  primary: `${defaultType} bg-button-primary-bg text-button-primary-text hover:opacity-90`,
+  /*
+   * The accent fill can only carry LARGE text. `bg` on `accent` is 3.52:1,
+   * which never reaches 1.4.3's 4.5:1 for normal text but does satisfy the
+   * 3:1 large-text threshold — so the label is locked to 1.25rem/700 here
+   * (20px = 15pt bold, clearing WCAG's 14pt-bold floor). Shrinking this
+   * label re-breaks contrast; see CLAUDE.md Section 1.
+   */
+  accent: "px-5 py-2.5 font-sans text-xl font-bold bg-accent text-button-primary-text hover:bg-accent-hover",
+  secondary: `${defaultType} border border-border-strong bg-transparent text-ink hover:bg-surface-alt`,
+  inverted: `${defaultType} bg-button-primary-text text-button-primary-bg hover:opacity-90`,
+  invertedOutline: `${defaultType} border border-button-primary-text bg-transparent text-button-primary-text hover:opacity-80`,
 };
 
 export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {

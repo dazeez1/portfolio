@@ -63,10 +63,11 @@ Build order is sequential — a phase starts only when the previous one is appro
 - [ ] Announce on LinkedIn / X / WhatsApp
 - [ ] Remove `/dev/components` route and the `/` → `/dev/components` redirect once Home exists
 
-## Contrast — outstanding owner decisions
+## Contrast
 
-- [ ] **Accent button text fails AA and cannot be fixed without a brand decision.** `#FAF7F2` on `#D95D39` is **3.52:1**, against 4.5:1 for normal text. One instance renders today (`/services`), and it is unreachable without changing either the terracotta itself or the button's text colour. Options: darken the accent fill to ~`#B04525` (loses the bright terracotta), use `ink` text on the accent fill (4.9:1, changes the button's character), or restrict the accent button to text ≥18px/14px-bold where 3:1 applies. Owner's call — nothing changed yet.
-- [ ] **Five tokens still have no dark-mode value** and measure below 4.5:1 on dark surfaces: `accent-hover` 3.13:1, `success` 2.93:1, `warning` 4.27:1, `error` 2.32:1, plus `border-strong` (a border, so not a text ratio, but it reads far too light on dark). None renders failing text in dark mode today, so none is a live axe violation — each becomes one the first time it is used for text there, most likely `error` and `success` on form validation states. Measured candidates that clear 4.6:1 on all three dark surfaces, if wanted: `accent-hover` `#D97356`, `success` `#669D55`, `warning` `#CB7E10`, `error` `#D77363`, `border-strong` ~`#766E60` (3.2:1 on surface, meets 1.4.11 for UI components). Not applied — Section 1 rule 7 needs these in CLAUDE.md first, and they are design choices.
+- [x] **Dark-mode token gap closed.** Every token in the light block now has a dark counterpart (or is a documented `var()` alias). Two-theme axe sweep over all 13 routes, including `/contact` with validation errors triggered: **0 violations**.
+- [x] **Accent button resolved by constraining usage, not by changing the brand colour.** `#FAF7F2` on `#D95D39` is 3.52:1, which clears the 3:1 large-text threshold. The `accent` variant now locks its label to 1.25rem/700 (20px bold = 15pt bold, above WCAG's 14pt-bold floor). `/services` Accessibility went 96 → 100.
+- [ ] **Light-mode `border-strong` is 1.53:1 against a white input — it does not meet WCAG 1.4.11's 3:1 for UI-component boundaries.** Found while giving the token a dark value: dark mode now sits at 3.74:1, so the two themes are no longer symmetrical and light mode is the non-compliant one. Not changed, because the brief was explicit that no light-mode value should move, and darkening `#D8D0C2` affects every input, pagination control, carousel dot, BrowserFrame dot and the 404 numeral. axe does not catch this — its `color-contrast` rule only tests text, so this will never show up in a sweep or a Lighthouse score. Roughly `#B3A896` would reach 3:1 on white. Owner's call.
 
 ## Content gaps (owner tasks — not launch-blocking to start, blocking to finish)
 

@@ -51,17 +51,15 @@
 }
 
 /*
- * CLAUDE.md Section 1 dark table redefines bg, surface, surface-alt,
- * text (→ ink), text-secondary, text-muted, border, accent, accent-text,
- * tint, and tint-border.
+ * Every token in the light block now has a dark counterpart here, except
+ * focus / button-primary-bg / button-primary-text (var() aliases that follow
+ * accent / ink / bg automatically) and the three external brand colors.
+ * Nothing is silently inherited any more — if you add a token to :root, add
+ * it here too, and to the Section 1 dark table.
  *
- * Four tokens still have no dark-specific hex there and so carry their
- * light-mode value into dark mode: accent-hover, border-strong, success,
- * warning, and error. None of them currently renders failing text in dark
- * mode, but all five measure below 4.5:1 on dark surfaces and will fail the
- * moment they do (see Roadmap.md). Section 1 rule 7 forbids inventing hex
- * values that aren't in the doc, so they stay inherited until the owner
- * approves real dark values.
+ * The binding surface for light-on-dark text is `tint` (#31251f, luminance
+ * 0.0208), a hair lighter than surface-alt — so every text value below is
+ * measured against all four dark surfaces, not just bg.
  */
 [data-theme="dark"] {
   --bg: #191613;
@@ -97,6 +95,30 @@
   --tint: #31251f;
   /* Keeps the light pair's subtle 1.2-1.4:1 edge against its own tint. */
   --tint-border: #483a32;
+  /*
+   * accent-hover is only ever a fill (Button's `accent` variant:
+   * hover:bg-accent-hover), so what matters is the button label on it —
+   * button-primary-text, which is var(--bg) = #191613 in dark mode. That
+   * reads 5.31:1 here. Lightness sits 8 points under the dark accent, giving
+   * a 1.26:1 step — the exact step the light pair has (#d95d39 → #c24e2c).
+   */
+  --accent-hover: #e3653b;
+  /*
+   * error/success/warning carry text (field errors are 12px), so all three
+   * clear 4.5:1 against every dark surface including tint. Hues preserved
+   * from their light values: error 8°, success 106°, warning 36°→35°.
+   */
+  --success: #669d55;
+  --warning: #cb7e10;
+  --error: #d77363;
+  /*
+   * border-strong is never text. It draws input borders, pagination and
+   * carousel controls, the BrowserFrame dots, and the decorative 404
+   * numeral — all UI components and graphics, so the governing threshold is
+   * WCAG 1.4.11 non-text contrast at 3:1, not 1.4.3's 4.5:1. This clears
+   * 3:1 on all four dark surfaces (worst 3.41:1 on tint).
+   */
+  --border-strong: #81786a;
 }
 
 /*
