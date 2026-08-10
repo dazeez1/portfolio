@@ -95,8 +95,8 @@ export const projects: Project[] = [
     tags: ["Healthcare", "SaaS"],
     stack: ["Node.js", "Express", "Prisma", "MongoDB"],
     screenshot: {
-      src: "/images/qure-patient-queue-dashboard.webp",
-      alt: "Qure staff dashboard showing the live patient queue",
+      src: "/images/qure-patient-portal.webp",
+      alt: "Qure patient portal showing a live queue position with estimated wait time and upcoming appointments",
       width: 1400,
       height: 779,
     },
