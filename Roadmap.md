@@ -65,7 +65,8 @@ Build order is sequential — a phase starts only when the previous one is appro
 
 ## Content gaps (owner tasks — not launch-blocking to start, blocking to finish)
 
-- [ ] Real light-mode screenshots: Sangira (dashboard, listing flow, PIN confirmation) and Qure (staff dashboard, queue mgmt, waiting areas, analytics)
+- [ ] **Sangira datastore conflict — owner decision needed.** The architecture diagram's data layer shows **PostgreSQL** ("Primary relational DB, UUID keys · ACID compliant") + **Redis Cache**, but the case study copy says **MongoDB** in three places: the meta bar (`stack: "React · Node · MongoDB · Socket.io"`), the build paragraph ("a modern MERN stack"), and the challenge paragraph ("a locking mechanism in MongoDB with optimistic concurrency control"). Both cannot be true and a technical reader will spot it. Confirm which is real, then fix the other. Per §4 no copy was rewritten and the diagram was not edited — the diagram's alt text summarises the layers without naming the datastore so the page does not assert a database that may be wrong.
+- [ ] Real light-mode screenshots: Sangira (dashboard, listing flow, PIN confirmation) and Qure (staff dashboard, queue mgmt, waiting areas, analytics) — listing flow, PIN confirmation, architecture diagram, and both Qure screenshots now supplied; Sangira dashboard and Qure analytics still outstanding
 - [x] Qure live demo URL (confirmed: qurequeue.com)
 - [ ] Professional photo for About
 - [x] Resume PDF — supplied by owner, at frontend/public/resume.pdf (2 pages, serves application/pdf)
