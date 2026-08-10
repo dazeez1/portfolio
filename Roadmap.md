@@ -42,7 +42,7 @@ Build order is sequential — a phase starts only when the previous one is appro
 - [x] Referrals page (Resources)
 - [x] 404
 - [x] Privacy (shared `LegalLayout` template built — sticky TOC, mobile accordion, block-based content model)
-- [ ] Terms (reuses `LegalLayout` + the `LegalDocument` shape in content/legal.ts)
+- [x] Terms (reuses `LegalLayout` + the `LegalDocument` shape in content/legal.ts)
 
 ## Phase 3 — Launch pass
 
@@ -75,7 +75,7 @@ Build order is sequential — a phase starts only when the previous one is appro
 - [x] Referral fixed-reward amount ($) for Starter tier — confirmed $20 (see content/referrals.ts)
 - [ ] Real LinkedIn and Instagram profile URLs (Footer + Contact page currently link to `#` for both)
 - [x] Privacy Policy text — written from a live audit of the deployed site (cookies, storage, third-party hosts, Resend payload), not a template
-- [ ] Terms of Service text
+- [x] Terms of Service text
 - [ ] Confirm Contact page budget-range select options — currently derived from the approved package prices (Section 4), not owner-specified; see content/contact.ts
 - [ ] Contact FAQ answer copy (5 questions currently show a placeholder string — see content/contact.ts)
 - [ ] Confirm Calendly URL is correct: https://calendly.com/azeezdamilare31/30mins (owner-supplied, not independently verified)

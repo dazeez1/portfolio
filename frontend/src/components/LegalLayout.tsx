@@ -2,6 +2,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { Helmet } from "react-helmet-async";
 import { Link } from "react-router";
 import { Accordion } from "./Accordion";
+import { Card } from "./Card";
 import { Container } from "./Container";
 import { Footer } from "./Footer";
 import { Nav } from "./Nav";
@@ -249,6 +250,32 @@ export function LegalLayout({ document: doc }: { document: LegalDocument }) {
             <p className="mt-3 font-sans text-sm text-text-muted">
               {doc.lastUpdated}
             </p>
+
+            {doc.summary && (
+              <>
+                <Card tone="alt" className="mt-8">
+                  <p className="font-sans text-xs uppercase tracking-wide text-text-muted">
+                    {doc.summary.label}
+                  </p>
+                  <ul className="mt-4 flex flex-col gap-2">
+                    {doc.summary.items.map((item) => (
+                      <li
+                        key={item.label}
+                        className="font-sans text-base leading-relaxed text-text-secondary"
+                      >
+                        <strong className="font-semibold text-ink">
+                          {item.label}
+                        </strong>{" "}
+                        — {item.text}
+                      </li>
+                    ))}
+                  </ul>
+                </Card>
+                <p className="mt-3 font-sans text-sm text-text-muted">
+                  {doc.summary.footnote}
+                </p>
+              </>
+            )}
 
             {doc.sections.map((section, i) => (
               <section

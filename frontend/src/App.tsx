@@ -12,6 +12,7 @@ import Referrals from "./pages/Referrals";
 import Sangira from "./pages/Sangira";
 import Seo from "./pages/Seo";
 import Services from "./pages/Services";
+import Terms from "./pages/Terms";
 import ThankYou from "./pages/ThankYou";
 
 function App() {
@@ -28,6 +29,7 @@ function App() {
         <Route path="/seo" element={<Seo />} />
         <Route path="/referrals" element={<Referrals />} />
         <Route path="/privacy" element={<Privacy />} />
+        <Route path="/terms" element={<Terms />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/thank-you" element={<ThankYou />} />
         <Route path="/dev/components" element={<DevComponents />} />
