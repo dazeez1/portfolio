@@ -42,7 +42,8 @@ Light mode is the **default** theme. Dark mode is a user toggle, never the defau
 | `tint`           | `#F7E7DF` | Quote backgrounds, chips, badges, selected states                         |
 | `tint-border`    | `#EDD5C8` | Border on tinted elements                                                 |
 | `border`         | `#EAE4DA` | Default borders, dividers                                                 |
-| `border-strong`  | `#D8D0C2` | Input borders                                                             |
+| `border-strong`  | `#888176` | **Functional boundaries** — inputs, secondary button, filter pills, pagination and carousel controls, timeline nodes, dashed cards (3:1 per 1.4.11) |
+| `border-decorative` | `#D8D0C2` | **Ornament only** — BrowserFrame dots, 404 ghost numeral. No threshold |
 | `focus`          | `#D95D39` | 2px focus ring on all interactive elements                                |
 | `success`        | `#4F7942` | Form success states                                                       |
 | `warning`        | `#C2790F` | Warnings                                                                  |
@@ -62,7 +63,8 @@ Light mode is the **default** theme. Dark mode is a user toggle, never the defau
 | `tint`           | `#31251F` (the terracotta wash rebuilt dark, just above `surface-alt`) |
 | `tint-border`    | `#483A32` (subtle edge on the dark `tint`, matching the light pair)    |
 | `border`         | `#33302B`                                                             |
-| `border-strong`  | `#81786A` (borders/controls only — 3:1 per 1.4.11, see note below)     |
+| `border-strong`  | `#81786A` (functional boundaries only — 3:1 per 1.4.11, see note below) |
+| `border-decorative` | `#3C3934` (ornament stays faint — 1.57:1 on dark `bg`, mirroring light) |
 | `accent`         | `#E8825F` (brightened — light-mode terracotta fails contrast on dark) |
 | `accent-hover`   | `#E3653B` (8 lightness points under `accent`, the same 1.26:1 step the light pair has) |
 | `success`        | `#669D55`                                                             |
@@ -75,7 +77,9 @@ Primary buttons invert in dark mode: `#F0EBE3` fill, `#191613` text.
 
 The binding surface for light-on-dark text is `tint` (`#31251F`), a hair lighter than `surface-alt` — measure dark text values against all four dark surfaces, not just `bg`.
 
-**Which threshold applies to which token.** WCAG 1.4.3 (4.5:1) governs text; 1.4.11 (3:1) governs UI-component boundaries and graphics. `border-strong` is never text — it draws input borders, pagination and carousel controls, the BrowserFrame dots and the decorative 404 numeral — so 3:1 is the correct bar for it and `#81786A` clears it on all four dark surfaces (worst 3.41:1). `error`, `success`, and `warning` do carry text, so all three clear 4.5:1. `accent-hover` is only ever a fill, so what is measured is the button label on it (5.31:1).
+**Which threshold applies to which token.** WCAG 1.4.3 (4.5:1) governs text; 1.4.11 (3:1) governs UI-component boundaries and graphics. `error`, `success`, and `warning` carry text, so all three clear 4.5:1. `accent-hover` is only ever a fill, so what is measured is the button label on it (5.31:1). `border-strong` is never text, so 3:1 is its bar — `#888176` clears it on all four light surfaces (worst 3.20:1 on `tint`) and `#81786A` on all four dark ones (worst 3.41:1).
+
+**Why `border-strong` and `border-decorative` are two tokens.** 1.4.11 applies to boundaries a user must perceive to *operate* something; it does not apply to pure ornament. Forcing one value to serve both broke the ornament: the 404 numeral is a 7–18rem watermark sitting directly behind the real heading and body copy, `aria-hidden` per Section 9, and at 3:1 it becomes a dark shape competing with the text on top of it. The BrowserFrame window dots have the same problem — they are quiet chrome and convey nothing. So functional boundaries darkened and ornament kept the old pale value. **When adding a border, pick by function:** does the user need to see it to operate a control? `border-strong`. Is it decoration? `border-decorative`. Note that the carousel dots are real `<button>`s, so they are functional despite looking ornamental.
 
 ### Brand icon colors (Footer social icons, hover only)
 
@@ -208,6 +212,14 @@ This site never claims what isn't true:
 This is not hypothetical. Measured on this site: Lighthouse reported Accessibility **100** on `/seo`, `/about`, and `/portfolio` while a two-theme axe sweep found **44 dark-mode contrast violations** across 12 routes — `accent-text` had no dark value and inherited the light `#B04525` onto dark backgrounds at 2.63–3.19:1. Lighthouse could not see any of it.
 
 A token that exists in the light block and not the dark block is a latent contrast bug, whatever Lighthouse reports.
+
+### axe's `color-contrast` rule tests TEXT ONLY
+
+Non-text contrast under **WCAG 1.4.11** — borders, icons, form-control boundaries, focus indicators, graphical objects — is **not covered by axe at all**, and not by Lighthouse either. A completely clean sweep says nothing about it. These must be checked **manually**: read the computed border/fill colour off the rendered element and measure it against the surface behind it, at the 3:1 threshold.
+
+Measured evidence: light-mode `border-strong` sat at **1.53:1** on a white input — every input on the site failed 1.4.11 — through multiple green axe sweeps and three Lighthouse runs reporting Accessibility 100. Nothing flagged it, because a border is not text. It was only found by measuring by hand.
+
+So the contrast checklist has two halves: a two-theme axe sweep for text, and a manual pass over borders, icons and control boundaries for 1.4.11.
 
 - Full keyboard operability: nav dropdown, accordions, copy buttons, form, dismissible chip.
 - Visible focus ring (2px accent) on all interactive elements.
