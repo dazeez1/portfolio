@@ -95,37 +95,58 @@ export interface ProofItem {
   title: string;
   caption: string;
   /**
-   * Real screenshots supplied by the owner. Neither file exists yet, so
-   * BrowserFrame renders its neutral empty state — no stand-in imagery is
-   * generated or sourced (CLAUDE.md Section 3: real screenshots only).
+   * Real screenshots supplied by the owner — the owner's own platforms, not
+   * client work. If a file is ever missing, BrowserFrame falls back to its
+   * neutral empty state rather than standing anything in for it
+   * (CLAUDE.md Section 3: real screenshots only).
    */
   screenshot: { src: string; alt: string };
   body: string;
 }
 
 export const proofSection = {
-  heading: "Real results from live projects",
+  heading: "Proof from my own platforms",
 };
 
 export const proofItems: ProofItem[] = [
   {
-    title: "Google Search Indexing",
-    caption: "Search Console coverage report",
+    title: "Qure — indexed and ranking",
+    caption: "Google search result for qurequeue.com",
     screenshot: {
-      src: "/images/seo-search-console.png",
-      alt: "Google Search Console coverage report for a client website",
+      src: "/images/seo-proof-qure.webp",
+      alt: "Google search results for qurequeue.com: Qure ranking first for its brand term with Login and Create Account sitelinks and a full meta description",
     },
-    body: "Client website successfully indexed with all pages showing valid status in Google Search Console.",
+    body: "Qure indexed and ranking first for its brand term, with sitelinks for login and registration and a correctly rendering meta description.",
   },
   {
-    title: "Vercel Analytics",
-    caption: "Real-time traffic insights",
+    title: "Sangira — indexed and ranking",
+    caption: "Google search result for gusangira.com",
     screenshot: {
-      src: "/images/seo-analytics.png",
-      alt: "Vercel Analytics dashboard showing client website traffic",
+      src: "/images/seo-proof-sangira.webp",
+      alt: "Google search results for gusangira.com: Sangira ranking with its homepage and terms page, and an AI overview citing the platform",
     },
-    body: "Client website traffic and performance metrics tracked through Vercel Analytics dashboard.",
+    body: "Sangira indexed with a clean title and description, multiple pages ranking, and the platform cited in Google's AI overview.",
   },
+  /*
+    Third proof card — reserved for Google Search Console and analytics data.
+    The owner expects to have enough history to show around October–November
+    2026 (2–3 months from 10 Aug 2026). It stays commented out until then:
+    nothing renders and no placeholder appears on the page, because an empty
+    frame would imply proof that does not exist yet (CLAUDE.md Section 4).
+
+    To ship it: uncomment, drop the screenshot in public/images as webp
+    (~1400px wide), and replace every field below with the real values.
+
+  {
+    title: "",
+    caption: "",
+    screenshot: {
+      src: "/images/seo-proof-search-console.webp",
+      alt: "",
+    },
+    body: "",
+  },
+  */
 ];
 
 export interface SeoPlan {

@@ -158,9 +158,9 @@ export default function Seo() {
                   </p>
                   <div className="mt-4">
                     {/*
-                      Real screenshots pending from the owner. BrowserFrame
-                      falls back to its neutral 16:10 placeholder on load
-                      failure, so nothing stands in for the real thing.
+                      BrowserFrame falls back to its neutral placeholder on
+                      load failure, so a missing file never stands in for the
+                      real thing.
                     */}
                     <BrowserFrame image={item.screenshot} />
                   </div>
