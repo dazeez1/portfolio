@@ -8,6 +8,7 @@ import {
   PhoneIcon,
   WhatsAppIcon,
 } from "../components/icons";
+import { contactSocials } from "./social";
 
 export interface TrustChip {
   Icon: ComponentType<IconProps>;
@@ -78,12 +79,8 @@ export const connectMethods: ConnectMethod[] = [
 
 export const socialLabel = "Find me on social media";
 
-// TODO: real LinkedIn/Instagram profile URLs — see Roadmap.md content gaps.
-export const socialLinks = [
-  { label: "GitHub", href: "https://github.com/dazeez1" },
-  { label: "LinkedIn", href: "#" },
-  { label: "Instagram", href: "#" },
-];
+// Re-exported from content/social.ts so these URLs live in exactly one place.
+export const socialLinks = contactSocials;
 
 export const afterYouWrite = {
   title: "What happens after you write",

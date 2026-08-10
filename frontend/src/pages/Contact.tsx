@@ -80,7 +80,7 @@ function ConnectMethodRow({
         <ButtonAnchor
           href={method.action.href}
           target="_blank"
-          rel="noreferrer"
+          rel="noopener noreferrer"
           variant="secondary"
           className="shrink-0"
         >
@@ -258,7 +258,7 @@ export default function Contact() {
                         key={social.label}
                         href={social.href}
                         target="_blank"
-                        rel="noreferrer"
+                        rel="noopener noreferrer"
                         variant="secondary"
                       >
                         <Icon className="h-4 w-4" aria-hidden="true" />

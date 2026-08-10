@@ -28,8 +28,7 @@ export const qure: CaseStudyContent = {
       timeline: "6+ months, 2026",
       stack: "Node.js · Express · Prisma · MongoDB",
       codeHref: qureProject.links.github,
-      // Live link stays hidden until the owner supplies the URL.
-      liveHref: undefined,
+      liveHref: qureProject.links.live,
     },
     screenshot: qureProject.screenshot,
   },

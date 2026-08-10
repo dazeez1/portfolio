@@ -175,7 +175,7 @@ export function CaseStudyLayout({ content }: { content: CaseStudyContent }) {
                     <a
                       href={hero.metaBar.codeHref}
                       target="_blank"
-                      rel="noreferrer"
+                      rel="noopener noreferrer"
                       className="inline-flex items-center gap-1.5 font-sans text-sm text-ink hover:text-accent-text"
                     >
                       <GithubIcon className="h-4 w-4" aria-hidden="true" />
@@ -186,7 +186,7 @@ export function CaseStudyLayout({ content }: { content: CaseStudyContent }) {
                     <a
                       href={hero.metaBar.liveHref}
                       target="_blank"
-                      rel="noreferrer"
+                      rel="noopener noreferrer"
                       className="inline-flex items-center gap-1.5 font-sans text-sm text-ink hover:text-accent-text"
                     >
                       <GlobeIcon className="h-4 w-4" aria-hidden="true" />

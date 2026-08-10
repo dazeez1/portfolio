@@ -19,7 +19,7 @@ export const hero = {
   headline: "Get found on Google.",
   subhead:
     "Technical SEO from someone who builds websites for a living, not just audits, but the fixes implemented in the code itself.",
-  primaryCta: { label: "Get a free SEO check", to: "/contact?package=seo-starter" },
+  primaryCta: { label: "Get a free SEO check", to: "/contact?package=seo-starter#get-in-touch" },
   secondaryCta: { label: "View pricing", to: "#pricing" },
 };
 
@@ -166,7 +166,7 @@ export const plans: SeoPlan[] = [
       "Basic meta tags optimization",
     ],
     ctaLabel: "Get started",
-    ctaHref: "/contact?package=seo-starter",
+    ctaHref: "/contact?package=seo-starter#get-in-touch",
   },
   {
     tier: "Growth",
@@ -183,7 +183,7 @@ export const plans: SeoPlan[] = [
       "Keyword research & mapping",
     ],
     ctaLabel: "Get started",
-    ctaHref: "/contact?package=seo-growth",
+    ctaHref: "/contact?package=seo-growth#get-in-touch",
     badge: "Most popular",
     emphasized: true,
   },
@@ -202,7 +202,7 @@ export const plans: SeoPlan[] = [
       "Competitor analysis",
     ],
     ctaLabel: "Get started",
-    ctaHref: "/contact?package=seo-premium",
+    ctaHref: "/contact?package=seo-premium#get-in-touch",
   },
 ];
 
@@ -210,7 +210,7 @@ export const ctaBand = {
   title: "Ready to rank higher?",
   subline:
     "Let's discuss your SEO needs and create a strategy that drives real results.",
-  primaryCta: { label: "Get a free SEO check", to: "/contact?package=seo-starter" },
+  primaryCta: { label: "Get a free SEO check", to: "/contact?package=seo-starter#get-in-touch" },
   secondaryCta: { label: "View all services", to: "/services" },
 };
 
