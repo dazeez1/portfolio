@@ -1,9 +1,16 @@
 import { useId, useState } from "react";
+import type { ReactNode } from "react";
 import { ChevronDownIcon } from "./icons";
 
 export interface AccordionItemData {
   question: string;
   answer: string;
+  /**
+   * Rich panel content, used instead of `answer` when present — e.g. the
+   * legal pages' collapsed table of contents, which is a list of links.
+   * FAQ usage keeps passing plain `answer` strings.
+   */
+  content?: ReactNode;
 }
 
 export interface AccordionProps {
@@ -53,7 +60,7 @@ export function Accordion({ items, defaultOpenIndex }: AccordionProps) {
                 aria-labelledby={triggerId}
                 className="px-5 pb-4 font-sans text-sm text-text-secondary"
               >
-                {item.answer}
+                {item.content ?? item.answer}
               </div>
             )}
           </div>

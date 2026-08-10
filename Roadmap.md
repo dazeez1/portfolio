@@ -41,7 +41,8 @@ Build order is sequential — a phase starts only when the previous one is appro
 - [x] SEO page (Resources)
 - [x] Referrals page (Resources)
 - [x] 404
-- [ ] Privacy · Terms (shared legal template)
+- [x] Privacy (shared `LegalLayout` template built — sticky TOC, mobile accordion, block-based content model)
+- [ ] Terms (reuses `LegalLayout` + the `LegalDocument` shape in content/legal.ts)
 
 ## Phase 3 — Launch pass
 
@@ -49,7 +50,7 @@ Build order is sequential — a phase starts only when the previous one is appro
 - [ ] Backfill the CLAUDE.md Section 13 SEO block onto pages built before it existed — Home, About, Portfolio, Contact, Thank You, 404, and both case studies currently have only title + description; they still need canonical, OG/Twitter tags, and (where a type fits) JSON-LD. `/services` is the reference implementation.
 - [ ] sitemap.xml + robots.txt; submit to Google Search Console
 - [ ] JSON-LD: Person (site-wide), BreadcrumbList (case studies)
-- [ ] Lighthouse ≥ 90 (mobile) on every page
+- [ ] Lighthouse ≥ 90 (mobile) on every page — SEO category applies to indexable pages only; `/privacy` and `/terms` are intentionally noindexed and exempt. See CLAUDE.md Section 13, "Lighthouse SEO gate".
 - [ ] **Owner decision — `text-muted` fails WCAG AA at 12px and 14px.** `#8A8377` on `bg`/`surface`/`surface-alt` measures 3.2–3.8:1, under the 4.5:1 AA minimum for normal-weight body text — at both `text-xs` and `text-sm`. This affects every small uppercase label/caption site-wide (10 files, incl. shared `SectionHeading`, `MetricCard`, `BrowserFrame`, and the Footer's Privacy/Terms links), so CLAUDE.md Section 9's "the token system already passes" is not currently accurate. Fix is a doc-level choice: darken `--text-muted` in CLAUDE.md Section 1 + tokens.css, or switch small labels to `text-secondary` (#5C554A, passes). Not changed unilaterally — Section 1 rule 7 forbids introducing hexes that aren't in the doc.
 - [ ] **Owner decision — accent button text contrast.** `#FAF7F2` on `accent` `#D95D39` measures 3.52:1 at 14px, under AA. Currently only used by the Services page's "Book a discovery call". `accent-hover` `#C24E2C` would pass (~4.6:1) but Section 1 designates `#D95D39` as the accent-button fill, so this needs a doc decision rather than a silent swap.
 - [ ] robots.txt is missing, which costs every page ~8 Lighthouse SEO points (Services scores 92 with it absent). Tracked alongside sitemap.xml above.
@@ -73,7 +74,8 @@ Build order is sequential — a phase starts only when the previous one is appro
 - [ ] About bio paragraphs (2 placeholder paragraphs currently in content/about.ts, marked for replacement)
 - [x] Referral fixed-reward amount ($) for Starter tier — confirmed $20 (see content/referrals.ts)
 - [ ] Real LinkedIn and Instagram profile URLs (Footer + Contact page currently link to `#` for both)
-- [ ] Privacy Policy + Terms text (template-based is fine)
+- [x] Privacy Policy text — written from a live audit of the deployed site (cookies, storage, third-party hosts, Resend payload), not a template
+- [ ] Terms of Service text
 - [ ] Confirm Contact page budget-range select options — currently derived from the approved package prices (Section 4), not owner-specified; see content/contact.ts
 - [ ] Contact FAQ answer copy (5 questions currently show a placeholder string — see content/contact.ts)
 - [ ] Confirm Calendly URL is correct: https://calendly.com/azeezdamilare31/30mins (owner-supplied, not independently verified)

@@ -226,7 +226,15 @@ Deploy from the first commit; ship page by page.
 
 ## 13. Definition of done — per page
 
-A page is done when: it matches the approved wireframe and this design system · it is responsive (mobile, tablet, desktop) · all links and buttons route correctly (including URL-param pre-fills) · it passes the accessibility checklist · Lighthouse ≥ 90 across the board · content comes from data files, not hard-coded JSX · it works on the deployed staging URL, not just localhost · **and it satisfies the SEO block below.**
+A page is done when: it matches the approved wireframe and this design system · it is responsive (mobile, tablet, desktop) · all links and buttons route correctly (including URL-param pre-fills) · it passes the accessibility checklist · Lighthouse ≥ 90 on Performance, Accessibility, and Best Practices, plus SEO where the page is indexable (see the exemption below) · content comes from data files, not hard-coded JSX · it works on the deployed staging URL, not just localhost · **and it satisfies the SEO block below.**
+
+### Lighthouse SEO gate — indexable pages only
+
+The **SEO ≥ 90 gate applies only to indexable pages.** Any page carrying `<meta name="robots" content="noindex">` is exempt, because Lighthouse's `is-crawlable` audit fails by design on a noindexed page and drags the whole SEO category down regardless of how well the page is built. The other three categories still apply in full.
+
+`/privacy` and `/terms` are **intentionally noindexed** — legal pages should not compete with real content in search results. Their SEO score is expected to be low and that is the correct outcome, not a defect. Measured on `/privacy`: Performance 95 · Accessibility 95 · Best Practices 100 · SEO 58, where removing the noindex tag alone scores 92.
+
+**Never remove a `noindex` tag to raise a Lighthouse score.**
 
 ### SEO block — standing requirement on every page
 
