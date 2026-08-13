@@ -34,10 +34,33 @@ const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 // simple on both ends.
 const GENERIC_FAILURE = { error: "message_failed" };
 
-// Resend's shared sandbox sender — works with zero domain setup. Switch to
-// a custom-domain sender (e.g. "Portfolio Contact <contact@azeezdamilare.com>")
-// once azeezdamilare.com is verified in Resend — see ROADMAP.md launch phase.
-const FROM_ADDRESS = "Portfolio Contact <onboarding@resend.dev>";
+// Resend's shared sandbox sender. Only a fallback now — the real sender comes
+// from CONTACT_FROM_EMAIL. Kept because a missing env var must degrade the
+// sender, never break the form: a silent contact-form failure is the worst
+// outcome on this site, so we would rather deliver from the sandbox address
+// and shout in the logs than 500 on the visitor.
+const SANDBOX_FROM = "Portfolio Contact <onboarding@resend.dev>";
+
+/**
+ * Sender address, read per-request so it picks up an env change on the next
+ * invocation rather than at cold start only.
+ *
+ * Set CONTACT_FROM_EMAIL in Vercel for BOTH Production and Preview, then
+ * redeploy — Vercel bakes env vars in at build time, so an existing build keeps
+ * the old value. The domain in it must be verified in Resend or Resend rejects
+ * the send with a 422.
+ */
+function resolveFromAddress(): string {
+  const configured = process.env.CONTACT_FROM_EMAIL?.trim();
+  if (configured) return configured;
+
+  console.warn(
+    "contact api: missing env var CONTACT_FROM_EMAIL — falling back to the " +
+      "Resend sandbox sender (onboarding@resend.dev). Set CONTACT_FROM_EMAIL " +
+      "in Vercel for Production and Preview, then redeploy.",
+  );
+  return SANDBOX_FROM;
+}
 
 function escapeHtml(value: string): string {
   return value
@@ -108,7 +131,12 @@ export default async function handler(
     const type = body.type?.trim() || need;
 
     const reference = `INQ-${Date.now().toString(36).toUpperCase()}`;
-    const subject = `[Portfolio] ${type} — ${pkg ?? "none"} — ${name}`;
+    // The package segment is dropped entirely when there isn't one, rather
+    // than printing a placeholder — "[Portfolio] Hiring or recruiting — none —
+    // Damilare Azeez" reads like a bug in the inbox.
+    const subject = pkg
+      ? `[Portfolio] ${type} — ${pkg} — ${name}`
+      : `[Portfolio] ${type} — ${name}`;
 
     const resendRes = await fetch("https://api.resend.com/emails", {
       method: "POST",
@@ -117,8 +145,10 @@ export default async function handler(
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        from: FROM_ADDRESS,
+        from: resolveFromAddress(),
         to: [toEmail],
+        // Replies go to the person who filled in the form, not the sender
+        // domain — so hitting Reply in the inbox answers them directly.
         reply_to: email,
         subject,
         html: `

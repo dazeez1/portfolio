@@ -57,7 +57,8 @@ Build order is sequential — a phase starts only when the previous one is appro
 - [ ] Forms and booking tested end-to-end **in production**
 - [ ] Favicon + site-wide OG image — `/og-default.png` is already referenced by every page's OG/Twitter tags (see content/site.ts); the asset itself still needs creating and dropping into `frontend/public/`
 - [ ] Custom domain purchased (on Vercel) and connected — target: end of month
-- [ ] Verify azeezdamilare.com in Resend, then switch frontend/api/contact.ts's FROM_ADDRESS from the onboarding@resend.dev sandbox sender to the custom-domain sender
+- [ ] **Set `CONTACT_FROM_EMAIL` in Vercel — owner action, code is ready.** azeezdamilare.com is verified in Resend and the handler now reads the sender from this env var (no longer hardcoded). Set it on **both Production and Preview**, then **redeploy** — Vercel bakes env vars in at build time, so existing builds keep the old value. Recommended value: `Portfolio Contact <hello@azeezdamilare.com>` (see the note on the display name below). Until it is set the form still works and sends from the `onboarding@resend.dev` sandbox, logging `contact api: missing env var CONTACT_FROM_EMAIL`.
+- [ ] After setting it, submit the live form once and confirm the received email's From, Reply-To and Subject. Reply-To must be the submitter's address, not the sender domain.
 - [ ] Announce on LinkedIn / X / WhatsApp
 - [ ] Remove `/dev/components` route and the `/` → `/dev/components` redirect once Home exists
 
