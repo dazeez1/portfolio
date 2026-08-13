@@ -63,7 +63,6 @@ function resolveFromAddress(): string {
 }
 
 const OWNER_NAME = "Azeez Damilare Gbenga";
-const SITE_DOMAIN = "azeezdamilare.com";
 
 /**
  * Inline styles only, and literal hex values rather than the site's CSS
@@ -149,7 +148,6 @@ function buildAcknowledgement(fields: {
     `If you need to add anything, just reply to this email.`,
     ``,
     `— ${OWNER_NAME}`,
-    SITE_DOMAIN,
   ].join("\n");
 
   const label = `font-family:${EMAIL_FONT};font-size:12px;line-height:1.5;color:#706a61;text-transform:uppercase;letter-spacing:0.08em;margin:0 0 8px;`;
@@ -171,7 +169,7 @@ function buildAcknowledgement(fields: {
             <p style="${body}">${escapeHtml(message).replace(/\n/g, "<br>")}</p>
             <hr style="border:0;border-top:1px solid #eae4da;margin:24px 0;">
             <p style="${body}">If you need to add anything, just reply to this email.</p>
-            <p style="font-family:${EMAIL_FONT};font-size:16px;line-height:1.6;color:#211d18;margin:24px 0 0;">— ${OWNER_NAME}<br><span style="color:#706a61;">${SITE_DOMAIN}</span></p>
+            <p style="font-family:${EMAIL_FONT};font-size:16px;line-height:1.6;color:#211d18;margin:24px 0 0;">— ${OWNER_NAME}</p>
           </td>
         </tr>
       </table>
