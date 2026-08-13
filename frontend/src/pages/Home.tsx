@@ -202,7 +202,9 @@ export default function Home() {
           Testimonials. The whole section — heading included — is omitted
           until there are enough real, permissioned quotes in
           content/testimonials.ts (CLAUDE.md Section 4: no placeholder
-          testimonials in production).
+          testimonials in production). The component picks stacked cards or a
+          carousel from the count; this gate only decides whether the section
+          exists at all.
         */}
         {testimonials.length >= minimumToRender && (
           <section className="bg-bg py-16 md:py-24">

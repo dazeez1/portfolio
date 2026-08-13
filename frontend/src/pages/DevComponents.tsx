@@ -39,6 +39,40 @@ function DemoImageSlot() {
   );
 }
 
+/*
+  Gallery fixtures. Deliberately obvious non-quotes — CLAUDE.md Section 4
+  forbids placeholder testimonials, and this route exists to exercise layout.
+*/
+const DEMO_A = {
+  id: "demo-a",
+  quote:
+    "Demo entry A. This string exercises the card layout and wrapping at a length close to a real quote; it is not a quote from anyone.",
+  name: "Aa Demo",
+  role: "Demo role",
+};
+const DEMO_B = {
+  id: "demo-b",
+  quote:
+    "Demo entry B, with a company and an outbound link to show the external-arrow treatment.",
+  name: "Bb Demo",
+  role: "Demo role",
+  company: "Demo Co",
+  link: "https://example.com",
+};
+const DEMO_C = {
+  id: "demo-c",
+  quote: "Demo entry C, deliberately short.",
+  name: "Cc Demo",
+  role: "Demo role",
+};
+const DEMO_D = {
+  id: "demo-d",
+  quote:
+    "Demo entry D exists so the carousel has more than two slides and the dots are exercised.",
+  name: "Dd Demo",
+  role: "Demo role",
+};
+
 function ThemePanel({ theme }: { theme: "light" | "dark" }) {
   return (
     <div
@@ -223,47 +257,48 @@ function ThemePanel({ theme }: { theme: "light" | "dark" }) {
             as="h3"
           />
           <p className="mt-3 text-xs text-text-muted">
-            Demo rows below are instrumentation, not testimonials — real quotes
-            live in content/testimonials.ts and none exist yet. First card omits
-            a photo to show the initial-avatar fallback. Auto-advances every 6s;
-            pauses on hover or focus; does not auto-advance at all under
-            prefers-reduced-motion. Renders <code>null</code> below three
-            entries, which is why Home currently shows no testimonials section.
+            Demo rows below are instrumentation, not testimonials — the real
+            quotes live in content/testimonials.ts. Layout follows from the
+            count, so all three states are shown. The card is one centred quote
+            with a decorative tint quotation glyph, a serif italic pull quote
+            capped at 55ch, and an initial-avatar attribution row.
           </p>
-          <div className="mt-4">
+
+          <p className="mt-6 font-sans text-xs uppercase tracking-wide text-text-muted">
+            1 entry — renders nothing
+          </p>
+          <div className="mt-2 rounded-md border border-dashed border-border-strong p-4">
             <TestimonialCarousel
-              label="Component gallery demo"
-              items={[
-                {
-                  id: "demo-a",
-                  quote:
-                    "Demo entry A. This string exercises the card layout and wrapping; it is not a quote from anyone.",
-                  name: "Aa Demo",
-                  role: "Demo role",
-                },
-                {
-                  id: "demo-b",
-                  quote:
-                    "Demo entry B, with a company and an outbound link to show the external-arrow treatment.",
-                  name: "Bb Demo",
-                  role: "Demo role",
-                  company: "Demo Co",
-                  link: "https://example.com",
-                },
-                {
-                  id: "demo-c",
-                  quote: "Demo entry C, deliberately short.",
-                  name: "Cc Demo",
-                  role: "Demo role",
-                },
-                {
-                  id: "demo-d",
-                  quote:
-                    "Demo entry D exists so the carousel has more than one page and the dots and arrows are exercised.",
-                  name: "Dd Demo",
-                  role: "Demo role",
-                },
-              ]}
+              label="Component gallery, one entry"
+              items={[DEMO_A]}
+            />
+            <p className="text-center font-sans text-xs text-text-muted">
+              (component returned null — below <code>minimumToRender</code>)
+            </p>
+          </div>
+
+          <p className="mt-8 font-sans text-xs uppercase tracking-wide text-text-muted">
+            2 entries — stacked, no carousel, no controls, no autoplay
+          </p>
+          <div className="mt-2">
+            <TestimonialCarousel
+              label="Component gallery, two entries"
+              items={[DEMO_A, DEMO_B]}
+            />
+          </div>
+
+          <p className="mt-8 font-sans text-xs uppercase tracking-wide text-text-muted">
+            3+ entries — single-slide carousel, prev/next, dots, 6s autoplay
+          </p>
+          <p className="mt-1 text-xs text-text-muted">
+            Pauses on hover or focus; never auto-advances under
+            prefers-reduced-motion. Second entry carries a company link to show
+            the external-arrow treatment.
+          </p>
+          <div className="mt-2">
+            <TestimonialCarousel
+              label="Component gallery, four entries"
+              items={[DEMO_A, DEMO_B, DEMO_C, DEMO_D]}
             />
           </div>
         </section>

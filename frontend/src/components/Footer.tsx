@@ -67,7 +67,7 @@ export function Footer() {
             <li>
               <a
                 href="/resume.pdf"
-                download
+                download="Azeez_Damilare_Gbenga_CV.pdf"
                 className="flex items-center gap-2 transition-colors hover:text-accent-text"
               >
                 <DownloadIcon

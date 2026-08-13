@@ -1,33 +1,12 @@
 import { useCallback, useEffect, useRef, useState } from "react";
-import { Card } from "./Card";
 import { ChevronLeftIcon, ChevronRightIcon, ExternalLinkIcon } from "./icons";
-import {
-  minimumToRender,
-  type Testimonial,
-} from "../content/testimonials";
+import { minimumToRender, type Testimonial } from "../content/testimonials";
 
 const AUTO_ADVANCE_MS = 6000;
 const SWIPE_THRESHOLD_PX = 50;
 
-/** Cards visible at once: 3 desktop, 2 tablet, 1 mobile. */
-function useCardsPerView() {
-  const [perView, setPerView] = useState(1);
-
-  useEffect(() => {
-    const lg = window.matchMedia("(min-width: 64rem)");
-    const sm = window.matchMedia("(min-width: 40rem)");
-    const update = () => setPerView(lg.matches ? 3 : sm.matches ? 2 : 1);
-    update();
-    lg.addEventListener("change", update);
-    sm.addEventListener("change", update);
-    return () => {
-      lg.removeEventListener("change", update);
-      sm.removeEventListener("change", update);
-    };
-  }, []);
-
-  return perView;
-}
+/** Above this count the section becomes a carousel; at or below it, cards stack. */
+const CAROUSEL_FROM = 3;
 
 function usePrefersReducedMotion() {
   const [reduced, setReduced] = useState(false);
@@ -61,8 +40,8 @@ function Avatar({ testimonial }: { testimonial: Testimonial }) {
   }
 
   // No photo is a complete state, not a degraded one: the initial on tint
-  // reads as intentional. accent-text (not accent) because `tint` does not
-  // theme-swap, so the brighter dark-mode accent would fail contrast on it.
+  // reads as intentional. accent-text (not accent) because at this size the
+  // initial is text, and accent-text is the token that passes on tint.
   return (
     <span
       aria-hidden="true"
@@ -73,19 +52,13 @@ function Avatar({ testimonial }: { testimonial: Testimonial }) {
   );
 }
 
-function TestimonialCard({ testimonial }: { testimonial: Testimonial }) {
-  const { quote, name, role, company, link } = testimonial;
+function Attribution({ testimonial }: { testimonial: Testimonial }) {
+  const { name, role, company, link } = testimonial;
 
   return (
-    <Card className="flex h-full flex-col">
+    <figcaption className="relative mt-8 flex items-center justify-center gap-3">
       <Avatar testimonial={testimonial} />
-
-      {/* No decorative quotation glyph — the blockquote carries the meaning. */}
-      <blockquote className="mt-5 flex-1 font-sans text-base leading-relaxed text-text-secondary">
-        {quote}
-      </blockquote>
-
-      <figcaption className="mt-5">
+      <div className="text-left">
         <p className="font-sans text-sm font-semibold text-ink">{name}</p>
         <p className="mt-0.5 font-sans text-xs text-text-muted">
           {role}
@@ -108,8 +81,41 @@ function TestimonialCard({ testimonial }: { testimonial: Testimonial }) {
             </>
           )}
         </p>
-      </figcaption>
-    </Card>
+      </div>
+    </figcaption>
+  );
+}
+
+/**
+ * One quote, centred and given room. Built out of raw markup rather than
+ * `Card` because the glyph needs a positioned ancestor and the padding here is
+ * deliberately larger than Card's fixed `p-6` — and a `p-*` passed through
+ * className would be same-specificity with Card's own, so which one won would
+ * depend on generated stylesheet order.
+ */
+function TestimonialCard({ testimonial }: { testimonial: Testimonial }) {
+  return (
+    <figure className="relative overflow-hidden rounded-lg border border-border bg-surface px-6 py-10 sm:px-12 sm:py-14">
+      {/*
+        Decorative opening quotation mark. `tint` on `surface` is deliberately
+        near-invisible — it should read as a watermark behind the quote, not as
+        a second thing to look at. aria-hidden because the blockquote already
+        carries the meaning, and a screen reader announcing a stray quotation
+        mark is noise.
+      */}
+      <span
+        aria-hidden="true"
+        className="pointer-events-none absolute left-3 top-2 select-none font-serif text-[7rem] leading-none text-tint sm:left-6 sm:text-[9rem]"
+      >
+        &ldquo;
+      </span>
+
+      <blockquote className="relative mx-auto max-w-[55ch] text-center font-serif text-xl italic leading-relaxed text-ink md:text-2xl">
+        {testimonial.quote}
+      </blockquote>
+
+      <Attribution testimonial={testimonial} />
+    </figure>
   );
 }
 
@@ -126,33 +132,49 @@ export function TestimonialCarousel({
   label = "Testimonials",
   minimum = minimumToRender,
 }: TestimonialCarouselProps) {
-  const perView = useCardsPerView();
   const reducedMotion = usePrefersReducedMotion();
   const [page, setPage] = useState(0);
   const [paused, setPaused] = useState(false);
   const pointerStartX = useRef<number | null>(null);
 
-  const pageCount = Math.max(1, Math.ceil(items.length / perView));
-  // Clamp when the breakpoint changes under us and shrinks the page count.
+  // One card per slide at every breakpoint, so a page is an item.
+  const pageCount = Math.max(1, items.length);
   const currentPage = Math.min(page, pageCount - 1);
+  const isCarousel = items.length >= CAROUSEL_FROM;
 
   const goTo = useCallback(
     (next: number) => setPage(((next % pageCount) + pageCount) % pageCount),
     [pageCount],
   );
 
-  // Auto-advance. Never runs under prefers-reduced-motion, and stops while the
-  // pointer is over the carousel or focus is anywhere inside it.
+  // Auto-advance. Never runs under prefers-reduced-motion, never in the
+  // stacked layout, and stops while the pointer is over the carousel or focus
+  // is anywhere inside it.
   useEffect(() => {
-    if (reducedMotion || paused || pageCount <= 1) return;
+    if (reducedMotion || paused || !isCarousel) return;
     const id = window.setInterval(
       () => setPage((p) => (p + 1) % pageCount),
       AUTO_ADVANCE_MS,
     );
     return () => window.clearInterval(id);
-  }, [reducedMotion, paused, pageCount]);
+  }, [reducedMotion, paused, isCarousel, pageCount]);
 
   if (items.length < minimum) return null;
+
+  /*
+    Two quotes read better stacked than paged — both are visible at once, and
+    there is nothing to operate, so no carousel semantics, no live region, no
+    controls and no autoplay are introduced for them.
+  */
+  if (!isCarousel) {
+    return (
+      <div className="mx-auto flex max-w-[46rem] flex-col gap-6">
+        {items.map((item) => (
+          <TestimonialCard key={item.id} testimonial={item} />
+        ))}
+      </div>
+    );
+  }
 
   function handlePointerDown(e: React.PointerEvent) {
     pointerStartX.current = e.clientX;
@@ -177,13 +199,14 @@ export function TestimonialCarousel({
     }
   }
 
-  const autoRotating = !reducedMotion && !paused && pageCount > 1;
+  const autoRotating = !reducedMotion && !paused;
 
   return (
     <div
       role="group"
       aria-roledescription="carousel"
       aria-label={label}
+      className="mx-auto max-w-[46rem]"
       onPointerEnter={() => setPaused(true)}
       onPointerLeave={() => setPaused(false)}
       onFocus={() => setPaused(true)}
@@ -209,62 +232,56 @@ export function TestimonialCarousel({
           style={{ transform: `translateX(-${currentPage * 100}%)` }}
         >
           {items.map((item, i) => (
-            <figure
+            <div
               key={item.id}
               role="group"
               aria-roledescription="slide"
               aria-label={`${i + 1} of ${items.length}`}
-              aria-hidden={
-                i < currentPage * perView || i >= (currentPage + 1) * perView
-              }
-              className="shrink-0 px-3 first:pl-0 last:pr-0"
-              style={{ width: `${100 / perView}%` }}
+              aria-hidden={i !== currentPage}
+              className="w-full shrink-0"
             >
               <TestimonialCard testimonial={item} />
-            </figure>
+            </div>
           ))}
         </div>
       </div>
 
-      {pageCount > 1 && (
-        <div className="mt-6 flex items-center justify-between gap-4">
-          <div className="flex items-center gap-2">
-            <button
-              type="button"
-              aria-label="Previous testimonial"
-              onClick={() => goTo(currentPage - 1)}
-              className="flex h-9 w-9 items-center justify-center rounded-full border border-border-strong text-ink transition-colors hover:bg-surface-alt"
-            >
-              <ChevronLeftIcon className="h-4 w-4" aria-hidden="true" />
-            </button>
-            <button
-              type="button"
-              aria-label="Next testimonial"
-              onClick={() => goTo(currentPage + 1)}
-              className="flex h-9 w-9 items-center justify-center rounded-full border border-border-strong text-ink transition-colors hover:bg-surface-alt"
-            >
-              <ChevronRightIcon className="h-4 w-4" aria-hidden="true" />
-            </button>
-          </div>
+      <div className="mt-6 flex items-center justify-center gap-4">
+        <button
+          type="button"
+          aria-label="Previous testimonial"
+          onClick={() => goTo(currentPage - 1)}
+          className="flex h-9 w-9 items-center justify-center rounded-full border border-border-strong text-ink transition-colors hover:bg-surface-alt"
+        >
+          <ChevronLeftIcon className="h-4 w-4" aria-hidden="true" />
+        </button>
 
-          <div className="flex items-center gap-2">
-            {Array.from({ length: pageCount }, (_, i) => (
-              <button
-                key={i}
-                type="button"
-                aria-label={`Go to testimonial ${i + 1} of ${pageCount}`}
-                aria-current={i === currentPage ? "true" : undefined}
-                onClick={() => goTo(i)}
-                className={`h-2.5 rounded-full transition-all ${
-                  i === currentPage
-                    ? "w-6 bg-accent-text"
-                    : "w-2.5 bg-border-strong hover:bg-text-muted"
-                }`}
-              />
-            ))}
-          </div>
+        <div className="flex items-center gap-2">
+          {items.map((item, i) => (
+            <button
+              key={item.id}
+              type="button"
+              aria-label={`Go to testimonial ${i + 1} of ${items.length}`}
+              aria-current={i === currentPage ? "true" : undefined}
+              onClick={() => goTo(i)}
+              className={`h-2.5 rounded-full transition-all ${
+                i === currentPage
+                  ? "w-6 bg-accent"
+                  : "w-2.5 bg-border-strong hover:bg-text-muted"
+              }`}
+            />
+          ))}
         </div>
-      )}
+
+        <button
+          type="button"
+          aria-label="Next testimonial"
+          onClick={() => goTo(currentPage + 1)}
+          className="flex h-9 w-9 items-center justify-center rounded-full border border-border-strong text-ink transition-colors hover:bg-surface-alt"
+        >
+          <ChevronRightIcon className="h-4 w-4" aria-hidden="true" />
+        </button>
+      </div>
     </div>
   );
 }
