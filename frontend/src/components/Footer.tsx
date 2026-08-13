@@ -10,6 +10,7 @@ import {
   PhoneIcon,
   WhatsAppIcon,
 } from "./icons";
+import { resumeDownloadName } from "../content/site";
 import { externalRel, footerSocials } from "../content/social";
 
 const socialIconFor = {
@@ -67,7 +68,7 @@ export function Footer() {
             <li>
               <a
                 href="/resume.pdf"
-                download="Azeez_Damilare_Gbenga_CV.pdf"
+                download={resumeDownloadName}
                 className="flex items-center gap-2 transition-colors hover:text-accent-text"
               >
                 <DownloadIcon

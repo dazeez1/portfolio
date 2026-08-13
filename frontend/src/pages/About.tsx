@@ -3,6 +3,7 @@ import { Helmet } from "react-helmet-async";
 import { ButtonAnchor, ButtonLink } from "../components/Button";
 import { Card } from "../components/Card";
 import { Container } from "../components/Container";
+import { resumeDownloadName } from "../content/site";
 import { Footer } from "../components/Footer";
 import { DownloadIcon } from "../components/icons";
 import { Nav } from "../components/Nav";
@@ -84,7 +85,7 @@ export default function About() {
               <div className="mt-8 flex flex-wrap items-center gap-3">
                 <ButtonAnchor
                   href={intro.primaryButton.href}
-                  download
+                  download={resumeDownloadName}
                   variant="primary"
                 >
                   <DownloadIcon className="h-4 w-4" aria-hidden="true" />
@@ -242,7 +243,7 @@ export default function About() {
             <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
               <ButtonAnchor
                 href={closingCta.primaryButton.href}
-                download
+                download={resumeDownloadName}
                 variant="primary"
               >
                 <DownloadIcon className="h-4 w-4" aria-hidden="true" />

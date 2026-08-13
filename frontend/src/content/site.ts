@@ -25,3 +25,15 @@ export const twitterCardType = "summary_large_image";
 export function canonicalUrl(path: string) {
   return `${siteUrl}${path}`;
 }
+/**
+ * Filename the resume saves as. Every link to /resume.pdf uses it via the
+ * `download` attribute.
+ *
+ * The attribute alone is not enough in production: Vercel serves the file with
+ * `Content-Disposition: inline; filename="resume.pdf"`, and a filename in that
+ * header overrides the `download` attribute — so the file saved as
+ * "resume.pdf" on the deployed site while saving correctly under `vite dev`,
+ * which sends no such header. frontend/vercel.json therefore sets the header
+ * explicitly. Keep the two in sync; JSON cannot import this constant.
+ */
+export const resumeDownloadName = "Azeez_Damilare_Gbenga_CV.pdf";
