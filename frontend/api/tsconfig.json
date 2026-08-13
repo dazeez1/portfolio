@@ -1,0 +1,37 @@
+{
+  /*
+   * Typecheck config for the serverless functions in this directory.
+   *
+   * Why it exists: these files use Node globals (`process.env`). The repo's
+   * `tsconfig.node.json` already declares `"types": ["node"]` and includes
+   * "api", so `npm run build` (`tsc -b`) has always typechecked them fine.
+   * But the root `tsconfig.json` is solution-style — `"files": []` plus
+   * references, with NO `compilerOptions` — so any tool that resolves the
+   * nearest config for a file in api/ and lands on the root gets no node
+   * types, and `process` comes back as TS2591 "Cannot find name 'process'".
+   * That is what failed the Vercel build on api/contact.ts(89,20) and (90,21).
+   *
+   * Nearest-config lookup from api/*.ts now finds this file, so node types are
+   * available whichever tool does the checking. `@types/node` is already a
+   * devDependency and present in the lockfile — it was never the missing piece.
+   *
+   * Do not "fix" a missing Node global with `any` or a ts-ignore; add the type
+   * here instead.
+   */
+  "compilerOptions": {
+    "target": "es2023",
+    "lib": ["ES2023"],
+    "module": "nodenext",
+    "moduleResolution": "nodenext",
+    "types": ["node"],
+    "strict": true,
+    "skipLibCheck": true,
+    "noEmit": true,
+    "verbatimModuleSyntax": true,
+    "moduleDetection": "force",
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noFallthroughCasesInSwitch": true
+  },
+  "include": ["."]
+}
