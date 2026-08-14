@@ -1,4 +1,3 @@
-import { Helmet } from "react-helmet-async";
 import { Link } from "react-router";
 import { Button, ButtonLink } from "../components/Button";
 import { Card } from "../components/Card";
@@ -99,7 +98,7 @@ export default function Services() {
 
   return (
     <div className="flex min-h-screen flex-col">
-      <Helmet>
+      <>
         <title>{meta.title}</title>
         <meta name="description" content={hero.intro} />
         <link rel="canonical" href={canonical} />
@@ -115,10 +114,11 @@ export default function Services() {
         <meta name="twitter:description" content={hero.intro} />
         <meta name="twitter:image" content={defaultOgImage} />
 
-        <script type="application/ld+json">
-          {JSON.stringify(structuredData)}
-        </script>
-      </Helmet>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+        />
+      </>
 
       <Nav />
 

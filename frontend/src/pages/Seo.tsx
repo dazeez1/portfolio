@@ -1,4 +1,3 @@
-import { Helmet } from "react-helmet-async";
 import { Accordion } from "../components/Accordion";
 import { BrowserFrame } from "../components/BrowserFrame";
 import { ButtonLink } from "../components/Button";
@@ -55,7 +54,7 @@ const structuredData = {
 export default function Seo() {
   return (
     <div className="flex min-h-screen flex-col">
-      <Helmet>
+      <>
         <title>{meta.title}</title>
         <meta name="description" content={hero.subhead} />
         <link rel="canonical" href={canonical} />
@@ -71,10 +70,11 @@ export default function Seo() {
         <meta name="twitter:description" content={hero.subhead} />
         <meta name="twitter:image" content={defaultOgImage} />
 
-        <script type="application/ld+json">
-          {JSON.stringify(structuredData)}
-        </script>
-      </Helmet>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+        />
+      </>
 
       <Nav />
 

@@ -1,4 +1,3 @@
-import { Helmet } from "react-helmet-async";
 import { Link } from "react-router";
 import { ButtonLink } from "../components/Button";
 import { Container } from "../components/Container";
@@ -22,7 +21,7 @@ const metaTitle = "Page not found — Azeez Damilare Gbenga";
 export default function NotFound() {
   return (
     <div className="flex min-h-screen flex-col">
-      <Helmet>
+      <>
         <title>{metaTitle}</title>
         <meta name="description" content={subline} />
         <meta name="robots" content="noindex, follow" />
@@ -44,7 +43,7 @@ export default function NotFound() {
         <meta name="twitter:title" content={metaTitle} />
         <meta name="twitter:description" content={subline} />
         <meta name="twitter:image" content={defaultOgImage} />
-      </Helmet>
+      </>
 
       <Nav />
 

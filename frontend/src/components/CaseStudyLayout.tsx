@@ -1,5 +1,4 @@
 import { useRef, useState } from "react";
-import { Helmet } from "react-helmet-async";
 import { Link } from "react-router";
 import type { CaseStudyContent, CaseStudyImage as CaseStudyImageData } from "../content/caseStudies/types";
 import {
@@ -180,7 +179,7 @@ export function CaseStudyLayout({
 
   return (
     <div className="flex min-h-screen flex-col">
-      <Helmet>
+      <>
         <title>{content.metaTitle}</title>
         <meta name="description" content={hero.summary} />
         <link rel="canonical" href={canonical} />
@@ -196,11 +195,15 @@ export function CaseStudyLayout({
         <meta name="twitter:description" content={hero.summary} />
         <meta name="twitter:image" content={defaultOgImage} />
 
-        <script type="application/ld+json">
-          {JSON.stringify(structuredData)}
-        </script>
-        <script type="application/ld+json">{JSON.stringify(breadcrumbs)}</script>
-      </Helmet>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbs) }}
+        />
+      </>
 
       <Nav />
 

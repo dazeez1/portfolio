@@ -1,4 +1,3 @@
-import { Helmet } from "react-helmet-async";
 import { useLocation } from "react-router";
 import { ButtonAnchor, ButtonLink } from "../components/Button";
 import { Container } from "../components/Container";
@@ -23,7 +22,7 @@ export default function ThankYou() {
 
   return (
     <div className="flex min-h-screen flex-col">
-      <Helmet>
+      <>
         <title>{metaTitle}</title>
         <meta name="description" content={thankYou.subline} />
         <link rel="canonical" href={canonical} />
@@ -39,7 +38,7 @@ export default function ThankYou() {
         <meta name="twitter:title" content={metaTitle} />
         <meta name="twitter:description" content={thankYou.subline} />
         <meta name="twitter:image" content={defaultOgImage} />
-      </Helmet>
+      </>
 
       <Nav />
 

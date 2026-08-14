@@ -1,6 +1,5 @@
 import { useRef, useState } from "react";
 import type { SyntheticEvent } from "react";
-import { Helmet } from "react-helmet-async";
 import { useNavigate, useSearchParams } from "react-router";
 import { Accordion } from "../components/Accordion";
 import { Button, ButtonAnchor } from "../components/Button";
@@ -221,7 +220,7 @@ export default function Contact() {
 
   return (
     <div className="flex min-h-screen flex-col">
-      <Helmet>
+      <>
         <title>{metaTitle}</title>
         <meta name="description" content={header.subhead} />
         <link rel="canonical" href={canonical} />
@@ -236,7 +235,7 @@ export default function Contact() {
         <meta name="twitter:title" content={metaTitle} />
         <meta name="twitter:description" content={header.subhead} />
         <meta name="twitter:image" content={defaultOgImage} />
-      </Helmet>
+      </>
 
       <Nav />
 
