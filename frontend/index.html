@@ -19,46 +19,44 @@
     <link rel="icon" href="/favicon.ico" sizes="32x32" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-
-    <!--
-      Mobile browser chrome tint (iOS Safari, Android Chrome). Hex values match
-      --bg light/dark in styles/tokens.css, and these move to app/root.tsx's
-      <head> at the framework-mode migration along with the icon links above.
-
-      KNOWN LIMITATION, measured: these keyed off prefers-color-scheme, but the
-      site's theme is driven by data-theme + localStorage and defaults to light
-      regardless of the OS. So the chrome only agrees with the page when the OS
-      is light and the visitor has not toggled — 1 of 4 states. It disagrees for
-      every dark-OS visitor who has not toggled (the site renders light, the
-      chrome goes dark), and for anyone whose toggle differs from their OS.
-      CSS cannot fix this: theme-color is a meta tag, not a styleable property.
-      The only correct fix is setting a single theme-color from JS whenever
-      data-theme changes, including in the anti-flash script above so the
-      pre-paint value is right. Not done — see Roadmap.
-    -->
-    <meta
-      name="theme-color"
-      media="(prefers-color-scheme: light)"
-      content="#FAF7F2"
-    />
-    <meta
-      name="theme-color"
-      media="(prefers-color-scheme: dark)"
-      content="#191613"
-    />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!--
+      Mobile browser chrome tint (iOS Safari, Android Chrome).
+
+      Declared HERE, above the anti-flash script, rather than down with the
+      icon links: the script below rewrites this tag's content, so it has to
+      exist in the DOM by the time the script runs.
+
+      One unconditional tag, not a prefers-color-scheme pair. The site's theme
+      is data-theme + localStorage and defaults to light regardless of the OS,
+      so keying off the OS was wrong in 3 of 4 states. The static value is the
+      light default, which is also the correct fallback when JS is unavailable;
+      the script overrides it to dark on exactly the same condition that sets
+      data-theme. Hex values match --bg light/dark in styles/tokens.css.
+
+      Moves to app/root.tsx's <head> at the framework-mode migration, along
+      with the icon links.
+    -->
+    <meta name="theme-color" content="#faf7f2" />
+
     <!--
       Anti-flash: read the persisted theme and set data-theme on <html>
       before first paint, then set the matching background as critical
       inline CSS. Runs synchronously (blocking) so the pre-JS/pre-stylesheet
       paint is ivory (or dark) instead of browser-default white. Hex values
       match --bg light/dark in styles/tokens.css.
+
+      It also syncs the theme-color meta above, in the same branch, so the
+      browser chrome is right on the first paint rather than flashing the
+      light value and correcting after hydration.
     -->
     <script>
       (function () {
         try {
           if (localStorage.getItem("theme") === "dark") {
             document.documentElement.dataset.theme = "dark";
+            var tc = document.querySelector('meta[name="theme-color"]');
+            if (tc) tc.setAttribute("content", "#191613");
           }
         } catch (e) {}
       })();

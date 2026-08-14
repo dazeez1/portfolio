@@ -48,6 +48,16 @@ function ThemeToggle() {
     const next =
       document.documentElement.dataset.theme === "dark" ? "light" : "dark";
     document.documentElement.dataset.theme = next === "dark" ? "dark" : "";
+
+    /*
+     * Keep the browser-chrome tint in step with the page. The same meta is set
+     * pre-paint by the inline script in index.html; this is the other half, for
+     * a toggle after load. Values match --bg light/dark in styles/tokens.css.
+     */
+    document
+      .querySelector('meta[name="theme-color"]')
+      ?.setAttribute("content", next === "dark" ? "#191613" : "#faf7f2");
+
     try {
       window.localStorage.setItem("theme", next);
     } catch {
