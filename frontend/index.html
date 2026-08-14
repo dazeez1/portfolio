@@ -19,6 +19,33 @@
     <link rel="icon" href="/favicon.ico" sizes="32x32" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
+    <!--
+      Mobile browser chrome tint (iOS Safari, Android Chrome). Hex values match
+      --bg light/dark in styles/tokens.css, and these move to app/root.tsx's
+      <head> at the framework-mode migration along with the icon links above.
+
+      KNOWN LIMITATION, measured: these keyed off prefers-color-scheme, but the
+      site's theme is driven by data-theme + localStorage and defaults to light
+      regardless of the OS. So the chrome only agrees with the page when the OS
+      is light and the visitor has not toggled — 1 of 4 states. It disagrees for
+      every dark-OS visitor who has not toggled (the site renders light, the
+      chrome goes dark), and for anyone whose toggle differs from their OS.
+      CSS cannot fix this: theme-color is a meta tag, not a styleable property.
+      The only correct fix is setting a single theme-color from JS whenever
+      data-theme changes, including in the anti-flash script above so the
+      pre-paint value is right. Not done — see Roadmap.
+    -->
+    <meta
+      name="theme-color"
+      media="(prefers-color-scheme: light)"
+      content="#FAF7F2"
+    />
+    <meta
+      name="theme-color"
+      media="(prefers-color-scheme: dark)"
+      content="#191613"
+    />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <!--
       Anti-flash: read the persisted theme and set data-theme on <html>
