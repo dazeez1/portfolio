@@ -60,3 +60,16 @@ export const contactSocials: SocialProfile[] = [
  * modern browsers implying it for `_blank`.
  */
 export const externalRel = "noopener noreferrer";
+/**
+ * Profiles asserted as `sameAs` in the site-wide Person JSON-LD — the signal
+ * that ties this site to the same real person as those accounts, which is the
+ * mechanism for ranking on the owner's own name.
+ *
+ * WhatsApp is deliberately excluded: `wa.me/…` is a chat deep link, not a
+ * profile page, so it is not a `sameAs` identity for the Person.
+ */
+export const sameAsProfiles: SocialProfile[] = [
+  socialProfiles.GitHub,
+  socialProfiles.LinkedIn,
+  socialProfiles.Instagram,
+];

@@ -2,20 +2,61 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+    <!--
+      Icons live here rather than in a per-page Helmet: they are document
+      shell, identical on all 13 routes, and the browser requests them before
+      any JavaScript runs. A Helmet-injected icon only lands after hydration.
+
+      Order is deliberate. The .ico is declared first with an explicit size for
+      older browsers and tools that ignore SVG favicons; the SVG follows and
+      wins wherever it is supported, staying crisp at any size.
+
+      Framework-mode note: index.html is not used in framework mode — the root
+      route renders <html> itself — so these four lines move into the <head> of
+      app/root.tsx during that migration. That is the direct analogue and the
+      spike already built the file, so the move is mechanical.
+    -->
+    <link rel="icon" href="/favicon.ico" sizes="32x32" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!--
+      Mobile browser chrome tint (iOS Safari, Android Chrome).
+
+      Declared HERE, above the anti-flash script, rather than down with the
+      icon links: the script below rewrites this tag's content, so it has to
+      exist in the DOM by the time the script runs.
+
+      One unconditional tag, not a prefers-color-scheme pair. The site's theme
+      is data-theme + localStorage and defaults to light regardless of the OS,
+      so keying off the OS was wrong in 3 of 4 states. The static value is the
+      light default, which is also the correct fallback when JS is unavailable;
+      the script overrides it to dark on exactly the same condition that sets
+      data-theme. Hex values match --bg light/dark in styles/tokens.css.
+
+      Moves to app/root.tsx's <head> at the framework-mode migration, along
+      with the icon links.
+    -->
+    <meta name="theme-color" content="#faf7f2" />
+
     <!--
       Anti-flash: read the persisted theme and set data-theme on <html>
       before first paint, then set the matching background as critical
       inline CSS. Runs synchronously (blocking) so the pre-JS/pre-stylesheet
       paint is ivory (or dark) instead of browser-default white. Hex values
       match --bg light/dark in styles/tokens.css.
+
+      It also syncs the theme-color meta above, in the same branch, so the
+      browser chrome is right on the first paint rather than flashing the
+      light value and correcting after hydration.
     -->
     <script>
       (function () {
         try {
           if (localStorage.getItem("theme") === "dark") {
             document.documentElement.dataset.theme = "dark";
+            var tc = document.querySelector('meta[name="theme-color"]');
+            if (tc) tc.setAttribute("content", "#191613");
           }
         } catch (e) {}
       })();

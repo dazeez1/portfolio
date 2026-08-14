@@ -22,6 +22,7 @@ import {
   tools,
 } from "../content/home";
 import { projects, stackIcons } from "../content/projects";
+import { canonicalUrl, defaultOgImage, twitterCardType } from "../content/site";
 
 const featuredProjects = projects.filter((project) => project.featured);
 
@@ -34,12 +35,27 @@ function AccentDot() {
   );
 }
 
+const metaTitle = "Azeez Damilare Gbenga — Full-Stack Software Engineer";
+const canonical = canonicalUrl("/");
+
 export default function Home() {
   return (
     <div className="flex min-h-screen flex-col">
       <Helmet>
-        <title>Azeez Damilare Gbenga — Full-Stack Software Engineer</title>
+        <title>{metaTitle}</title>
         <meta name="description" content={hero.subhead} />
+        <link rel="canonical" href={canonical} />
+
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content={metaTitle} />
+        <meta property="og:description" content={hero.subhead} />
+        <meta property="og:url" content={canonical} />
+        <meta property="og:image" content={defaultOgImage} />
+
+        <meta name="twitter:card" content={twitterCardType} />
+        <meta name="twitter:title" content={metaTitle} />
+        <meta name="twitter:description" content={hero.subhead} />
+        <meta name="twitter:image" content={defaultOgImage} />
       </Helmet>
 
       <Nav />

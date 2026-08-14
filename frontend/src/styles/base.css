@@ -34,3 +34,29 @@
     outline-offset: 2px;
   }
 }
+
+/*
+ * Theme-toggle icon/label pair, driven by `<html data-theme>` rather than React
+ * state. Both halves are always in the markup so the prerendered HTML and the
+ * first client render match exactly; CSS picks the right one at first paint,
+ * using the same attribute the inline anti-flash script in index.html sets.
+ *
+ * Deliberately OUTSIDE @layer base: unlayered rules beat every cascade layer,
+ * so a Tailwind display utility landing on these spans could never silently
+ * reveal both halves at once.
+ */
+.theme-only-dark {
+  display: none;
+}
+
+.theme-only-light {
+  display: contents;
+}
+
+[data-theme="dark"] .theme-only-light {
+  display: none;
+}
+
+[data-theme="dark"] .theme-only-dark {
+  display: contents;
+}

@@ -30,39 +30,60 @@ function navLinkClass({ isActive }: { isActive: boolean }) {
   }`;
 }
 
+/*
+ * Stateless by design. `<html data-theme>` is the single source of truth: the
+ * inline script in index.html sets it before first paint, and this component
+ * reads and writes that attribute directly.
+ *
+ * Nothing in the returned markup depends on the current theme, so the
+ * prerendered HTML and the first client render are identical — there is no
+ * hydration mismatch to fix. The correct icon and label still appear at first
+ * paint because CSS keys off the same `data-theme` attribute (see the
+ * `.theme-only-*` rules in styles/base.css), which is why this reads the DOM
+ * rather than holding React state: state would have to be resolved after mount
+ * and the icon would visibly flip.
+ */
 function ThemeToggle() {
-  const [theme, setTheme] = useState<"light" | "dark">(() => {
-    if (typeof window === "undefined") return "light";
-    const stored = window.localStorage.getItem("theme");
-    if (stored === "dark" || stored === "light") return stored;
-    return document.documentElement.dataset.theme === "dark"
-      ? "dark"
-      : "light";
-  });
+  function toggle() {
+    const next =
+      document.documentElement.dataset.theme === "dark" ? "light" : "dark";
+    document.documentElement.dataset.theme = next === "dark" ? "dark" : "";
 
-  useEffect(() => {
-    document.documentElement.dataset.theme = theme === "dark" ? "dark" : "";
+    /*
+     * Keep the browser-chrome tint in step with the page. The same meta is set
+     * pre-paint by the inline script in index.html; this is the other half, for
+     * a toggle after load. Values match --bg light/dark in styles/tokens.css.
+     */
+    document
+      .querySelector('meta[name="theme-color"]')
+      ?.setAttribute("content", next === "dark" ? "#191613" : "#faf7f2");
+
     try {
-      window.localStorage.setItem("theme", theme);
+      window.localStorage.setItem("theme", next);
     } catch {
       // localStorage unavailable (private mode, etc.) — theme just won't persist.
     }
-  }, [theme]);
+  }
 
   return (
     <button
       type="button"
-      onClick={() => setTheme((t) => (t === "light" ? "dark" : "light"))}
-      aria-label={
-        theme === "light" ? "Switch to dark mode" : "Switch to light mode"
-      }
+      onClick={toggle}
       className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full text-ink transition-colors hover:bg-surface-alt"
     >
-      {theme === "light" ? (
+      {/*
+        Both states ship in the markup and CSS shows exactly one. The label is
+        real text rather than aria-label so the accessible name is correct at
+        first paint too — an aria-label would have to be corrected after mount.
+      */}
+      <span className="theme-only-light">
         <MoonIcon className="h-4 w-4" aria-hidden="true" />
-      ) : (
+        <span className="sr-only">Switch to dark mode</span>
+      </span>
+      <span className="theme-only-dark">
         <SunIcon className="h-4 w-4" aria-hidden="true" />
-      )}
+        <span className="sr-only">Switch to light mode</span>
+      </span>
     </button>
   );
 }
