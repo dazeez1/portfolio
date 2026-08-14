@@ -2,7 +2,23 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+    <!--
+      Icons live here rather than in a per-page Helmet: they are document
+      shell, identical on all 13 routes, and the browser requests them before
+      any JavaScript runs. A Helmet-injected icon only lands after hydration.
+
+      Order is deliberate. The .ico is declared first with an explicit size for
+      older browsers and tools that ignore SVG favicons; the SVG follows and
+      wins wherever it is supported, staying crisp at any size.
+
+      Framework-mode note: index.html is not used in framework mode — the root
+      route renders <html> itself — so these four lines move into the <head> of
+      app/root.tsx during that migration. That is the direct analogue and the
+      spike already built the file, so the move is mechanical.
+    -->
+    <link rel="icon" href="/favicon.ico" sizes="32x32" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <!--
       Anti-flash: read the persisted theme and set data-theme on <html>
