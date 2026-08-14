@@ -3,7 +3,12 @@ import { Helmet } from "react-helmet-async";
 import { ButtonAnchor, ButtonLink } from "../components/Button";
 import { Card } from "../components/Card";
 import { Container } from "../components/Container";
-import { resumeDownloadName } from "../content/site";
+import {
+  canonicalUrl,
+  defaultOgImage,
+  resumeDownloadName,
+  twitterCardType,
+} from "../content/site";
 import { Footer } from "../components/Footer";
 import { DownloadIcon } from "../components/icons";
 import { Nav } from "../components/Nav";
@@ -50,12 +55,27 @@ function IntroPhoto({ src, alt }: { src: string; alt: string }) {
   );
 }
 
+const metaTitle = "About — Azeez Damilare Gbenga";
+const canonical = canonicalUrl("/about");
+
 export default function About() {
   return (
     <div className="flex min-h-screen flex-col">
       <Helmet>
-        <title>About — Azeez Damilare Gbenga</title>
+        <title>{metaTitle}</title>
         <meta name="description" content={intro.lead} />
+        <link rel="canonical" href={canonical} />
+
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content={metaTitle} />
+        <meta property="og:description" content={intro.lead} />
+        <meta property="og:url" content={canonical} />
+        <meta property="og:image" content={defaultOgImage} />
+
+        <meta name="twitter:card" content={twitterCardType} />
+        <meta name="twitter:title" content={metaTitle} />
+        <meta name="twitter:description" content={intro.lead} />
+        <meta name="twitter:image" content={defaultOgImage} />
       </Helmet>
 
       <Nav />

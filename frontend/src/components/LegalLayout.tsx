@@ -7,7 +7,7 @@ import { Container } from "./Container";
 import { Footer } from "./Footer";
 import { Nav } from "./Nav";
 import type { LegalBlock, LegalDocument } from "../content/legal";
-import { canonicalUrl } from "../content/site";
+import { canonicalUrl, defaultOgImage, twitterCardType } from "../content/site";
 
 /**
  * Shared layout for legal documents (/privacy, /terms). Renders entirely from
@@ -178,6 +178,22 @@ export function LegalLayout({ document: doc }: { document: LegalDocument }) {
         <link rel="canonical" href={canonical} />
         {/* Legal pages should not compete with real content in search. */}
         <meta name="robots" content="noindex, follow" />
+
+        {/*
+          OG/Twitter despite the noindex: robots stops indexing, not link
+          previews, so a legal URL shared in a chat or email still needs a
+          title, description and image rather than rendering bare.
+        */}
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content={doc.metaTitle} />
+        <meta property="og:description" content={doc.metaDescription} />
+        <meta property="og:url" content={canonical} />
+        <meta property="og:image" content={defaultOgImage} />
+
+        <meta name="twitter:card" content={twitterCardType} />
+        <meta name="twitter:title" content={doc.metaTitle} />
+        <meta name="twitter:description" content={doc.metaDescription} />
+        <meta name="twitter:image" content={defaultOgImage} />
       </Helmet>
 
       <Nav />

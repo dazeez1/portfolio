@@ -15,6 +15,7 @@ import {
 import { Nav } from "../components/Nav";
 import { SectionHeading } from "../components/SectionHeading";
 import { TagPill } from "../components/TagPill";
+import { canonicalUrl, defaultOgImage, twitterCardType } from "../content/site";
 import {
   featuredSectionLabel,
   filterOptions,
@@ -270,6 +271,9 @@ function Pagination({
   );
 }
 
+const metaTitle = "Portfolio — Azeez Damilare Gbenga";
+const canonical = canonicalUrl("/portfolio");
+
 export default function Portfolio() {
   const [activeFilter, setActiveFilter] = useState<string>("All");
   const [page, setPage] = useState(1);
@@ -298,8 +302,20 @@ export default function Portfolio() {
   return (
     <div className="flex min-h-screen flex-col">
       <Helmet>
-        <title>Portfolio — Azeez Damilare Gbenga</title>
+        <title>{metaTitle}</title>
         <meta name="description" content={header.subhead} />
+        <link rel="canonical" href={canonical} />
+
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content={metaTitle} />
+        <meta property="og:description" content={header.subhead} />
+        <meta property="og:url" content={canonical} />
+        <meta property="og:image" content={defaultOgImage} />
+
+        <meta name="twitter:card" content={twitterCardType} />
+        <meta name="twitter:title" content={metaTitle} />
+        <meta name="twitter:description" content={header.subhead} />
+        <meta name="twitter:image" content={defaultOgImage} />
       </Helmet>
 
       <Nav />

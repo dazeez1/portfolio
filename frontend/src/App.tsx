@@ -1,5 +1,6 @@
 import { Route, Routes } from "react-router";
 import { ScrollManager } from "./components/ScrollManager";
+import { SiteStructuredData } from "./components/SiteStructuredData";
 import About from "./pages/About";
 import CaseStudy from "./pages/CaseStudy";
 import Contact from "./pages/Contact";
@@ -18,6 +19,7 @@ function App() {
   return (
     <>
       <ScrollManager />
+      <SiteStructuredData />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />

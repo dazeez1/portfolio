@@ -47,17 +47,17 @@ Build order is sequential — a phase starts only when the previous one is appro
 ## Phase 3 — Launch pass
 
 - [ ] Per-page meta titles/descriptions + OG images; prerendered HTML verified per route
-- [ ] **Backfill the Section 13 SEO block onto the 8 routes that still lack it.** Audited 13 Aug 2026 from the rendered DOM. Complete: `/services` + `/seo` (canonical, 5 OG, 4 Twitter, `Service`), `/referrals` (same, `FAQPage`), and **both case studies** (canonical, 5 OG, 4 Twitter, `WebPage`+`about:WebApplication`, `BreadcrumbList`). Canonical + robots only: `/privacy`, `/terms` — noindex does not stop link previews, so they still want OG. **Nothing beyond title + description:** `/`, `/about`, `/portfolio`, `/contact`, `/thank-you`, 404.
-- [ ] **`Person` JSON-LD is missing site-wide.** CLAUDE.md Section 8 requires it on every page; no route emits it. `/referrals` uses `FAQPage`, so no page currently carries `Person` at all.
+- [x] **Section 13 SEO block complete on all 13 routes** (14 Aug 2026). Canonical + 5 OG + 4 Twitter everywhere except 404, which carries 4 OG and no canonical by design (it renders at arbitrary URLs). `/thank-you` and 404 carry `noindex, follow`; `/privacy` and `/terms` keep theirs and now have OG too, since noindex does not stop link previews.
+- [x] **`Person` JSON-LD emitted site-wide** from `components/SiteStructuredData.tsx`, rendered once in App.tsx beside ScrollManager. `sameAs` is derived from `sameAsProfiles` in content/social.ts (GitHub, LinkedIn, Instagram — WhatsApp excluded as a chat deep link, not a profile) and was verified byte-identical to the footer hrefs.
 - [ ] **No per-case-study OG image.** Both case studies point at the site default. Their hero screenshots are real and near-perfect OG ratio (`sangira-card.webp` is 1400x730 = 1.91:1) but are WebP, which LinkedIn and Facebook scrapers handle unreliably — do not repoint OG at them without converting to PNG/JPEG first.
 - [ ] sitemap.xml + robots.txt; submit to Google Search Console
-- [ ] JSON-LD: Person (site-wide), BreadcrumbList (case studies)
+- [x] JSON-LD: Person (site-wide), BreadcrumbList (case studies)
 - [ ] Lighthouse ≥ 90 (mobile) on every page — measure on a **production build**, not a preview URL (CLAUDE.md Section 13). SEO category applies to indexable pages only; `/privacy` and `/terms` are intentionally noindexed and exempt.
 - [ ] robots.txt is missing, which costs every page ~8 Lighthouse SEO points (Services scores 92 with it absent). Tracked alongside sitemap.xml above.
 - [ ] Cross-browser: Chrome, Safari, Firefox, Edge + iOS Safari, Android Chrome
 - [ ] Full keyboard-only walkthrough
 - [ ] Forms and booking tested end-to-end **in production**
-- [ ] Favicon + site-wide OG image — `/og-default.png` is already referenced by every page's OG/Twitter tags (see content/site.ts); the asset itself still needs creating and dropping into `frontend/public/`
+- [ ] **Favicon + site-wide OG image — `/og-default.png` still does not exist**, and is now referenced by **all 13 routes**. Needed: `frontend/public/og-default.png`, **1200×630** (1.91:1), PNG or JPEG — not WebP, which LinkedIn and Facebook scrapers handle unreliably. Under 8MB, ideally under 1MB. Beware when checking: the SPA rewrite makes `/og-default.png` return **HTTP 200 with `content-type: text/html`** (the 1968-byte shell), so a status check alone looks like it exists — verify the content-type.
 - [ ] Custom domain purchased (on Vercel) and connected — target: end of month
 - [x] **`/api/contact` 500 resolved.** Diagnosed 13 Aug 2026 by black-box probing to "handler reaches Resend, Resend rejects" (both env guards passed — proven by warm-latency separation with no overlap). The owner then fixed it on the Resend side; the endpoint returned 200 on the next check. Cause was outside the code — no handler change was needed or made.
 - [ ] **Merge `stage` into `main`.** Production (80495f5) predates both the `CONTACT_FROM_EMAIL` support and the api/ typecheck config, so setting that env var currently has no effect on production at all.

@@ -36,6 +36,7 @@ import {
 } from "../content/contact";
 import { useCalendly } from "../hooks/useCalendly";
 import { useHydrated } from "../hooks/useHydrated";
+import { canonicalUrl, defaultOgImage, twitterCardType } from "../content/site";
 
 const socialIcons = { GitHub: GithubIcon, LinkedIn: LinkedInIcon, Instagram: InstagramIcon };
 
@@ -91,6 +92,9 @@ function ConnectMethodRow({
     </div>
   );
 }
+
+const metaTitle = "Contact — Azeez Damilare Gbenga";
+const canonical = canonicalUrl("/contact");
 
 export default function Contact() {
   const navigate = useNavigate();
@@ -218,8 +222,20 @@ export default function Contact() {
   return (
     <div className="flex min-h-screen flex-col">
       <Helmet>
-        <title>Contact — Azeez Damilare Gbenga</title>
+        <title>{metaTitle}</title>
         <meta name="description" content={header.subhead} />
+        <link rel="canonical" href={canonical} />
+
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content={metaTitle} />
+        <meta property="og:description" content={header.subhead} />
+        <meta property="og:url" content={canonical} />
+        <meta property="og:image" content={defaultOgImage} />
+
+        <meta name="twitter:card" content={twitterCardType} />
+        <meta name="twitter:title" content={metaTitle} />
+        <meta name="twitter:description" content={header.subhead} />
+        <meta name="twitter:image" content={defaultOgImage} />
       </Helmet>
 
       <Nav />

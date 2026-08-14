@@ -5,6 +5,7 @@ import { Container } from "../components/Container";
 import { Footer } from "../components/Footer";
 import { HomeIcon } from "../components/icons";
 import { Nav } from "../components/Nav";
+import { defaultOgImage, twitterCardType } from "../content/site";
 import {
   ghostNumeral,
   heading,
@@ -16,12 +17,33 @@ import {
   subline,
 } from "../content/notFound";
 
+const metaTitle = "Page not found — Azeez Damilare Gbenga";
+
 export default function NotFound() {
   return (
     <div className="flex min-h-screen flex-col">
       <Helmet>
-        <title>Page not found — Azeez Damilare Gbenga</title>
-        <meta name="robots" content="noindex" />
+        <title>{metaTitle}</title>
+        <meta name="description" content={subline} />
+        <meta name="robots" content="noindex, follow" />
+
+        {/*
+          No canonical here on purpose. This component renders at whatever URL
+          failed to match — /nonsense, /portfolio/bad-slug, anything — so a
+          self-referential canonical would canonicalise junk URLs, and a fixed
+          one would tell Google a junk URL is really another page (a soft-404
+          signal). `noindex` already keeps it out of the index, which makes a
+          canonical inert here anyway.
+        */}
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content={metaTitle} />
+        <meta property="og:description" content={subline} />
+        <meta property="og:image" content={defaultOgImage} />
+
+        <meta name="twitter:card" content={twitterCardType} />
+        <meta name="twitter:title" content={metaTitle} />
+        <meta name="twitter:description" content={subline} />
+        <meta name="twitter:image" content={defaultOgImage} />
       </Helmet>
 
       <Nav />

@@ -6,12 +6,16 @@ import { Footer } from "../components/Footer";
 import { CheckIcon, WhatsAppIcon } from "../components/icons";
 import { Nav } from "../components/Nav";
 import { thankYou } from "../content/thankyou";
+import { canonicalUrl, defaultOgImage, twitterCardType } from "../content/site";
 
 interface ThankYouState {
   reference?: string;
   request?: string;
   package?: string;
 }
+
+const metaTitle = "Message received — Azeez Damilare Gbenga";
+const canonical = canonicalUrl("/thank-you");
 
 export default function ThankYou() {
   const location = useLocation();
@@ -20,8 +24,21 @@ export default function ThankYou() {
   return (
     <div className="flex min-h-screen flex-col">
       <Helmet>
-        <title>Message received — Azeez Damilare Gbenga</title>
+        <title>{metaTitle}</title>
         <meta name="description" content={thankYou.subline} />
+        <link rel="canonical" href={canonical} />
+        <meta name="robots" content="noindex, follow" />
+
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content={metaTitle} />
+        <meta property="og:description" content={thankYou.subline} />
+        <meta property="og:url" content={canonical} />
+        <meta property="og:image" content={defaultOgImage} />
+
+        <meta name="twitter:card" content={twitterCardType} />
+        <meta name="twitter:title" content={metaTitle} />
+        <meta name="twitter:description" content={thankYou.subline} />
+        <meta name="twitter:image" content={defaultOgImage} />
       </Helmet>
 
       <Nav />
