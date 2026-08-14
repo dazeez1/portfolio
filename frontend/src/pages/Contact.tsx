@@ -35,6 +35,7 @@ import {
   submitMicrocopy,
 } from "../content/contact";
 import { useCalendly } from "../hooks/useCalendly";
+import { useHydrated } from "../hooks/useHydrated";
 
 const socialIcons = { GitHub: GithubIcon, LinkedIn: LinkedInIcon, Instagram: InstagramIcon };
 
@@ -94,8 +95,18 @@ function ConnectMethodRow({
 export default function Contact() {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
-  const packageParam = searchParams.get("package");
-  const typeParam = searchParams.get("type");
+
+  /*
+   * Query strings never get their own prerendered file — /contact?package=x is
+   * served by the same static /contact HTML — so that HTML is always the
+   * no-param state. Reading the params during render would make the first
+   * client render differ from it and trip a hydration mismatch, so they are
+   * resolved after mount instead. The chip and the pre-set select appear a tick
+   * later, which is invisible in practice and keeps both renders identical.
+   */
+  const hydrated = useHydrated();
+  const packageParam = hydrated ? searchParams.get("package") : null;
+  const typeParam = hydrated ? searchParams.get("type") : null;
   const isReferral = typeParam === "referral";
 
   const [chipDismissed, setChipDismissed] = useState(false);
@@ -109,9 +120,17 @@ export default function Contact() {
 
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
-  const [need, setNeed] = useState(() =>
-    packageParam ? "new-project" : isReferral ? "referral" : "",
-  );
+  /*
+   * `need` is derived, not stored: the URL params supply the default and the
+   * visitor's own selection overrides it. That keeps the pre-fill out of an
+   * effect entirely — before hydration the params read as null, so this is ""
+   * on both sides — and means a later param change can never overwrite a
+   * choice the visitor has already made.
+   */
+  const [needOverride, setNeedOverride] = useState<string | null>(null);
+  const need =
+    needOverride ??
+    (packageParam ? "new-project" : isReferral ? "referral" : "");
   const [message, setMessage] = useState("");
   const [honeypot, setHoneypot] = useState("");
   const [errors, setErrors] = useState<Record<string, string>>({});
@@ -131,7 +150,7 @@ export default function Contact() {
 
   function handleDismissChip() {
     setChipDismissed(true);
-    setNeed("");
+    setNeedOverride("");
   }
 
   async function handleSubmit(e: SyntheticEvent<HTMLFormElement>) {
@@ -369,7 +388,7 @@ export default function Contact() {
                       label="What do you need?"
                       name="need"
                       value={need}
-                      onChange={(e) => setNeed(e.target.value)}
+                      onChange={(e) => setNeedOverride(e.target.value)}
                       error={errors.need}
                     >
                       <option value="" disabled>
