@@ -45,6 +45,8 @@ Build order is sequential — a phase starts only when the previous one is appro
 - [x] Terms (reuses `LegalLayout` + the `LegalDocument` shape in content/legal.ts)
 
 ## Phase 3 — Launch pass
+- [x] **`react-helmet-async` removed; React 19 native metadata now owns the head** (15 Aug 2026). All 12 `<Helmet>` usages became plain fragments, `HelmetProvider` is out of the entry chain, and the dependency is uninstalled (bundle 407KB → 396KB). Verified on the deployed preview: **0 of 13 routes differ** from the Helmet baseline on title, description, canonical, 5 OG, 4 Twitter, robots, theme-color, icons or JSON-LD types; all blocks still parse. JSON-LD stays in `<body>` (React does not hoist `<script>`) — unchanged, Helmet left them there too. This removes the SSR-injection obstacle before the framework-mode migration.
+- [ ] **Two `<title>` elements in `<head>` on every route** — pre-existing, not caused by the Helmet removal (Helmet produced the same two). React inserts its title *before* the static one from index.html, so `document.title` resolves correctly and the second is inert. Removing the static title would leave no title before hydration, which is worse for the current client-rendered SPA. **Framework mode fixes it for free**: `app/root.tsx` owns the whole document, so there is no separate index.html title.
 
 - [ ] Per-page meta titles/descriptions + OG images; prerendered HTML verified per route
 - [x] **Section 13 SEO block complete on all 13 routes** (14 Aug 2026). Canonical + 5 OG + 4 Twitter everywhere except 404, which carries 4 OG and no canonical by design (it renders at arbitrary URLs). `/thank-you` and 404 carry `noindex, follow`; `/privacy` and `/terms` keep theirs and now have OG too, since noindex does not stop link previews.
