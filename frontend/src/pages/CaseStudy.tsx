@@ -16,7 +16,10 @@ export default function CaseStudy() {
   const { slug } = useParams();
   const content = getCaseStudy(slug);
 
-  if (!content) return <NotFound />;
+  // Narrowing `slug` here as well as `content` avoids a non-null assertion:
+  // getCaseStudy only returns content for a defined slug, but TypeScript
+  // cannot infer that from the lookup alone.
+  if (!slug || !content) return <NotFound />;
 
-  return <CaseStudyLayout content={content} />;
+  return <CaseStudyLayout content={content} slug={slug} />;
 }

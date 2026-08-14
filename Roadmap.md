@@ -47,7 +47,9 @@ Build order is sequential — a phase starts only when the previous one is appro
 ## Phase 3 — Launch pass
 
 - [ ] Per-page meta titles/descriptions + OG images; prerendered HTML verified per route
-- [ ] Backfill the CLAUDE.md Section 13 SEO block onto pages built before it existed — Home, About, Portfolio, Contact, Thank You, 404, and both case studies currently have only title + description; they still need canonical, OG/Twitter tags, and (where a type fits) JSON-LD. `/services` is the reference implementation.
+- [ ] **Backfill the Section 13 SEO block onto the 8 routes that still lack it.** Audited 13 Aug 2026 from the rendered DOM. Complete: `/services` + `/seo` (canonical, 5 OG, 4 Twitter, `Service`), `/referrals` (same, `FAQPage`), and **both case studies** (canonical, 5 OG, 4 Twitter, `WebPage`+`about:WebApplication`, `BreadcrumbList`). Canonical + robots only: `/privacy`, `/terms` — noindex does not stop link previews, so they still want OG. **Nothing beyond title + description:** `/`, `/about`, `/portfolio`, `/contact`, `/thank-you`, 404.
+- [ ] **`Person` JSON-LD is missing site-wide.** CLAUDE.md Section 8 requires it on every page; no route emits it. `/referrals` uses `FAQPage`, so no page currently carries `Person` at all.
+- [ ] **No per-case-study OG image.** Both case studies point at the site default. Their hero screenshots are real and near-perfect OG ratio (`sangira-card.webp` is 1400x730 = 1.91:1) but are WebP, which LinkedIn and Facebook scrapers handle unreliably — do not repoint OG at them without converting to PNG/JPEG first.
 - [ ] sitemap.xml + robots.txt; submit to Google Search Console
 - [ ] JSON-LD: Person (site-wide), BreadcrumbList (case studies)
 - [ ] Lighthouse ≥ 90 (mobile) on every page — measure on a **production build**, not a preview URL (CLAUDE.md Section 13). SEO category applies to indexable pages only; `/privacy` and `/terms` are intentionally noindexed and exempt.

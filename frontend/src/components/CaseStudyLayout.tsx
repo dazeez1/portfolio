@@ -2,6 +2,12 @@ import { useRef, useState } from "react";
 import { Helmet } from "react-helmet-async";
 import { Link } from "react-router";
 import type { CaseStudyContent, CaseStudyImage as CaseStudyImageData } from "../content/caseStudies/types";
+import {
+  canonicalUrl,
+  defaultOgImage,
+  siteUrl,
+  twitterCardType,
+} from "../content/site";
 import { BrowserFrame } from "./BrowserFrame";
 import { ButtonLink } from "./Button";
 import { Card } from "./Card";
@@ -97,15 +103,103 @@ function CaseStudyImage({
   );
 }
 
-export function CaseStudyLayout({ content }: { content: CaseStudyContent }) {
+export function CaseStudyLayout({
+  content,
+  slug,
+}: {
+  content: CaseStudyContent;
+  /**
+   * URL segment under /portfolio/. Supplied by the route rather than stored in
+   * the content file, because the case-study registry is already keyed by it —
+   * so a third case study needs no meta work of any kind.
+   */
+  slug: string;
+}) {
   const { hero, problem, solution, build, features, challenges, results, projectNav, closingCta } =
     content;
+
+  const canonical = canonicalUrl(`/portfolio/${slug}`);
+
+  /*
+   * WebPage describing the page, `about` describing the thing the page is
+   * about — a real web application. Both statements are true, and every field
+   * comes from the content file.
+   *
+   * Deliberately no `offers`, `aggregateRating` or `review`: there are no real
+   * ratings, and Section 4 forbids inventing them. Google needs one of those
+   * for a SoftwareApplication rich result, so this will not produce a rich
+   * snippet — it exists to describe the entity, not to win a badge. Article
+   * types were rejected for the same reason: they want a publish date, and the
+   * only dates here are project durations.
+   */
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    url: canonical,
+    name: content.metaTitle,
+    description: hero.summary,
+    isPartOf: {
+      "@type": "WebSite",
+      name: "Azeez Damilare Gbenga",
+      url: siteUrl,
+    },
+    author: {
+      "@type": "Person",
+      name: "Azeez Damilare Gbenga",
+      url: siteUrl,
+    },
+    about: {
+      "@type": "WebApplication",
+      name: hero.title,
+      description: hero.summary,
+      ...(hero.metaBar.liveHref ? { url: hero.metaBar.liveHref } : {}),
+    },
+  };
+
+  /* Home → Portfolio → <current>, using the breadcrumbCurrent already in the
+     content file (which until now nothing rendered). */
+  const breadcrumbs = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: canonicalUrl("/") },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: "Portfolio",
+        item: canonicalUrl("/portfolio"),
+      },
+      {
+        "@type": "ListItem",
+        position: 3,
+        name: content.breadcrumbCurrent,
+        item: canonical,
+      },
+    ],
+  };
 
   return (
     <div className="flex min-h-screen flex-col">
       <Helmet>
         <title>{content.metaTitle}</title>
         <meta name="description" content={hero.summary} />
+        <link rel="canonical" href={canonical} />
+
+        <meta property="og:type" content="article" />
+        <meta property="og:title" content={content.metaTitle} />
+        <meta property="og:description" content={hero.summary} />
+        <meta property="og:url" content={canonical} />
+        <meta property="og:image" content={defaultOgImage} />
+
+        <meta name="twitter:card" content={twitterCardType} />
+        <meta name="twitter:title" content={content.metaTitle} />
+        <meta name="twitter:description" content={hero.summary} />
+        <meta name="twitter:image" content={defaultOgImage} />
+
+        <script type="application/ld+json">
+          {JSON.stringify(structuredData)}
+        </script>
+        <script type="application/ld+json">{JSON.stringify(breadcrumbs)}</script>
       </Helmet>
 
       <Nav />
