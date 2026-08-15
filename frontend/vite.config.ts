@@ -40,5 +40,13 @@ function sitemap(): Plugin {
 // Plugin order is not load-bearing here — the spike built this both ways and
 // got a byte-identical stylesheet — but tailwind first reads more naturally.
 export default defineConfig({
+  /*
+   * Vite only exposes VITE_-prefixed vars to client code. GA_ is added so the
+   * measurement ID can be set as plain GA_MEASUREMENT_ID. Widening the prefix
+   * is safe only because it stays narrow: never put a secret behind a GA_ name
+   * — anything matching a listed prefix is inlined into the public bundle.
+   * A GA4 measurement ID is not a secret; it ships in the page by design.
+   */
+  envPrefix: ["VITE_", "GA_"],
   plugins: [tailwindcss(), reactRouter(), sitemap()],
 });
