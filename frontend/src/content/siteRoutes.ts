@@ -39,8 +39,6 @@ export const siteRoutes: SiteRoute[] = [
   { path: "/terms", indexable: false },
   // noindex, follow — a post-submission receipt is not a search destination.
   { path: "/thank-you", indexable: false },
-  // Internal component gallery, due for removal in Phase 3.
-  { path: "/dev/components", indexable: false },
 ];
 
 /** Everything to prerender. The 404 is added separately in the router config. */

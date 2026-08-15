@@ -1,10 +1,7 @@
-# Crawling is open. Two exceptions, both deliberate:
+# Crawling is open. One exception:
 #
-#   /dev/  — the internal component gallery. It is prerendered (an
-#            un-enumerated route would hard-404 now that the SPA catch-all is
-#            gone) but it is instrumentation, not content. Due for removal.
-#   /api/  — the contact-form function. It answers 405 to GET, so crawling it
-#            only wastes budget and files errors in Search Console.
+#   /api/ — the contact-form function. It answers 405 to GET, so crawling it
+#           only wastes budget and files errors in Search Console.
 #
 # Pages that must stay out of the index carry <meta name="robots" content="noindex">
 # instead of a rule here: /privacy, /terms, /thank-you and the 404. Disallow
@@ -13,7 +10,6 @@
 
 User-agent: *
 Allow: /
-Disallow: /dev/
 Disallow: /api/
 
 Sitemap: https://azeezdamilare.com/sitemap.xml
