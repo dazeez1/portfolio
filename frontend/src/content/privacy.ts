@@ -53,7 +53,7 @@ export const privacy: LegalDocument = {
             },
             {
               label: "Usage data.",
-              text: "The hosting platform records standard server request data, including your IP address, as part of serving the site. Google Analytics records the pages you open, how you move between them, and a few specific actions such as opening the booking window or clicking a pricing button; it uses cookies to tell repeat visits apart. Plausible records aggregate page views alongside it, without cookies.",
+              text: "The hosting platform records standard server request data, including your IP address, as part of serving the site. Google Analytics records the pages you open, how you move between them, and a few specific actions such as opening the booking window or clicking a pricing button; it uses cookies to tell repeat visits apart.",
             },
           ],
         },
@@ -105,10 +105,6 @@ export const privacy: LegalDocument = {
               text: 'If you switch between light and dark mode, that choice is saved in your browser\'s local storage under a single key named "theme". It stays on your device, is never sent to a server, and clearing your browser data removes it.',
             },
             {
-              label: "Plausible.",
-              text: "The second analytics tool on the site runs without cookies and without any persistent identifier, so it cannot follow you between sites or across visits.",
-            },
-            {
               label: "Calendly.",
               text: 'If, and only if, you open the booking window, Calendly sets two cookies on its own domain, calendly.com: "__cf_bm" and "_cfuvid". Both come from its Cloudflare bot protection. They are not set on this site, and they do not appear unless you open the booking window.',
             },
@@ -150,11 +146,6 @@ export const privacy: LegalDocument = {
               name: "Google Analytics",
               text: "measures how the site is used. It receives the pages you open, how you move between them, and a short list of actions I have chosen to record: submitting the contact form, along with the request type and package if those were included; opening the booking window; downloading my resume; clicking a pricing button; and opening a case study. It also receives your IP address and sets the two cookies described above. It does not receive your name, your email address, or anything you type into the message field.",
               href: "https://policies.google.com/privacy",
-            },
-            {
-              name: "Plausible",
-              text: "provides privacy-focused analytics alongside Google Analytics. It is cookieless, collects no personal data, and reports only aggregate figures such as page views and referrers.",
-              href: "https://plausible.io/data-policy",
             },
           ],
         },

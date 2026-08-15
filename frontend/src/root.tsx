@@ -84,21 +84,11 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <Links />
 
         {/*
-          Plausible: async, non-blocking (CLAUDE.md Section 10). Records nothing
-          until azeezdamilare.com is live and a matching Plausible site exists.
-          Runs alongside GA4 only until GA4 is verified, then comes out.
-        */}
-        <script
-          defer
-          data-domain="azeezdamilare.com"
-          src="https://plausible.io/js/script.js"
-        />
-
-        {/*
-          GA4. Both tags render only when GA_MEASUREMENT_ID holds a well-formed
-          ID, so an unset var leaves the document exactly as it was rather than
-          loading a tag that 404s. async keeps it off the render path
-          (CLAUDE.md Section 10); page views come from <Analytics />.
+          GA4 — the only analytics on the site. Both tags render only when
+          GA_MEASUREMENT_ID holds a well-formed ID, so an unset var leaves the
+          document exactly as it was rather than loading a tag that 404s. async
+          keeps it off the render path (CLAUDE.md Section 10); page views come
+          from <Analytics />.
         */}
         {gaEnabled && (
           <>
