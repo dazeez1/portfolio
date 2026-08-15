@@ -43,12 +43,12 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
         {/*
-          Icons. The .ico is declared first with an explicit size for older
-          browsers and tools that ignore SVG favicons; the SVG follows and wins
-          wherever it is supported, staying crisp at any size.
+          Icons. favicon.ico is the only tab icon — the .svg that used to sit
+          here was the untouched Vite scaffold logo, and because browsers prefer
+          an SVG favicon it was the one actually being shown. If an ADG SVG is
+          ever drawn, it goes back below this line and wins again.
         */}
         <link rel="icon" href="/favicon.ico" sizes="32x32" />
-        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
         <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 
         {/*
