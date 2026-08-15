@@ -21,7 +21,12 @@ import { join, dirname, basename, extname } from "node:path";
 import { fileURLToPath } from "node:url";
 import sharp from "sharp";
 
-const IMAGES_DIR = join(dirname(fileURLToPath(import.meta.url)), "..", "public", "images");
+const IMAGES_DIR = join(
+  dirname(fileURLToPath(import.meta.url)),
+  "..",
+  "public",
+  "images",
+);
 
 /** Sources to downscale. Each is the full-size original, left untouched. */
 const SOURCES = ["sangira-card.webp", "qure-patient-portal.webp"];
@@ -39,20 +44,55 @@ const WIDTHS = [400, 700, 1050];
 /** Matches the quality the source files were encoded at closely enough. */
 const QUALITY = 80;
 
+/**
+ * The favicon Google will actually index.
+ *
+ * Google's favicon crawler expects a square whose side is a multiple of 48px;
+ * the 32x32 favicon.ico can be skipped for being an odd size. This is a plain
+ * downscale of apple-touch-icon.png — the same ADG artwork, not a redraw — so
+ * there is only ever one icon design to keep in sync.
+ */
+const FAVICON_SOURCE = "apple-touch-icon.png";
+const FAVICON_OUT = "favicon-96.png";
+const FAVICON_SIZE = 96;
+
+{
+  const src = join(IMAGES_DIR, "..", FAVICON_SOURCE);
+  const out = join(IMAGES_DIR, "..", FAVICON_OUT);
+  const input = await readFile(src);
+  const meta = await sharp(input).metadata();
+  const buf = await sharp(input)
+    .resize(FAVICON_SIZE, FAVICON_SIZE, { fit: "cover" })
+    .png()
+    .toBuffer();
+  await writeFile(out, buf);
+  console.log(
+    `${FAVICON_OUT} — ${FAVICON_SIZE}x${FAVICON_SIZE} from ${FAVICON_SOURCE} (${meta.width}x${meta.height}), ${(buf.length / 1024).toFixed(1)} KiB\n`,
+  );
+}
+
 let totalSaved = 0;
 for (const file of SOURCES) {
   const src = join(IMAGES_DIR, file);
   const input = await readFile(src);
   const meta = await sharp(input).metadata();
-  console.log(`${file} — source ${meta.width}x${meta.height}, ${(input.length / 1024).toFixed(1)} KiB`);
+  console.log(
+    `${file} — source ${meta.width}x${meta.height}, ${(input.length / 1024).toFixed(1)} KiB`,
+  );
 
   for (const width of WIDTHS) {
     if (width >= meta.width) {
       console.log(`  ${width}w: skipped, source is only ${meta.width}px wide`);
       continue;
     }
-    const out = join(IMAGES_DIR, `${basename(file, extname(file))}-${width}${extname(file)}`);
-    const buf = await sharp(input).resize({ width }).webp({ quality: QUALITY }).toBuffer();
+    const out = join(
+      IMAGES_DIR,
+      `${basename(file, extname(file))}-${width}${extname(file)}`,
+    );
+    const buf = await sharp(input)
+      .resize({ width })
+      .webp({ quality: QUALITY })
+      .toBuffer();
     await writeFile(out, buf);
     const saved = input.length - buf.length;
     totalSaved += saved;
@@ -61,4 +101,6 @@ for (const file of SOURCES) {
     );
   }
 }
-console.log(`\nDone. Largest single-request saving vs always serving the source: ${(totalSaved / 1024).toFixed(1)} KiB across all variants.`);
+console.log(
+  `\nDone. Largest single-request saving vs always serving the source: ${(totalSaved / 1024).toFixed(1)} KiB across all variants.`,
+);
