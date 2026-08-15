@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { Helmet } from "react-helmet-async";
 import { ButtonAnchor, ButtonLink } from "../components/Button";
 import { Card } from "../components/Card";
 import { Container } from "../components/Container";
@@ -61,7 +60,7 @@ const canonical = canonicalUrl("/about");
 export default function About() {
   return (
     <div className="flex min-h-screen flex-col">
-      <Helmet>
+      <>
         <title>{metaTitle}</title>
         <meta name="description" content={intro.lead} />
         <link rel="canonical" href={canonical} />
@@ -76,7 +75,7 @@ export default function About() {
         <meta name="twitter:title" content={metaTitle} />
         <meta name="twitter:description" content={intro.lead} />
         <meta name="twitter:image" content={defaultOgImage} />
-      </Helmet>
+      </>
 
       <Nav />
 

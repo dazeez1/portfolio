@@ -1,4 +1,3 @@
-import { Helmet } from "react-helmet-async";
 import { Link } from "react-router";
 import { BrowserFrame } from "../components/BrowserFrame";
 import { ButtonLink } from "../components/Button";
@@ -41,7 +40,7 @@ const canonical = canonicalUrl("/");
 export default function Home() {
   return (
     <div className="flex min-h-screen flex-col">
-      <Helmet>
+      <>
         <title>{metaTitle}</title>
         <meta name="description" content={hero.subhead} />
         <link rel="canonical" href={canonical} />
@@ -56,7 +55,7 @@ export default function Home() {
         <meta name="twitter:title" content={metaTitle} />
         <meta name="twitter:description" content={hero.subhead} />
         <meta name="twitter:image" content={defaultOgImage} />
-      </Helmet>
+      </>
 
       <Nav />
 

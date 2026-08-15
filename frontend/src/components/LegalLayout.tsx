@@ -1,5 +1,4 @@
 import { useCallback, useEffect, useRef, useState } from "react";
-import { Helmet } from "react-helmet-async";
 import { Link } from "react-router";
 import { Accordion } from "./Accordion";
 import { Card } from "./Card";
@@ -172,7 +171,7 @@ export function LegalLayout({ document: doc }: { document: LegalDocument }) {
 
   return (
     <div className="flex min-h-screen flex-col">
-      <Helmet>
+      <>
         <title>{doc.metaTitle}</title>
         <meta name="description" content={doc.metaDescription} />
         <link rel="canonical" href={canonical} />
@@ -194,7 +193,7 @@ export function LegalLayout({ document: doc }: { document: LegalDocument }) {
         <meta name="twitter:title" content={doc.metaTitle} />
         <meta name="twitter:description" content={doc.metaDescription} />
         <meta name="twitter:image" content={defaultOgImage} />
-      </Helmet>
+      </>
 
       <Nav />
 
