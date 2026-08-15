@@ -1,6 +1,8 @@
 import { Links, Meta, Outlet, Scripts } from "react-router";
+import { Analytics } from "./components/Analytics";
 import { ScrollManager } from "./components/ScrollManager";
 import { SiteStructuredData } from "./components/SiteStructuredData";
+import { gaEnabled, gaInlineScript, gaMeasurementId } from "./lib/analytics";
 import "./index.css";
 
 /**
@@ -84,12 +86,29 @@ export function Layout({ children }: { children: React.ReactNode }) {
         {/*
           Plausible: async, non-blocking (CLAUDE.md Section 10). Records nothing
           until azeezdamilare.com is live and a matching Plausible site exists.
+          Runs alongside GA4 only until GA4 is verified, then comes out.
         */}
         <script
           defer
           data-domain="azeezdamilare.com"
           src="https://plausible.io/js/script.js"
         />
+
+        {/*
+          GA4. Both tags render only when GA_MEASUREMENT_ID holds a well-formed
+          ID, so an unset var leaves the document exactly as it was rather than
+          loading a tag that 404s. async keeps it off the render path
+          (CLAUDE.md Section 10); page views come from <Analytics />.
+        */}
+        {gaEnabled && (
+          <>
+            <script
+              async
+              src={`https://www.googletagmanager.com/gtag/js?id=${gaMeasurementId}`}
+            />
+            <script dangerouslySetInnerHTML={{ __html: gaInlineScript }} />
+          </>
+        )}
       </head>
       <body>
         {children}
@@ -109,6 +128,7 @@ export default function Root() {
   return (
     <>
       <ScrollManager />
+      <Analytics />
       <SiteStructuredData />
       <Outlet />
     </>
