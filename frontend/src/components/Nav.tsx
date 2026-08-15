@@ -32,7 +32,7 @@ function navLinkClass({ isActive }: { isActive: boolean }) {
 
 /*
  * Stateless by design. `<html data-theme>` is the single source of truth: the
- * inline script in index.html sets it before first paint, and this component
+ * inline script in root.tsx sets it before first paint, and this component
  * reads and writes that attribute directly.
  *
  * Nothing in the returned markup depends on the current theme, so the
@@ -51,7 +51,7 @@ function ThemeToggle() {
 
     /*
      * Keep the browser-chrome tint in step with the page. The same meta is set
-     * pre-paint by the inline script in index.html; this is the other half, for
+     * pre-paint by the inline script in root.tsx; this is the other half, for
      * a toggle after load. Values match --bg light/dark in styles/tokens.css.
      */
     document

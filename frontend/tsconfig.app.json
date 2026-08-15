@@ -22,5 +22,8 @@
     "erasableSyntaxOnly": true,
     "noFallthroughCasesInSwitch": true
   },
-  "include": ["src"]
+  "include": ["src"],
+  /* entry.server.tsx runs in Node and uses node: builtins — it is typechecked
+     by tsconfig.node.json instead, so browser code never gains node globals. */
+  "exclude": ["src/entry.server.tsx"]
 }

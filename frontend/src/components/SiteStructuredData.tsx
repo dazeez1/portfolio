@@ -4,9 +4,9 @@ import { sameAsProfiles } from "../content/social";
 /**
  * The site-wide `Person` JSON-LD required by CLAUDE.md Section 8.
  *
- * Emitted ONCE, from App.tsx alongside ScrollManager — outside <Routes>, so it
- * is unconditional and every route carries it without each page repeating it.
- * A static block in index.html would also be site-wide, but it could not read
+ * Emitted ONCE, from the root route alongside ScrollManager, so it is
+ * unconditional and every route carries it without each page repeating it.
+ * A static block in the document shell would also be site-wide, but could not read
  * content/social.ts, so the profile URLs would be duplicated in two places and
  * could drift from the footer.
  *
