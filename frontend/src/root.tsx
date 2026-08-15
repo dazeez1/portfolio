@@ -45,12 +45,31 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
         {/*
-          Icons. favicon.ico is the only tab icon — the .svg that used to sit
-          here was the untouched Vite scaffold logo, and because browsers prefer
-          an SVG favicon it was the one actually being shown. If an ADG SVG is
-          ever drawn, it goes back below this line and wins again.
+          Icons, in deliberate order.
+
+          favicon.ico stays first: clients that ignore `sizes` take the first
+          rel="icon" they see, so legacy behaviour is exactly what it was.
+          Everything modern reads `sizes` and picks by fit rather than order,
+          which is what makes appending safe.
+
+          favicon-96.png exists for Google. Its favicon crawler expects a square
+          whose side is a multiple of 48px, and the 32x32 ICO can be passed over
+          for being an odd size — the likely reason search results kept showing
+          a stale icon. Same ADG artwork, generated from apple-touch-icon.png by
+          `npm run images`, not a second design to maintain.
+
+          (An SVG once sat here and was the untouched Vite scaffold logo. Since
+          browsers prefer an SVG favicon, it beat the ICO everywhere that
+          supported it. If an ADG SVG is ever drawn, it goes below this line and
+          wins again — but only once it is genuinely ADG artwork.)
         */}
         <link rel="icon" href="/favicon.ico" sizes="32x32" />
+        <link
+          rel="icon"
+          type="image/png"
+          href="/favicon-96.png"
+          sizes="96x96"
+        />
         <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 
         {/*

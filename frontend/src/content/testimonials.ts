@@ -71,10 +71,10 @@ export const testimonials: Testimonial[] = [
     single-slide carousel automatically — no other change needed.
 
   {
-    id: "teni",
+    id: "",
     quote: "",
-    name: "Teniola",
-    role: "Founder",
+    name: "",
+    role: "",
     company: "",
   },
   {
