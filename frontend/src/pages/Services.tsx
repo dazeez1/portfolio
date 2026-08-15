@@ -2,6 +2,7 @@ import { Link } from "react-router";
 import { Button, ButtonLink } from "../components/Button";
 import { Card } from "../components/Card";
 import { Container } from "../components/Container";
+import { trackPricingCta } from "../lib/analytics";
 import { Footer } from "../components/Footer";
 import { CheckIcon, CloseIcon } from "../components/icons";
 import { Nav } from "../components/Nav";
@@ -94,7 +95,7 @@ export default function Services() {
     loading: calendlyLoading,
     warmUp: warmUpCalendly,
     open: openCalendly,
-  } = useCalendly(booking.calendlyUrl);
+  } = useCalendly(booking.calendlyUrl, "services");
 
   return (
     <div className="flex min-h-screen flex-col">
@@ -262,6 +263,7 @@ export default function Services() {
 
                   <ButtonLink
                     to={pkg.ctaHref}
+                    onClick={() => trackPricingCta(pkg.ctaHref)}
                     variant={pkg.emphasized ? "primary" : "secondary"}
                     className="mt-6 w-full"
                   >

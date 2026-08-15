@@ -2,6 +2,7 @@ import { useState } from "react";
 import { ButtonAnchor, ButtonLink } from "../components/Button";
 import { Card } from "../components/Card";
 import { Container } from "../components/Container";
+import { trackResumeDownload } from "../lib/analytics";
 import {
   canonicalUrl,
   defaultOgImage,
@@ -105,6 +106,7 @@ export default function About() {
                 <ButtonAnchor
                   href={intro.primaryButton.href}
                   download={resumeDownloadName}
+                  onClick={trackResumeDownload}
                   variant="primary"
                 >
                   <DownloadIcon className="h-4 w-4" aria-hidden="true" />
@@ -263,6 +265,7 @@ export default function About() {
               <ButtonAnchor
                 href={closingCta.primaryButton.href}
                 download={resumeDownloadName}
+                onClick={trackResumeDownload}
                 variant="primary"
               >
                 <DownloadIcon className="h-4 w-4" aria-hidden="true" />

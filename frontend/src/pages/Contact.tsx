@@ -34,6 +34,7 @@ import {
   submitMicrocopy,
 } from "../content/contact";
 import { useCalendly } from "../hooks/useCalendly";
+import { trackContactSubmit } from "../lib/analytics";
 import { useHydrated } from "../hooks/useHydrated";
 import { canonicalUrl, defaultOgImage, twitterCardType } from "../content/site";
 
@@ -149,7 +150,7 @@ export default function Contact() {
     loading: calendlyLoading,
     warmUp: warmUpCalendly,
     open: openCalendly,
-  } = useCalendly(booking.calendlyUrl);
+  } = useCalendly(booking.calendlyUrl, "contact");
 
   function handleDismissChip() {
     setChipDismissed(true);
@@ -204,6 +205,15 @@ export default function Contact() {
         setSubmitting(false);
         return;
       }
+
+      // After the ok check and before the redirect: this counts delivered
+      // leads, not attempts. Enhanced Measurement's form_submit already counts
+      // attempts (it fires even when the request fails), so the two are
+      // deliberately different measures rather than duplicates.
+      trackContactSubmit(
+        isReferral ? "referral" : needLabel,
+        packageLabel,
+      );
 
       navigate("/thank-you", {
         state: {

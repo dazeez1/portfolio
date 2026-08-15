@@ -1,4 +1,5 @@
 import { useRef, useState } from "react";
+import { trackBookingOpen } from "../lib/analytics";
 
 declare global {
   interface Window {
@@ -17,7 +18,7 @@ declare global {
  * pointerenter/touchstart so the click is near-instant; `open` awaits the
  * in-flight load and shows a transient loading label for slow connections.
  */
-export function useCalendly(calendlyUrl: string) {
+export function useCalendly(calendlyUrl: string, placement: string) {
   const [loading, setLoading] = useState(false);
   const loadPromiseRef = useRef<Promise<void> | null>(null);
 
@@ -50,6 +51,11 @@ export function useCalendly(calendlyUrl: string) {
   }
 
   async function open() {
+    // Tracked here rather than at each call site so every "book a call"
+    // trigger on the site is counted by construction — a new trigger that
+    // uses this hook cannot forget to report itself.
+    trackBookingOpen(placement);
+
     const existing = window.Calendly;
     if (existing) {
       existing.initPopupWidget({ url: calendlyUrl });

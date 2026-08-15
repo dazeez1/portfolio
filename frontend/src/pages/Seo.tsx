@@ -3,6 +3,7 @@ import { BrowserFrame } from "../components/BrowserFrame";
 import { ButtonLink } from "../components/Button";
 import { Card } from "../components/Card";
 import { Container } from "../components/Container";
+import { trackPricingCta } from "../lib/analytics";
 import { Footer } from "../components/Footer";
 import { CheckIcon, SearchIcon } from "../components/icons";
 import { Nav } from "../components/Nav";
@@ -234,6 +235,7 @@ export default function Seo() {
 
                   <ButtonLink
                     to={plan.ctaHref}
+                    onClick={() => trackPricingCta(plan.ctaHref)}
                     variant={plan.emphasized ? "primary" : "secondary"}
                     className="mt-6 w-full"
                   >
