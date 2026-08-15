@@ -1,5 +1,5 @@
 import type { Config } from "@react-router/dev/config";
-import { caseStudySlugs } from "./src/content/caseStudies";
+import { prerenderPaths } from "./src/content/siteRoutes";
 
 /**
  * Framework mode, static output — no runtime server.
@@ -13,31 +13,12 @@ export default {
   ssr: false,
 
   /**
-   * Every route emitted as static HTML. Case-study paths come from the content
-   * registry, so a third case study needs a content file and a registry line
-   * and nothing here.
+   * Routes come from content/siteRoutes.ts, the single list the sitemap
+   * generator also reads — so the two cannot drift.
    *
-   * /dev/components is enumerated deliberately: it is a live route today, and
-   * with the SPA catch-all gone an un-enumerated route hard-404s. It is due for
-   * removal in Phase 3 — delete the route, the page and this entry together.
+   * "/404" is extra: it is rendered by the splat route, and
+   * scripts/emit-404.mjs moves the output to build/client/404.html, which
+   * Vercel serves for unmatched paths.
    */
-  async prerender() {
-    return [
-      "/",
-      "/about",
-      "/portfolio",
-      ...caseStudySlugs.map((slug) => `/portfolio/${slug}`),
-      "/services",
-      "/seo",
-      "/referrals",
-      "/privacy",
-      "/terms",
-      "/contact",
-      "/thank-you",
-      "/dev/components",
-      // Rendered by the splat route; scripts/emit-404.mjs moves the output to
-      // build/client/404.html, which Vercel serves for unmatched paths.
-      "/404",
-    ];
-  },
+  prerender: () => [...prerenderPaths, "/404"],
 } satisfies Config;
