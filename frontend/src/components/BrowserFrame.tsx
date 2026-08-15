@@ -8,6 +8,21 @@ export interface BrowserFrameImage {
   height?: number;
   /** Default "lazy". Set "eager" for above-the-fold usage (e.g. the hero). */
   loading?: "lazy" | "eager";
+  /**
+   * Width-descriptor candidates, e.g. "/images/x-700.webp 700w, ...". Generate
+   * the files with `npm run images` (scripts/gen-image-variants.mjs) and always
+   * include the full-size original as the widest candidate.
+   *
+   * `src` stays the full-size file so browsers without srcset support, and any
+   * tool that reads src directly, still get a working image.
+   */
+  srcSet?: string;
+  /**
+   * Rendered width per breakpoint. Required for `srcSet` to be useful — without
+   * it the browser assumes 100vw and picks a candidate that is too large on any
+   * layout where the image occupies less than the full viewport.
+   */
+  sizes?: string;
 }
 
 export interface BrowserFrameProps {
@@ -91,6 +106,8 @@ export function BrowserFrame({
               if (node?.complete) setImageLoaded(true);
             }}
             src={image.src}
+            srcSet={image.srcSet}
+            sizes={image.sizes}
             alt={image.alt}
             width={image.width}
             height={image.height}

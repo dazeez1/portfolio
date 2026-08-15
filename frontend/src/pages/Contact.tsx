@@ -7,7 +7,12 @@ import { Container } from "../components/Container";
 import { Footer } from "../components/Footer";
 import { Select, Textarea, TextInput } from "../components/FormFields";
 import { GithubIcon, InstagramIcon, LinkedInIcon } from "../components/icons";
-import { CalendarIcon, ClipboardIcon, CloseIcon, SendIcon } from "../components/icons";
+import {
+  CalendarIcon,
+  ClipboardIcon,
+  CloseIcon,
+  SendIcon,
+} from "../components/icons";
 import { Nav } from "../components/Nav";
 import { TagPill } from "../components/TagPill";
 import {
@@ -38,7 +43,11 @@ import { trackContactSubmit } from "../lib/analytics";
 import { useHydrated } from "../hooks/useHydrated";
 import { canonicalUrl, defaultOgImage, twitterCardType } from "../content/site";
 
-const socialIcons = { GitHub: GithubIcon, LinkedIn: LinkedInIcon, Instagram: InstagramIcon };
+const socialIcons = {
+  GitHub: GithubIcon,
+  LinkedIn: LinkedInIcon,
+  Instagram: InstagramIcon,
+};
 
 function ConnectMethodRow({
   method,
@@ -68,9 +77,7 @@ function ConnectMethodRow({
           <p className="font-sans text-xs uppercase tracking-wide text-text-muted">
             {method.label}
           </p>
-          <p className="truncate font-sans text-sm text-ink">
-            {method.value}
-          </p>
+          <p className="truncate font-sans text-sm text-ink">{method.value}</p>
         </div>
       </div>
       {method.action.type === "copy" ? (
@@ -109,7 +116,17 @@ export default function Contact() {
    * later, which is invisible in practice and keeps both renders identical.
    */
   const hydrated = useHydrated();
-  const packageParam = hydrated ? searchParams.get("package") : null;
+  /*
+   * Only a package we have a label for counts. An unrecognised value — a typo,
+   * a stale link, a hand-edited URL — is treated as if no package were passed
+   * at all, so it cannot silently pre-set the "What do you need?" answer while
+   * the chip that would explain that choice stays hidden.
+   */
+  const rawPackageParam = hydrated ? searchParams.get("package") : null;
+  const packageParam =
+    rawPackageParam && rawPackageParam in packageLabels
+      ? rawPackageParam
+      : null;
   const typeParam = hydrated ? searchParams.get("type") : null;
   const isReferral = typeParam === "referral";
 
@@ -180,8 +197,7 @@ export default function Contact() {
     setSubmitting(true);
     setSubmitError(null);
 
-    const needLabel =
-      needOptions.find((o) => o.value === need)?.label ?? need;
+    const needLabel = needOptions.find((o) => o.value === need)?.label ?? need;
     const packageLabel = packageParam ? packageLabels[packageParam] : undefined;
 
     try {
@@ -210,10 +226,7 @@ export default function Contact() {
       // leads, not attempts. Enhanced Measurement's form_submit already counts
       // attempts (it fires even when the request fails), so the two are
       // deliberately different measures rather than duplicates.
-      trackContactSubmit(
-        isReferral ? "referral" : needLabel,
-        packageLabel,
-      );
+      trackContactSubmit(isReferral ? "referral" : needLabel, packageLabel);
 
       navigate("/thank-you", {
         state: {

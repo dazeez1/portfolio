@@ -334,68 +334,78 @@ export function Nav({ sticky = true }: NavProps) {
         panelRef={resourcesPanelRef}
       />
 
-      {mobileOpen && (
-        <div id={mobileMenuId} className="border-t border-border md:hidden">
-          {/*
+      {/*
+        Kept mounted and hidden rather than conditionally rendered, for the
+        same reason as the Accordion panel: the hamburger's `aria-controls`
+        pointed at an id that was absent from the document whenever the menu
+        was shut. `hidden` keeps it out of the tab order and the accessibility
+        tree, so closed-menu behaviour is unchanged.
+      */}
+      <div
+        id={mobileMenuId}
+        hidden={!mobileOpen}
+        className="border-t border-border md:hidden"
+      >
+        {/*
             Same label as the desktop landmark: only one of the two is ever in
             the accessibility tree, since each is display:none at the other's
-            breakpoint and this one is not rendered at all while closed.
+            breakpoint and this one sits inside a `hidden` wrapper while the
+            menu is closed.
           */}
-          <nav aria-label="Primary">
-            <Container as="ul" className="flex flex-col gap-1 py-4">
-              {navLinks.map((link) => (
-                <li key={link.to}>
-                  <NavLink
-                    to={link.to}
-                    end={link.end}
-                    onClick={() => setMobileOpen(false)}
-                    className={({ isActive }) =>
-                      `block py-2 ${navLinkClass({ isActive })}`
-                    }
-                  >
-                    {link.label}
-                  </NavLink>
-                </li>
-              ))}
-              {resourceLinks.map((link) => (
-                <li key={link.to}>
-                  <NavLink
-                    to={link.to}
-                    onClick={() => setMobileOpen(false)}
-                    className={({ isActive }) =>
-                      `block py-2 ${navLinkClass({ isActive })}`
-                    }
-                  >
-                    {link.label}
-                  </NavLink>
-                </li>
-              ))}
-              <li>
+        <nav aria-label="Primary">
+          <Container as="ul" className="flex flex-col gap-1 py-4">
+            {navLinks.map((link) => (
+              <li key={link.to}>
                 <NavLink
-                  to="/contact"
+                  to={link.to}
+                  end={link.end}
                   onClick={() => setMobileOpen(false)}
                   className={({ isActive }) =>
                     `block py-2 ${navLinkClass({ isActive })}`
                   }
                 >
-                  Contact
+                  {link.label}
                 </NavLink>
               </li>
-            </Container>
-          </nav>
-          <Container className="flex items-center gap-3 border-t border-border py-4">
-            <ButtonLink
-              to="/contact"
-              variant="primary"
-              onClick={() => setMobileOpen(false)}
-              className="flex-1 text-center"
-            >
-              Book a call
-            </ButtonLink>
-            <ThemeToggle />
+            ))}
+            {resourceLinks.map((link) => (
+              <li key={link.to}>
+                <NavLink
+                  to={link.to}
+                  onClick={() => setMobileOpen(false)}
+                  className={({ isActive }) =>
+                    `block py-2 ${navLinkClass({ isActive })}`
+                  }
+                >
+                  {link.label}
+                </NavLink>
+              </li>
+            ))}
+            <li>
+              <NavLink
+                to="/contact"
+                onClick={() => setMobileOpen(false)}
+                className={({ isActive }) =>
+                  `block py-2 ${navLinkClass({ isActive })}`
+                }
+              >
+                Contact
+              </NavLink>
+            </li>
           </Container>
-        </div>
-      )}
+        </nav>
+        <Container className="flex items-center gap-3 border-t border-border py-4">
+          <ButtonLink
+            to="/contact"
+            variant="primary"
+            onClick={() => setMobileOpen(false)}
+            className="flex-1 text-center"
+          >
+            Book a call
+          </ButtonLink>
+          <ThemeToggle />
+        </Container>
+      </div>
     </header>
   );
 }

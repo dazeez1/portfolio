@@ -53,6 +53,14 @@ export const testimonials: Testimonial[] = [
     role: "Founder",
     company: "Luti",
   },
+  {
+    id: "tinuola",
+    quote:
+      "I really loved the project he created. The UI is clean, simple, and easy to navigate, and I especially liked the subtle animations. Everything feels polished without being overdone.",
+    name: "Tinuola",
+    role: "Founder",
+    company: "Alumni Connect",
+  },
   /*
     Slots for the next two quotes. Every field is deliberately left EMPTY
     rather than filled with a sample: if one of these is uncommented before it
@@ -63,10 +71,10 @@ export const testimonials: Testimonial[] = [
     single-slide carousel automatically — no other change needed.
 
   {
-    id: "",
+    id: "teni",
     quote: "",
-    name: "",
-    role: "",
+    name: "Teniola",
+    role: "Founder",
     company: "",
   },
   {
