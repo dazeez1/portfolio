@@ -19,6 +19,5 @@ export default [
   route("terms", "pages/Terms.tsx"),
   route("contact", "pages/Contact.tsx"),
   route("thank-you", "pages/ThankYou.tsx"),
-  route("dev/components", "pages/DevComponents.tsx"),
   route("*", "pages/NotFound.tsx"),
 ] satisfies RouteConfig;
