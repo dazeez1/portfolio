@@ -3,6 +3,7 @@ import { BrowserFrame } from "../components/BrowserFrame";
 import { ButtonLink } from "../components/Button";
 import { Card } from "../components/Card";
 import { Container } from "../components/Container";
+import { trackCaseStudyOpen } from "../lib/analytics";
 import { Footer } from "../components/Footer";
 import { Nav } from "../components/Nav";
 import { SectionHeading } from "../components/SectionHeading";
@@ -156,6 +157,7 @@ export default function Home() {
                     {project.links.caseStudy && (
                       <Link
                         to={project.links.caseStudy}
+                        onClick={() => trackCaseStudyOpen(project.links.caseStudy!)}
                         className="mt-3 inline-block font-sans text-sm text-accent-text underline"
                       >
                         View case study →

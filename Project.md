@@ -38,5 +38,5 @@ BUILD (current phase — starting now)
 
 STATUS / OPEN ITEMS
 Currently at: Phase 0 (scaffold). Owner reviews each step and reports back for the next.
-Owner to-dos: real light-mode screenshots (both projects), Qure live URL, photo for About, resume PDF, SEO proof screenshots, Vephla year, referral fixed $ amount, legal text, domain purchase on Vercel at end of month (name preference: azeezdamilare.com), analytics from day one (Plausible).
+Owner to-dos: real light-mode screenshots (both projects), Qure live URL, photo for About, resume PDF, SEO proof screenshots, Vephla year, referral fixed $ amount, legal text, domain purchase on Vercel at end of month (name preference: azeezdamilare.com), analytics from day one (Google Analytics 4).
 V2 parking lot: testimonials (when real), third project, backend/ activation, possible Next.js migration, price raises after 3–5 projects.

@@ -1,11 +1,17 @@
 import type { LegalDocument } from "./legal";
 
 /**
- * Section 4 (Cookies and storage) and section 5 (Third-party services) are
- * written from a live audit of the deployed site — actual cookies observed,
- * actual third-party hosts contacted, actual Resend payload from
- * api/contact.ts — not from a generic template. If the site's behaviour
- * changes, these two sections must be re-checked against reality.
+ * Sections 2 (Information I collect), 4 (Cookies and storage) and 5
+ * (Third-party services) are written from a live audit of the deployed site —
+ * actual cookies observed in a browser, actual third-party hosts contacted,
+ * actual Resend payload from api/contact.ts, actual event names from
+ * lib/analytics.ts — not from a generic template. If the site's behaviour
+ * changes, these sections must be re-checked against reality.
+ *
+ * The two Google Analytics cookies were measured on the deployed site, which
+ * is why "_gid" is called out as absent: it appears in most published cookie
+ * lists but GA4 does not set it. Copying a template here would have described
+ * a cookie this site has never had.
  */
 export const privacy: LegalDocument = {
   metaTitle: "Privacy Policy — Azeez Damilare Gbenga",
@@ -22,7 +28,7 @@ export const privacy: LegalDocument = {
       body: [
         {
           kind: "paragraph",
-          text: "This policy explains how I collect, use, and share personal information when you visit or interact with azeezdamilare.com. I am a sole practitioner, so \"I\" throughout means one person, not a company or a team.",
+          text: 'This policy explains how I collect, use, and share personal information when you visit or interact with azeezdamilare.com. I am a sole practitioner, so "I" throughout means one person, not a company or a team.',
         },
         {
           kind: "paragraph",
@@ -47,7 +53,7 @@ export const privacy: LegalDocument = {
             },
             {
               label: "Usage data.",
-              text: "The hosting platform records standard server request data, including your IP address, as part of serving the site. Analytics records aggregate page views without cookies or persistent identifiers.",
+              text: "The hosting platform records standard server request data, including your IP address, as part of serving the site. Google Analytics records the pages you open, how you move between them, and a few specific actions such as opening the booking window or clicking a pricing button; it uses cookies to tell repeat visits apart.",
             },
           ],
         },
@@ -77,24 +83,36 @@ export const privacy: LegalDocument = {
       body: [
         {
           kind: "paragraph",
-          text: "This site sets no cookies of its own.",
+          text: "This site sets two cookies of its own, both for Google Analytics. They are set as soon as a page loads, before you interact with anything.",
         },
         {
           kind: "labeled",
           items: [
             {
-              label: "Theme preference.",
-              text: "If you switch between light and dark mode, that choice is saved in your browser's local storage under a single key named \"theme\". It stays on your device, is never sent to a server, and clearing your browser data removes it.",
+              label: '"_ga".',
+              text: "Tells one visitor apart from another, so that someone returning next week is not counted as a new person. It is a first-party cookie, set on this domain rather than Google's, and it lasts 400 days.",
             },
             {
-              label: "Analytics.",
-              text: "Plausible runs without cookies and without any persistent identifier, so it cannot follow you between sites or across visits.",
+              label: '"_ga_DRNRZ9K7Z5".',
+              text: "Holds the session state for this site's own Analytics property, which is what the suffix identifies. Also first-party, also 400 days.",
+            },
+            {
+              label: "No third Analytics cookie.",
+              text: 'Most privacy policies you will read list a cookie named "_gid" as well. The current version of Google Analytics does not set it, and this site does not have it. I checked what the site actually sets rather than copying a template.',
+            },
+            {
+              label: "Theme preference.",
+              text: 'If you switch between light and dark mode, that choice is saved in your browser\'s local storage under a single key named "theme". It stays on your device, is never sent to a server, and clearing your browser data removes it.',
             },
             {
               label: "Calendly.",
-              text: "If, and only if, you open the booking window, Calendly sets two cookies on its own domain, calendly.com: \"__cf_bm\" and \"_cfuvid\". Both come from its Cloudflare bot protection. They are not set on this site, and they do not appear unless you open the booking window.",
+              text: 'If, and only if, you open the booking window, Calendly sets two cookies on its own domain, calendly.com: "__cf_bm" and "_cfuvid". Both come from its Cloudflare bot protection. They are not set on this site, and they do not appear unless you open the booking window.',
             },
           ],
+        },
+        {
+          kind: "paragraph",
+          text: "You can clear either Analytics cookie, or block cookies for this site altogether, in your browser settings. Nothing on the site depends on them, so blocking them costs you nothing: the pages, the form, and the booking window all work exactly the same, and I simply stop seeing that visit in the numbers.",
         },
       ],
     },
@@ -125,9 +143,9 @@ export const privacy: LegalDocument = {
               href: "https://calendly.com/legal/privacy-notice",
             },
             {
-              name: "Plausible",
-              text: "provides privacy-focused analytics. It is cookieless, collects no personal data, and reports only aggregate figures such as page views and referrers.",
-              href: "https://plausible.io/data-policy",
+              name: "Google Analytics",
+              text: "measures how the site is used. It receives the pages you open, how you move between them, and a short list of actions I have chosen to record: submitting the contact form, along with the request type and package if those were included; opening the booking window; downloading my resume; clicking a pricing button; and opening a case study. It also receives your IP address and sets the two cookies described above. It does not receive your name, your email address, or anything you type into the message field.",
+              href: "https://policies.google.com/privacy",
             },
           ],
         },

@@ -5,8 +5,8 @@
  */
 
 /**
- * Production origin — the domain in CLAUDE.md Section 11 and the Plausible
- * data-domain. Canonical URLs must point at production even while the site
+ * Production origin — the domain in CLAUDE.md Section 11. Canonical URLs
+ * must point at production even while the site
  * is only reachable on Vercel preview URLs, so search engines never index a
  * preview host.
  */

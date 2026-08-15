@@ -58,7 +58,25 @@ export interface Project {
   tags: string[];
   /** Names looked up in stackIcons — only rendered on featured cards. */
   stack: string[];
-  screenshot: { src: string; alt: string; width?: number; height?: number };
+  /*
+   * Declared inline rather than imported from BrowserFrame, deliberately.
+   * vite.config.ts reads siteRoutes -> caseStudies -> this file, so projects.ts
+   * is compiled under tsconfig.node.json, which has no DOM lib. Importing a
+   * component's types here pulls .tsx and DOM globals into that project and
+   * breaks typecheck. Content files must not import from components/.
+   *
+   * Structurally assignable to BrowserFrameImage, which is what consumes it.
+   */
+  screenshot: {
+    src: string;
+    alt: string;
+    width?: number;
+    height?: number;
+    /** Width-descriptor candidates; generate the files with `npm run images`. */
+    srcSet?: string;
+    /** Rendered width per breakpoint — required for srcSet to pick sensibly. */
+    sizes?: string;
+  };
   links: ProjectLinks;
   featured: boolean;
   clientWork: boolean;
@@ -70,11 +88,16 @@ export const projects: Project[] = [
   {
     slug: "sangira",
     title: "Sangira",
-    oneLiner: "Verified surplus-food handoffs between donors and NGOs in Kigali.",
+    oneLiner:
+      "Verified surplus-food handoffs between donors and NGOs in Kigali.",
     tags: ["Social impact", "Real-time"],
     stack: ["Node.js", "React", "Socket.io", "MongoDB"],
     screenshot: {
       src: "/images/sangira-card.webp",
+      srcSet:
+        "/images/sangira-card-400.webp 400w, /images/sangira-card-700.webp 700w, /images/sangira-card-1050.webp 1050w, /images/sangira-card.webp 1400w",
+      sizes:
+        "(min-width: 1200px) 560px, (min-width: 768px) 45vw, calc(100vw - 3rem)",
       alt: "Sangira dashboard showing active food donation listings",
       width: 1400,
       height: 730,
@@ -96,6 +119,10 @@ export const projects: Project[] = [
     stack: ["Node.js", "Express", "Prisma", "MongoDB"],
     screenshot: {
       src: "/images/qure-patient-portal.webp",
+      srcSet:
+        "/images/qure-patient-portal-400.webp 400w, /images/qure-patient-portal-700.webp 700w, /images/qure-patient-portal-1050.webp 1050w, /images/qure-patient-portal.webp 1400w",
+      sizes:
+        "(min-width: 1200px) 560px, (min-width: 768px) 45vw, calc(100vw - 3rem)",
       alt: "Qure patient portal showing a live queue position with estimated wait time and upcoming appointments",
       width: 1400,
       height: 779,
@@ -129,7 +156,8 @@ export const projects: Project[] = [
   {
     slug: "zidify",
     title: "Zidify",
-    oneLiner: "Zidify helps individuals and groups save money securely and reach their financial goals faster.",
+    oneLiner:
+      "Zidify helps individuals and groups save money securely and reach their financial goals faster.",
     tags: ["Social impact", "Fintech"],
     stack: ["HTML", "CSS", "JavaScript"],
     screenshot: {

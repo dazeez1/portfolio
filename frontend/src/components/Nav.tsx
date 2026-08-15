@@ -261,39 +261,47 @@ export function Nav({ sticky = true }: NavProps) {
           ADG
         </Link>
 
-        <ul className="hidden items-center gap-8 md:flex">
-          {navLinks.map((link) => (
-            <li key={link.to}>
-              <NavLink to={link.to} end={link.end} className={navLinkClass}>
-                {link.label}
+        {/*
+          Labelled because the site has more than one navigation landmark —
+          the footer's link lists are navigation too. With two unlabelled
+          <nav>s a screen-reader user gets "navigation" twice and cannot tell
+          them apart; the label is what makes the landmark list useful.
+        */}
+        <nav aria-label="Primary" className="hidden md:block">
+          <ul className="flex items-center gap-8">
+            {navLinks.map((link) => (
+              <li key={link.to}>
+                <NavLink to={link.to} end={link.end} className={navLinkClass}>
+                  {link.label}
+                </NavLink>
+              </li>
+            ))}
+            <li>
+              <button
+                ref={resourcesTriggerRef}
+                type="button"
+                aria-haspopup="menu"
+                aria-expanded={resourcesOpen}
+                aria-controls={resourcesMenuId}
+                onClick={() => setResourcesOpen((o) => !o)}
+                className="flex items-center gap-1 font-sans text-sm text-ink transition-colors hover:text-accent-text"
+              >
+                Resources
+                <ChevronDownIcon
+                  className={`h-3.5 w-3.5 motion-safe:transition-transform ${
+                    resourcesOpen ? "rotate-180" : ""
+                  }`}
+                  aria-hidden="true"
+                />
+              </button>
+            </li>
+            <li>
+              <NavLink to="/contact" className={navLinkClass}>
+                Contact
               </NavLink>
             </li>
-          ))}
-          <li>
-            <button
-              ref={resourcesTriggerRef}
-              type="button"
-              aria-haspopup="menu"
-              aria-expanded={resourcesOpen}
-              aria-controls={resourcesMenuId}
-              onClick={() => setResourcesOpen((o) => !o)}
-              className="flex items-center gap-1 font-sans text-sm text-ink transition-colors hover:text-accent-text"
-            >
-              Resources
-              <ChevronDownIcon
-                className={`h-3.5 w-3.5 motion-safe:transition-transform ${
-                  resourcesOpen ? "rotate-180" : ""
-                }`}
-                aria-hidden="true"
-              />
-            </button>
-          </li>
-          <li>
-            <NavLink to="/contact" className={navLinkClass}>
-              Contact
-            </NavLink>
-          </li>
-        </ul>
+          </ul>
+        </nav>
 
         <div className="hidden items-center gap-3 md:flex">
           <ButtonLink to="/contact" variant="primary">
@@ -326,8 +334,25 @@ export function Nav({ sticky = true }: NavProps) {
         panelRef={resourcesPanelRef}
       />
 
-      {mobileOpen && (
-        <div id={mobileMenuId} className="border-t border-border md:hidden">
+      {/*
+        Kept mounted and hidden rather than conditionally rendered, for the
+        same reason as the Accordion panel: the hamburger's `aria-controls`
+        pointed at an id that was absent from the document whenever the menu
+        was shut. `hidden` keeps it out of the tab order and the accessibility
+        tree, so closed-menu behaviour is unchanged.
+      */}
+      <div
+        id={mobileMenuId}
+        hidden={!mobileOpen}
+        className="border-t border-border md:hidden"
+      >
+        {/*
+            Same label as the desktop landmark: only one of the two is ever in
+            the accessibility tree, since each is display:none at the other's
+            breakpoint and this one sits inside a `hidden` wrapper while the
+            menu is closed.
+          */}
+        <nav aria-label="Primary">
           <Container as="ul" className="flex flex-col gap-1 py-4">
             {navLinks.map((link) => (
               <li key={link.to}>
@@ -368,19 +393,19 @@ export function Nav({ sticky = true }: NavProps) {
               </NavLink>
             </li>
           </Container>
-          <Container className="flex items-center gap-3 border-t border-border py-4">
-            <ButtonLink
-              to="/contact"
-              variant="primary"
-              onClick={() => setMobileOpen(false)}
-              className="flex-1 text-center"
-            >
-              Book a call
-            </ButtonLink>
-            <ThemeToggle />
-          </Container>
-        </div>
-      )}
+        </nav>
+        <Container className="flex items-center gap-3 border-t border-border py-4">
+          <ButtonLink
+            to="/contact"
+            variant="primary"
+            onClick={() => setMobileOpen(false)}
+            className="flex-1 text-center"
+          >
+            Book a call
+          </ButtonLink>
+          <ThemeToggle />
+        </Container>
+      </div>
     </header>
   );
 }

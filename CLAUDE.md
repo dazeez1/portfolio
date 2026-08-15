@@ -3,7 +3,7 @@
 Personal brand & portfolio website. Owner: Azeez Damilare Gbenga — full-stack software engineer, Kigali, Rwanda.
 GitHub: **dazeez1** · Email: azeezdamilare31@gmail.com · Phone: +250 798 203 134 · WhatsApp: +234 701 505 9880
 
-**Stack:** React 19 + Vite + TypeScript · Tailwind CSS · React Router · Vercel · Resend (form email) · Calendly (booking popup) · Plausible (analytics)
+**Stack:** React 19 + Vite + TypeScript · Tailwind CSS · React Router · Vercel · Resend (form email) · Calendly (booking popup) · Google Analytics 4 (analytics)
 
 This file is the source of truth for how this project is built. Read fully before writing any code. These rules were settled during the design phase and are not open for reinterpretation during the build. When a decision isn't covered here, choose the boring, maintainable option and flag it.
 
@@ -231,7 +231,7 @@ So the contrast checklist has two halves: a two-theme axe sweep for text, and a 
 
 ## 10. Performance gate
 
-Before any page merges to `main`: Lighthouse ≥ 90 on Performance, Accessibility, Best Practices, and SEO (mobile). Fix before merge, not after launch. Route-level code-splitting (`React.lazy`), pre-optimized images per Section 3, fonts self-hosted and preloaded, no blocking third-party scripts (Plausible is async; Calendly loads on interaction).
+Before any page merges to `main`: Lighthouse ≥ 90 on Performance, Accessibility, Best Practices, and SEO (mobile). Fix before merge, not after launch. Route-level code-splitting (`React.lazy`), pre-optimized images per Section 3, fonts self-hosted and preloaded, no blocking third-party scripts (gtag.js is async; Calendly loads on interaction).
 
 ---
 

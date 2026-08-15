@@ -39,10 +39,14 @@ export const hero: HeroContent = {
   secondaryCta: { label: "Book a discovery call", to: "/contact" },
   credentialLine:
     "B.Sc. Software Engineering, First Class Honours · ALU certified by IBM & DataCamp",
-  
+
   screenshotUrl: "gusangira.com",
   screenshot: {
     src: "/images/sangira-card.webp",
+    srcSet:
+      "/images/sangira-card-400.webp 400w, /images/sangira-card-700.webp 700w, /images/sangira-card-1050.webp 1050w, /images/sangira-card.webp 1400w",
+    sizes:
+      "(min-width: 1200px) 560px, (min-width: 768px) 45vw, calc(100vw - 3rem)",
     alt: "Sangira dashboard showing active food donation listings",
     width: 1400,
     height: 730,

@@ -11,7 +11,7 @@ Build order is sequential — a phase starts only when the previous one is appro
 - [ ] Branches: `main` (production) + `stage` (staging) pushed to `origin`; not yet connected to Vercel (blocked on Vercel auth — see owner to-dos)
 - [x] Design tokens as CSS variables + Tailwind theme (light + dark) — Terracotta editorial, per CLAUDE.md Section 1
 - [x] Self-hosted fonts: serif display (Fraunces) + sans (Inter), preloaded
-- [x] Plausible analytics script wired (data-domain="azeezdamilare.com" — won't record real data until that domain is live and a matching Plausible site/account exists)
+- [x] Google Analytics 4 wired (measurement ID in the `GA_MEASUREMENT_ID` env var; a page_view is sent on every React Router navigation, plus five conversion events) — Plausible was removed on 15 Aug 2026 once GA4 was confirmed in Realtime
 
 ## Phase 1 — Component library (approve each before pages begin)
 

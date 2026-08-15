@@ -3,6 +3,7 @@ import { Link } from "react-router";
 import { BrowserFrame } from "../components/BrowserFrame";
 import { ButtonAnchor, ButtonLink } from "../components/Button";
 import { Container } from "../components/Container";
+import { trackCaseStudyOpen } from "../lib/analytics";
 import { Footer } from "../components/Footer";
 import {
   ChevronLeftIcon,
@@ -131,7 +132,11 @@ function FeaturedCard({ project, reverse }: { project: Project; reverse: boolean
         )}
         <div className="mt-5 flex flex-wrap items-center gap-3">
           {project.links.caseStudy && (
-            <ButtonLink to={project.links.caseStudy} variant="primary">
+            <ButtonLink
+              to={project.links.caseStudy}
+              onClick={() => trackCaseStudyOpen(project.links.caseStudy!)}
+              variant="primary"
+            >
               Read case study
             </ButtonLink>
           )}
@@ -182,6 +187,7 @@ function GridCard({ project }: { project: Project }) {
           {project.links.caseStudy && (
             <Link
               to={project.links.caseStudy}
+              onClick={() => trackCaseStudyOpen(project.links.caseStudy!)}
               className="font-sans text-sm text-accent-text underline"
             >
               Details →

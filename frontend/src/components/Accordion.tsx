@@ -53,16 +53,32 @@ export function Accordion({ items, defaultOpenIndex }: AccordionProps) {
                 aria-hidden="true"
               />
             </button>
-            {isOpen && (
-              <div
-                id={panelId}
-                role="region"
-                aria-labelledby={triggerId}
-                className="px-5 pb-4 font-sans text-sm text-text-secondary"
-              >
-                {item.content ?? item.answer}
-              </div>
-            )}
+            {/*
+              Always rendered, hidden when collapsed, rather than mounted on
+              open. Two reasons:
+
+              1. `aria-controls` must reference an element that exists. When
+                 the panel was conditionally mounted the id pointed at nothing
+                 for as long as the item stayed shut, which is invalid ARIA.
+              2. The answers are content. Conditional mounting kept them out of
+                 the prerendered HTML entirely, so every FAQ answer on
+                 /contact, /seo and /referrals was invisible to crawlers
+                 (CLAUDE.md Section 8). Hidden text still ships in the document.
+
+              The `hidden` attribute (not a Tailwind class) does the hiding, so
+              the panel is also removed from the tab order and the
+              accessibility tree while collapsed — links inside a closed legal
+              TOC must not be focusable.
+            */}
+            <div
+              id={panelId}
+              role="region"
+              aria-labelledby={triggerId}
+              hidden={!isOpen}
+              className="px-5 pb-4 font-sans text-sm text-text-secondary"
+            >
+              {item.content ?? item.answer}
+            </div>
           </div>
         );
       })}

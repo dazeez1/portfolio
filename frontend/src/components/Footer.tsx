@@ -1,5 +1,6 @@
 import { Link } from "react-router";
 import { Container } from "./Container";
+import { trackResumeDownload } from "../lib/analytics";
 import {
   DownloadIcon,
   GithubIcon,
@@ -69,6 +70,7 @@ export function Footer() {
               <a
                 href="/resume.pdf"
                 download={resumeDownloadName}
+                onClick={trackResumeDownload}
                 className="flex items-center gap-2 transition-colors hover:text-accent-text"
               >
                 <DownloadIcon
