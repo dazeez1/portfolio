@@ -26,6 +26,15 @@ if (!existsSync(src)) {
 }
 
 copyFileSync(src, dest);
+
+/*
+ * Drop the SPA fallback. React Router emits it for routes that are not
+ * prerendered, but every route here is, and vercel.json has no rewrite
+ * pointing at it — so it is an orphan document that is nonetheless reachable
+ * (and therefore indexable) at /__spa-fallback.html. Unmatched paths are
+ * served by 404.html above instead.
+ */
+rmSync("build/client/__spa-fallback.html", { force: true });
 // Drop the directory form so /404 is not a second, indexable copy.
 rmSync("build/client/404", { recursive: true, force: true });
 console.log(`emit-404: ${dest} written from the prerendered splat route`);
