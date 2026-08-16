@@ -238,22 +238,33 @@ function GridCard({ project }: { project: Project }) {
                 Details →
               </Link>
             )}
-            {project.clientWork
-              ? project.links.live && (
-                  <ButtonAnchor
-                    href={project.links.live}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    variant="secondary"
-                    /*
+            {/*
+              Which links appear is decided by the data, not by `clientWork`.
+              A repo URL in `links.github` is the owner stating that repo is
+              shareable, so it renders; a private client project simply has no
+              github value to render. `clientWork` now only drives the pill.
+
+              The live site is the card's hitbox when it exists, because it is
+              the more useful destination for a visitor scanning the grid. With
+              no live URL the repo takes that role instead, so every card still
+              has exactly one full-card target.
+            */}
+            <div className="flex items-center gap-3">
+              {project.links.live && (
+                <ButtonAnchor
+                  href={project.links.live}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  variant="secondary"
+                  /*
                     The card's hitbox. Deliberately not `relative`: the ::after
                     must resolve against the card, not this button.
                   */
-                    className="after:absolute after:inset-0 after:content-['']"
-                  >
-                    <GlobeIcon className="h-4 w-4" aria-hidden="true" />
-                    Live site
-                    {/*
+                  className="after:absolute after:inset-0 after:content-['']"
+                >
+                  <GlobeIcon className="h-4 w-4" aria-hidden="true" />
+                  Live site
+                  {/*
                     Every grid card's link reads "Live site", which is useless
                     in a screen reader's link list. The project name is appended
                     visually-hidden rather than set as an aria-label, so the
@@ -261,22 +272,32 @@ function GridCard({ project }: { project: Project }) {
                     WCAG 2.5.3 Label in Name — and voice-control users saying
                     "Live site" still match the control.
                   */}
-                    <span className="sr-only">, {project.title}</span>
-                  </ButtonAnchor>
-                )
-              : project.links.github && (
-                  <ButtonAnchor
-                    href={project.links.github}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    variant="secondary"
-                    className="after:absolute after:inset-0 after:content-['']"
-                  >
-                    <GithubIcon className="h-4 w-4" aria-hidden="true" />
-                    Code
-                    <span className="sr-only">, {project.title}</span>
-                  </ButtonAnchor>
-                )}
+                  <span className="sr-only">, {project.title}</span>
+                </ButtonAnchor>
+              )}
+              {project.links.github && (
+                <ButtonAnchor
+                  href={project.links.github}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  variant="secondary"
+                  /*
+                    Takes the hitbox only when there is no live site to take it.
+                    Otherwise it is a secondary target and needs `relative z-10`
+                    to sit above the overlay rather than be swallowed by it.
+                  */
+                  className={
+                    project.links.live
+                      ? "relative z-10"
+                      : "after:absolute after:inset-0 after:content-['']"
+                  }
+                >
+                  <GithubIcon className="h-4 w-4" aria-hidden="true" />
+                  Code
+                  <span className="sr-only">, {project.title}</span>
+                </ButtonAnchor>
+              )}
+            </div>
           </div>
         )}
       </div>
