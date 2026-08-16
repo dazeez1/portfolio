@@ -59,7 +59,14 @@ function FilterPill({
   );
 }
 
-function GridImage({ src, alt }: { src: string; alt: string }) {
+/*
+ * Takes the whole screenshot object rather than src/alt, so a card that has
+ * responsive variants actually uses them. Passing only `src` silently threw
+ * `srcSet` away and made every grid card download the full 1400px master to
+ * fill a ~352px slot.
+ */
+function GridImage({ image }: { image: Project["screenshot"] }) {
+  const { src, alt, srcSet, sizes } = image;
   const [loaded, setLoaded] = useState(false);
   const [failed, setFailed] = useState(false);
   const imgRef = useRef<HTMLImageElement>(null);
@@ -88,6 +95,8 @@ function GridImage({ src, alt }: { src: string; alt: string }) {
           if (node?.complete) setLoaded(true);
         }}
         src={src}
+        srcSet={srcSet}
+        sizes={sizes}
         alt={alt}
         loading="lazy"
         className={`relative block h-full w-full object-cover transition-opacity duration-500 ${
@@ -187,7 +196,7 @@ function GridCard({ project }: { project: Project }) {
     <div
       className={`relative flex h-full flex-col overflow-hidden rounded-lg border border-border bg-surface ${cardLiftClasses}`}
     >
-      <GridImage src={project.screenshot.src} alt={project.screenshot.alt} />
+      <GridImage image={project.screenshot} />
       <div className="flex flex-1 flex-col p-5">
         <div className="relative z-10 flex w-fit items-center gap-2">
           <h3 className="font-serif text-xl text-ink">{project.title}</h3>

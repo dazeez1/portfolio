@@ -28,8 +28,21 @@ const IMAGES_DIR = join(
   "images",
 );
 
-/** Sources to downscale. Each is the full-size original, left untouched. */
-const SOURCES = ["sangira-card.webp", "qure-patient-portal.webp"];
+/**
+ * Sources to downscale. Each is the full-size original, left untouched.
+ *
+ * These are the ~1400px webp masters that ship. If you are starting from a
+ * camera-resolution PNG, convert it to a 1400px webp first and put that here —
+ * the multi-megabyte original does not belong in public/.
+ */
+const SOURCES = [
+  "sangira-card.webp",
+  "qure-patient-portal.webp",
+  "faunapulse.webp",
+  "trashwell.webp",
+  "hura.webp",
+  "zidify.webp",
+];
 
 /**
  * Target widths. 1400 is the source and is not regenerated.

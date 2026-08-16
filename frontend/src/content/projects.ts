@@ -144,6 +144,10 @@ export const projects: Project[] = [
     stack: ["HTML", "CSS", "JavaScript", "Node.js"],
     screenshot: {
       src: "/images/hura.webp",
+      srcSet:
+        "/images/hura-400.webp 400w, /images/hura-700.webp 700w, /images/hura-1050.webp 1050w, /images/hura.webp 1400w",
+      sizes:
+        "(min-width: 1200px) 560px, (min-width: 768px) 45vw, calc(100vw - 3rem)",
       alt: "Hura AI travel companion chat interface answering a question about Rwanda",
       width: 1400,
       height: 809,
@@ -163,12 +167,63 @@ export const projects: Project[] = [
     stack: ["HTML", "CSS", "JavaScript"],
     screenshot: {
       src: "/images/zidify.webp",
+      srcSet:
+        "/images/zidify-400.webp 400w, /images/zidify-700.webp 700w, /images/zidify-1050.webp 1050w, /images/zidify.webp 1400w",
+      sizes:
+        "(min-width: 1200px) 560px, (min-width: 768px) 45vw, calc(100vw - 3rem)",
       alt: "Zidify savings dashboard showing group and individual savings goals",
       width: 1400,
       height: 804,
     },
     links: {
       live: "https://www.zidify.com/",
+    },
+    featured: false,
+    clientWork: true,
+  },
+  {
+    slug: "faunapulse",
+    title: "FaunaPulse",
+    oneLiner:
+      "FaunaPulse uses advanced AI and IoT to monitor wildlife populations and provide real-time insights for conservation efforts.",
+    tags: ["Advanced AI + IoT", "Agriculture"],
+    stack: ["HTML", "CSS", "JavaScript"],
+    screenshot: {
+      src: "/images/faunapulse.webp",
+      srcSet:
+        "/images/faunapulse-400.webp 400w, /images/faunapulse-700.webp 700w, /images/faunapulse-1050.webp 1050w, /images/faunapulse.webp 1400w",
+      sizes:
+        "(min-width: 1200px) 560px, (min-width: 768px) 45vw, calc(100vw - 3rem)",
+      alt: "FaunaPulse landing page headed “Monitor Soil Life in real time”, with a phone showing a soil metrics dashboard",
+      width: 1400,
+      height: 806,
+    },
+    links: {
+      live: "https://faunapulse.vercel.app/",
+    },
+    featured: false,
+    clientWork: true,
+  },
+  {
+    slug: "trashwell",
+    title: "TrashWell",
+    oneLiner:
+      "TrashWell is an innovative web application that streamlines waste management processes for households, waste collection services, and administrators.",
+    tags: ["Social impact"],
+    stack: ["HTML", "CSS", "JavaScript"],
+    screenshot: {
+      src: "/images/trashwell.webp",
+      srcSet:
+        "/images/trashwell-400.webp 400w, /images/trashwell-700.webp 700w, /images/trashwell-1050.webp 1050w, /images/trashwell.webp 1400w",
+      sizes:
+        "(min-width: 1200px) 560px, (min-width: 768px) 45vw, calc(100vw - 3rem)",
+      alt: "TrashWell landing page headed “Smart Waste Solutions for a Sustainable Future”, over a photograph of a landfill",
+      width: 1400,
+      height: 808,
+    },
+    links: {
+      live: "https://trashwell.onrender.com/",
+      github: "https://github.com/Lydia02/trashWell",
     },
     featured: false,
     clientWork: true,
