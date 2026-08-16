@@ -38,9 +38,7 @@ export interface ConnectMethod {
   Icon: ComponentType<IconProps>;
   label: string;
   value: string;
-  action:
-    | { type: "copy" }
-    | { type: "link"; label: string; href: string };
+  action: { type: "copy" } | { type: "link"; label: string; href: string };
 }
 
 export const connectTitle = "Other ways to connect";
@@ -159,6 +157,11 @@ export const faqItems = [
     question: "Are you available for full-time roles?",
     answer:
       "I primarily work on a contract/project basis, but I'm always open to discussing long-term partnerships or lead roles for the right mission.",
+  },
+  {
+    question: "What kind of projects do you specialize in?",
+    answer:
+      "I love variety! I work across different technologies, including healthcare, educational platforms, agriculture, real estate, fintech solutions and so much more.",
   },
 ];
 
