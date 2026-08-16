@@ -1,3 +1,4 @@
+import { cardLiftClasses } from "../components/Card";
 import { useRef, useState } from "react";
 import { Link } from "react-router";
 import { BrowserFrame } from "../components/BrowserFrame";
@@ -99,7 +100,13 @@ function GridImage({ src, alt }: { src: string; alt: string }) {
   );
 }
 
-function FeaturedCard({ project, reverse }: { project: Project; reverse: boolean }) {
+function FeaturedCard({
+  project,
+  reverse,
+}: {
+  project: Project;
+  reverse: boolean;
+}) {
   return (
     <div
       className={`flex flex-col overflow-hidden rounded-lg border border-border bg-surface md:flex-row md:items-start ${
@@ -157,24 +164,51 @@ function FeaturedCard({ project, reverse }: { project: Project; reverse: boolean
   );
 }
 
+/*
+ * The whole card is clickable, without wrapping it in an anchor.
+ *
+ * Wrapping would make a screen reader read every word in the card as the
+ * link's name before revealing it is a link, and would flatten the heading and
+ * the tag into that one string. Instead the card is `relative` and the card's
+ * primary link paints a transparent `::after` across it, so the pointer target
+ * is the whole card while the accessibility tree still sees one ordinary link
+ * beside a real heading — and the card stays a single tab stop.
+ *
+ * Two consequences worth knowing before editing this:
+ *  - The primary link must NOT be positioned. Its `::after` resolves against
+ *    the nearest positioned ancestor, so making the link `relative` would
+ *    shrink the hitbox back to the button.
+ *  - Anything that must stay usable above the overlay needs `relative z-10`:
+ *    the title and description so text is still selectable, and any secondary
+ *    link so it stays independently clickable.
+ */
 function GridCard({ project }: { project: Project }) {
   return (
-    <div className="flex h-full flex-col overflow-hidden rounded-lg border border-border bg-surface">
+    <div
+      className={`relative flex h-full flex-col overflow-hidden rounded-lg border border-border bg-surface ${cardLiftClasses}`}
+    >
       <GridImage src={project.screenshot.src} alt={project.screenshot.alt} />
       <div className="flex flex-1 flex-col p-5">
-        <div className="flex items-center gap-2">
+        <div className="relative z-10 flex w-fit items-center gap-2">
           <h3 className="font-serif text-xl text-ink">{project.title}</h3>
           {project.clientWork && <TagPill>Client work</TagPill>}
         </div>
         <p
           className={
             project.placeholder
-              ? "mt-2 flex-1 font-sans text-xs text-text-muted"
-              : "mt-2 flex-1 font-sans text-base text-text-secondary"
+              ? "relative z-10 mt-2 font-sans text-xs text-text-muted"
+              : "relative z-10 mt-2 font-sans text-base text-text-secondary"
           }
         >
           {project.oneLiner}
         </p>
+        {/*
+          The flex growth that used to live on the paragraph. Moved out so the
+          paragraph is only as tall as its own text: it sits above the card's
+          click overlay to stay selectable, and any height it did not need would
+          be dead space the card could not be clicked through.
+        */}
+        <div className="flex-1" aria-hidden="true" />
         {/*
           Placeholder entries render no clickable links at all — no Details, no
           Code, no Live site. Their case studies do not exist and their repo/live
@@ -183,40 +217,58 @@ function GridCard({ project }: { project: Project }) {
           never surface on a placeholder card.
         */}
         {!project.placeholder && (
-        <div className="mt-4 flex items-center justify-between gap-4">
-          {project.links.caseStudy && (
-            <Link
-              to={project.links.caseStudy}
-              onClick={() => trackCaseStudyOpen(project.links.caseStudy!)}
-              className="font-sans text-sm text-accent-text underline"
-            >
-              Details →
-            </Link>
-          )}
-          {project.clientWork
-            ? project.links.live && (
-                <ButtonAnchor
-                  href={project.links.live}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  variant="secondary"
-                >
-                  <GlobeIcon className="h-4 w-4" aria-hidden="true" />
-                  Live site
-                </ButtonAnchor>
-              )
-            : project.links.github && (
-                <ButtonAnchor
-                  href={project.links.github}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  variant="secondary"
-                >
-                  <GithubIcon className="h-4 w-4" aria-hidden="true" />
-                  Code
-                </ButtonAnchor>
-              )}
-        </div>
+          <div className="mt-4 flex items-center justify-between gap-4">
+            {project.links.caseStudy && (
+              <Link
+                to={project.links.caseStudy}
+                onClick={() => trackCaseStudyOpen(project.links.caseStudy!)}
+                // z-10 keeps this above the card overlay so it remains its own
+                // click target rather than being swallowed by the primary link.
+                className="relative z-10 font-sans text-sm text-accent-text underline"
+              >
+                Details →
+              </Link>
+            )}
+            {project.clientWork
+              ? project.links.live && (
+                  <ButtonAnchor
+                    href={project.links.live}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    variant="secondary"
+                    /*
+                    The card's hitbox. Deliberately not `relative`: the ::after
+                    must resolve against the card, not this button.
+                  */
+                    className="after:absolute after:inset-0 after:content-['']"
+                  >
+                    <GlobeIcon className="h-4 w-4" aria-hidden="true" />
+                    Live site
+                    {/*
+                    Every grid card's link reads "Live site", which is useless
+                    in a screen reader's link list. The project name is appended
+                    visually-hidden rather than set as an aria-label, so the
+                    accessible name still *starts with* the visible text —
+                    WCAG 2.5.3 Label in Name — and voice-control users saying
+                    "Live site" still match the control.
+                  */}
+                    <span className="sr-only">, {project.title}</span>
+                  </ButtonAnchor>
+                )
+              : project.links.github && (
+                  <ButtonAnchor
+                    href={project.links.github}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    variant="secondary"
+                    className="after:absolute after:inset-0 after:content-['']"
+                  >
+                    <GithubIcon className="h-4 w-4" aria-hidden="true" />
+                    Code
+                    <span className="sr-only">, {project.title}</span>
+                  </ButtonAnchor>
+                )}
+          </div>
         )}
       </div>
     </div>
@@ -384,7 +436,10 @@ export default function Portfolio() {
         {filteredGrid.length > 0 && (
           <section className="bg-surface-alt py-16 md:py-24">
             <Container>
-              <SectionHeading title={moreProjectsSectionLabel} variant="label" />
+              <SectionHeading
+                title={moreProjectsSectionLabel}
+                variant="label"
+              />
               <div className="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
                 {pageItems.map((project) => (
                   <GridCard key={project.slug} project={project} />

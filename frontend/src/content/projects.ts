@@ -138,7 +138,8 @@ export const projects: Project[] = [
   {
     slug: "hura",
     title: "Hura",
-    oneLiner: "Hura - AI Travel Companion for Rwanda.",
+    oneLiner:
+      "Ask a question about visiting Rwanda and get an itinerary, costs and local context back in plain language.",
     tags: ["Tourism"],
     stack: ["HTML", "CSS", "JavaScript", "Node.js"],
     screenshot: {
